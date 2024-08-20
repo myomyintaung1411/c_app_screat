@@ -3,7 +3,7 @@
     <section class="h-48 w-full ">
       <img src="@/assets/loginbg.jpg" alt="loginbg" class="w-full h-full relative">
     </section>
-    <section class="py-5 px-3 w-full relative">
+    <!-- <section class="py-5 px-3 w-full relative">
       <div class="h-10 bg-white w-56"></div>
       <div class="py-2 flex items-center justify-between">
         <div class="text-white text-base flex-1 max-w-[70%] text-left">
@@ -25,16 +25,6 @@
           </div>
         </template>
           </van-circle>
-          <!-- <div class="relative size-28">
-          <svg class="size-full -rotate-90" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-[#f8e29b] " stroke-width="1" stroke-dasharray="100 100"></circle>    
-            <circle cx="18" cy="18" r="16" fill="none" class="stroke-current text-[#febf32] " stroke-width="2" stroke-dasharray="100" stroke-dashoffset="20" stroke-linecap="round"></circle>
-          </svg>
-
-              <div class="absolute top-1/2 start-1/2 transform -translate-y-1/2 -translate-x-1/2">
-                <span class="text-center text-2xl font-bold text-[#febf32]">35%</span>
-              </div>
-          </div> -->
         </div>
       </div>
       <section class="py-2 w-full px-1 space-y-5">
@@ -55,7 +45,7 @@
           <van-icon name="arrow" color="#febf32" size="20"  />
         </div>
       </section>
-    </section>
+    </section> -->
   </div>
 </template>
 
