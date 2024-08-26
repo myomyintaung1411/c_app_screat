@@ -192,7 +192,6 @@ const router = createRouter({
 
 /* Default title tag */
 const defaultDocumentTitle = '鄉'
-
 router.afterEach(to => {
   /* Set document title from route meta */
 

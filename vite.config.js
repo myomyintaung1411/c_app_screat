@@ -18,7 +18,7 @@ export default defineConfig({
     open: false,
     https: false,
     hot: true,
-    port: 565,
+    port: 1111,
     proxy: {
       '/api': {
          target: 'http://154.212.146.148:4195/', //http://182.255.62.173:7878/api
@@ -31,7 +31,7 @@ export default defineConfig({
         //ws: true,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/aa/, '')
-      },
+      }
     }
   },
   build: {

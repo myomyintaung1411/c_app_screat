@@ -1,5 +1,5 @@
 <template>
-  <div
+  <div id="main"
     
     class="w-full h-full sm:max-w-md sm:mx-auto sm:flex sm:justify-center sm:items-center relative"
   >
@@ -11,28 +11,28 @@
       <NoInterNet></NoInterNet>
     </div> -->
 
-    <!-- <van-tabbar
+    <van-tabbar
       :border="false"
       route
       v-model="active"
-      active-color="#ffffff"
+      active-color="#fff"
       inactive-color="#F2BE22"
     >
       <van-tabbar-item to="/home">
-        <span>公告</span>
+        <span>主页</span>
         <template #icon="props">
           <img :src="props.active ? home.active : home.inactive" />
         </template>
       </van-tabbar-item>
 
-      <van-tabbar-item to="/envelope">
-        <span>打卡</span>
+      <van-tabbar-item to="/user">
+        <span>轮廓</span>
         <template #icon="props">
-          <img :src="props.active ? envelope.active : envelope.inactive" />
+          <img :src="props.active ? user.active : user.inactive" />
         </template>
       </van-tabbar-item>
 
-      <van-tabbar-item to="/team">
+      <!-- <van-tabbar-item to="/team">
         <span>团队</span>
         <template #icon="props">
           <img :src="props.active ? team.active : team.inactive" />  
@@ -43,9 +43,9 @@
         <template #icon="props">
           <img :src="props.active ? user.active : user.inactive" />
         </template>
-      </van-tabbar-item>
-    </van-tabbar> -->
-    <section class="fixed left-0 bottom-0 z-50 h-[68px] flex w-full sm:max-w-md sm:relative border-none  bg-[#050a30]  ">
+      </van-tabbar-item> -->
+    </van-tabbar>
+    <!-- <section class="fixed left-0 bottom-0 z-50 h-[68px] flex w-full sm:max-w-md sm:relative border-none  bg-[#050a30]  ">
       <div class="w-full  h-full flex items-center px-12 border-none ">
         <div class=" flex items-center w-full  py-2 px-3 mx-auto my-2 bg-[#0f2a57] rounded-full space-x-3  " >
           <div @click="TabClick(1)" class=" flex items-center space-x-2 flex-1 py-1 rounded-full pl-3" :class="activeRoute === '/home' ? 'bg-[#febf32] text-white animate-fadeleft' : 'text-[#febf32]'">
@@ -58,18 +58,9 @@
             <img v-else src="@/assets/home/user.svg" alt="home" class="w-8">
             <span class="text-lg">轮廓</span>
           </div>
-            <!-- <button type="button" class="px-5 py-1.5 text-xs font-medium text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700 rounded-lg">
-                New
-            </button>
-            <button type="button" class="px-5 py-1.5 text-xs font-medium text-white bg-gray-900 dark:bg-gray-300 dark:text-gray-900 rounded-lg">
-                Popular
-            </button> -->
-            <!-- <button type="button" class="px-5 py-1.5 text-xs font-medium text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700 rounded-lg">
-                Following
-            </button> -->
         </div>
     </div>
-    </section>
+    </section> -->
     </div>
   </div>
 </template>
@@ -144,13 +135,14 @@ const user = {
 background-color: transparent;
 } */
 
-/* #main :deep() .van-tabbar {
-  background: #4286f5;
+#main :deep() .van-tabbar {
+  /* background: #4286f5; */
+  background: #fd3130;
   line-height: 0;
 }
 .van-tabbar-item--active {
   background-color: transparent;
-} */
+}
 
 .main {
   @apply overflow-y-scroll sm:overflow-y-visible

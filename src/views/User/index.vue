@@ -1,79 +1,41 @@
 <template>
   <div class="w-full relative pb-10 h-full ">
-    <div class="py-4 px-4 relative w-full flex items-center justify-between">
-      <div>
-        <div class="font-bold text-lg tracking-wider">Alfredo Torres</div>
-        <div class="text-[#eabf67] text-base">0.00 USD</div>
-        <div class="flex items-center space-x-2 text-sm tracking-wider">
-          <van-icon name="bulb-o" size="18" />
-          <span>会员级别</span>
-        </div>
-      </div>
-
-      <div class="pt-3">
-        <img :src="avatar" alt="avatar" class="w-18">
-      </div>
-
+   <section class="w-full  bg-[#fe2c2b] relative">
+    <div class=" w-full rounded-b-[50%] bg-red-400">
+      <div class="flex justify-end py-2 px-3 font-bold tracking-wider text-right text-black">可用积分 0</div>
+     <div class="flex items-center justify-center flex-col py-2">
+      <img :src="avatar" alt="avatar" class="w-18">
+       <div class="text-white py-2 font-medium tracking-wider">用户名区</div>
+       <div class="text-xl tracking-wider text-white font-bold pb-2">0 平衡</div>
+     </div>
     </div>
-    <section class="py-4  w-full relative">
-      <div class="w-full relative  py-2">
-          <van-row gutter="10">
-            <van-col span="6">
-              <div
-                @click="goSection(0)"
-                class="flex flex-col    text-[12px] text-center  items-center relative"
-              >
-               <div class="bg-[#0f2a57] h-12 w-12 flex items-center justify-center rounded-full">
-                <van-image width="1.5rem" height="1.5rem" :src="cardpng" />
-               </div>
-                <p class="text-center pt-3 tracking-wider">添加银行  </p>
-              </div>
-            </van-col>
-            <van-col span="6">
-              <div
-                @click="goSection(1)"
-                class="flex flex-col    text-[12px] text-center  items-center relative"
-              >
-              <div class="bg-[#0f2a57] h-12 w-12 flex items-center justify-center rounded-full">
-                <van-image width="1.5rem" height="1.5rem" :src="usersvg" />
-               </div>          
-                 <p class="text-center pt-3 tracking-wider">真实姓名</p>
-              </div>
-            </van-col>
-            <van-col span="6">
-              <div
-                @click="goSection(2)"
-                class="flex flex-col    text-[12px] text-center  items-center relative"
-              >
-              <div class="bg-[#0f2a57] h-12 w-12 flex items-center justify-center rounded-full">
-                <van-image width="1.5rem" height="1.5rem" :src="password" />
-               </div> 
-                <p class="text-center pt-3 tracking-wider">更改密码  </p>
-              </div>
-            </van-col>
-            <van-col span="6">
-              <div
-                @click="goSection(3)"
-                class="flex flex-col    text-[12px] text-center  items-center relative"
-              >
-              <div class="bg-[#0f2a57] h-12 w-12 flex items-center justify-center rounded-full">
-                <van-image width="1.5rem" height="1.5rem" :src="personalpng" />
-               </div> 
-                <p class="text-center pt-3 tracking-wider">地址簿</p>
-              </div>
-            </van-col>
-          </van-row>
-        </div>
-    </section>
-    <section class="py-2 w-full space-y-5 px-4">
-        <div class="h-14 rounded-lg w-full bg-[#0f2a57] text-[#febf32] flex items-center justify-between px-4 text-base">
+    <div class="flex items-center justify-center py-5 px-10 ">
+      <div class="px-3 py-3 bg-white bg-opacity-35 h-20 w-full  "></div>
+    </div>
+   </section>
+    <section class="py-2 w-full space-y-5 px-4 pt-4">
+        <div class="h-14 rounded-lg w-full bg-[#f8f8f8] text-[#febf32] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
             <img :src="fileCheck" alt="filecheck" class="w-8">
-            <span class=" tracking-wider text-base">任务任务</span>
+            <span class=" tracking-wider text-base">客户服务</span>
           </div>
           <van-icon name="arrow" color="#febf32" size="20"  />
         </div>
-        <div class="h-14 rounded-lg w-full bg-[#0f2a57] text-[#febf32] flex items-center justify-between px-4 text-base">
+        <div class="h-14 rounded-lg w-full bg-[#f8f8f8] text-[#7437a2] font-bold flex items-center justify-between px-4 text-base">
+          <div class="flex items-center space-x-3">
+            <img :src="service" alt="filecheck" class="w-8">
+            <span class=" tracking-wider text-base">客户服务</span>
+          </div>
+          <van-icon name="arrow" color="#febf32" size="20"  />
+        </div>
+        <div class="h-14 rounded-lg w-full bg-[#f8f8f8] text-[#6a8fee] font-bold flex items-center justify-between px-4 text-base">
+          <div class="flex items-center space-x-3">
+            <img :src="service" alt="filecheck" class="w-8">
+            <span class=" tracking-wider text-base">客户服务</span>
+          </div>
+          <van-icon name="arrow" color="#febf32" size="20"  />
+        </div>
+        <div class="h-14 rounded-lg w-full bg-[#f8f8f8] text-[#a3e584] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
             <img :src="service" alt="filecheck" class="w-8">
             <span class=" tracking-wider text-base">客户服务</span>
