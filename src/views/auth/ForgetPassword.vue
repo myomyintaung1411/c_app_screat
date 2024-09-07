@@ -1,5 +1,5 @@
 <template>
-  <div class="relative min-h-screen min-w-full w-screen h-screen flex flex-col items-center justify-center  login__  ">
+  <div class="relative min-h-screen min-w-full w-screen h-screen flex flex-col max-w-md sm:mx-auto items-center justify-center  login__  ">
   <!-- <img
     src="https://www.0wtz2q.com/_next/static/chunks/images/img_background_login-c4a7660140d5a8f9e98fdbae5b7b85f5.png"
     alt=""
@@ -35,7 +35,7 @@
  </section> -->
  <section class=" flex items-center flex-col justify-center z-20   py-5 rounded-xl mx-5  ">
    <!-- <div class="text-2xl font-bold tracking-wider text-white">账户注册</div> -->
-  <form @click.prevent class="px-10 py-4 relative w-full">
+  <form @click.prevent class="px-10 py-4 relative ">
     <div class="text-white text-base tracking-wide py-2">身份证号</div>
     <div class=" px-4 rounded-md h-12 w-full bg-white bg-opacity-40 ">
      
@@ -104,14 +104,14 @@
                 v-if="passwordField !== 'password'"
                 name="eye-o"
                 size="20"
-                color="#f95554"
+                color="#ffffff"
               />
               <van-icon
                 v-else
                 @click="showVisibile"
                 name="closed-eye"
                 size="20"
-                color="#f95554"
+                color="#ffffff"
               />
             </div>
             </div>
@@ -152,14 +152,14 @@
                 v-if="conpasswordField !== 'password'"
                 name="eye-o"
                 size="20"
-                color="#f95554"
+                color="#ffffff"
               />
               <van-icon
                 v-else
                 @click="conshowVisibile"
                 name="closed-eye"
                 size="20"
-                color="#f95554"
+                color="#ffffff"
               />
             </div>
             </div>

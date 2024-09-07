@@ -1,15 +1,20 @@
 <template>
-  <div class="w-full h-full text-center  relative home_bg   " >
+  <div class="w-full h-full text-center  relative home_bg pb-10   " >
     <section class="bg-[#f0eaea] pt-2">
-        <div @click="goNotice" class="w-full px-4 mx-auto flex items-center justify-between ">
+        <div @click="goNotice" class="w-full px-4  mx-auto flex items-center justify-between ">
             <div class="w-6 h-6 rounded-full bg-[#ed155e] flex items-center justify-center">
               <img src="@/assets/user/sound.svg" alt="sound" class="w-4">
             </div>
-            <div class="flex-1 ">
-                <van-notice-bar  background="#f0eaea" color="#000" scrollable text="★★★尊敬的客户：我司亚博体育场馆比分系统于2020年7月7日（星期二）11:00-13:35进行滚球比分系统维护，维护期间将无法查看比分，可以正常游戏，给您带来不便敬请谅解，谢谢。" />
+            <div class="flex-1  w-[60%]  ">
+                <van-notice-bar  background="#f0eaea" color="#000" scrollable>
+                  <div  class="text-black">{{ noticeList?.content }}</div>
+                </van-notice-bar>
+                <!-- <Vue3Marquee class="w-full" style="width: 100%;">
+                  <div v-html="noticeList?.content"  class="text-black w-full"></div>
+               </Vue3Marquee> -->
             </div>
             <div class="relative">
-                <van-badge :content="1">
+                <van-badge :content="0">
                   <img src="@/assets/user/notice_fill.svg" alt="button_more" class=" w-6">
                </van-badge>
             </div>
@@ -31,42 +36,54 @@
         <van-rolling-text  class="my-rolling-text"  :start-num="0"
         :target-num="1000000" :duration="1" />
         <div class="absolute bottom-7 right-7  flex items-center justify-end w-full  ">
-        <div class="bg-blue-500 text-[#ffffff] text-base  px-6 py-2 font-bold">提取</div>
+        <div class="bg-[#f2cd78] text-[#fff] text-base  px-6 py-2 font-bold">提取</div>
         </div>
        </div>
 
       </div>
     </section>
     <section class="py-1 w-full flex items-center justify-center">
-      <div class="bg-[#7193ed] text-[#f2c65d] py-2 px-7 font-bold rounded-full text-base tracking-wider">任务任务图</div>
+      <div class="bg-[#f2cd78] text-[#fff] py-2 px-7 font-bold rounded-full text-base tracking-wider">任务任务图</div>
     </section>
     <section class="py-3 w-full px-4 ">
-      <van-row gutter="5" class="py-3"  align="center" >
-            <van-col   span="3">
-              <div class="flex items-center">
-                <div class="font-bold text-lg tracking-wide text-[#f2c65d]">1期</div>
+      <van-row  v-for="(rowIndex) in numRows" :key="rowIndex"  gutter="5" class="py-3"  align="center" >
+            <van-col    span="3">
+              <div class="flex items-center whitespace-nowrap">
+                <div class="font-bold text-base tracking-wide text-[#f2c65d]">{{ rowIndex }}期</div>
               </div>
             </van-col>
-            <van-col   span="5">
-                <div class=" h-16 flex items-center justify-center w-full bg-[#f2c65d]">1期</div>
+            <!-- here need to  click testContentList array of positon 0,3,6,9 -->
+            <van-col    span="5">
+                <div @click="openTeskDialog((rowIndex - 1) * 3)" class=" h-16 flex items-center justify-center w-full bg-[#f2c65d]"></div>
             </van-col>
             <van-col   span="3">
                 <div class="flex flex-col items-center justify-center">
-                  <van-icon name="success" size="25" />
-                  <div class="text-sm">2选1</div>
+                  <!-- <van-icon name="success" size="25" /> -->
+                <img src="@/assets/arrow-both.svg" alt="arrow-both" class="w-7">
+              
+                  <div class="text-xs tracking-wide">2选1</div>
                 </div>
             </van-col>
+                        <!-- here show testContentList array of positon 1,4,7,10 -->
+
             <van-col   span="5">
-                <div class=" h-16 flex items-center justify-center w-full bg-[#f2c65d]">1期</div>
+                <div @click="openTeskDialog((rowIndex - 1) *  3 + 1)" class=" h-16 flex items-center justify-center w-full bg-[#f2c65d]">1期</div>
             </van-col>
             <van-col   span="3">
-              <van-icon name="arrow-double-right" size="25" />
+              <!-- <van-icon name="arrow-double-right" size="25" /> -->
+              <div class="flex items-center justify-center">
+                <img src="@/assets/arrow-right-double.svg" alt="arrow-double-right" class="w-7">
+              </div>
             </van-col>
+               <!-- here show testContentList array of positon 3,5,8,11 -->
             <van-col   span="5">
-                <div class=" h-16 flex items-center justify-center w-full bg-[#9f5ce0] text-base font-bold text-white">免费包</div>
+                <div @click="openTeskDialog((rowIndex - 1) * 3 + 2)"  class=" h-16 flex items-center justify-center w-full bg-[#fd3130] text-base font-bold text-white">免费包</div>
             </van-col>
-           
        </van-row>
+
+
+
+
        <!-- <div v-for="m in 3" :key="m" class="flex items-center justify-center px-3 py-4 w-full  ">
     <div v-for="n in 3" :key="n" class="flex w-full items-center justify-center  ">
       <div
@@ -89,24 +106,42 @@
   </div> -->
 
 
-      <!-- <div class="w-full flex">
-        <div @click="openCard()" class="w-1/3 text-center  bg-blue-500 flex items-center justify-center h-20">
-        Step 1
-      </div>
-      <div class="flex-1 flex items-center justify-center">
-        <van-icon name="arrow-double-right" />
-      </div>
-      <div @click="openCard()" class="w-1/3 text-center bg-blue-500 flex items-center justify-center h-20">
-        Step 2
-      </div>
-      <div class="flex-1 flex items-center justify-center">
-        <van-icon name="arrow-double-right" />
-      </div>
-      <div @click="openCard()" class="w-1/3 text-center bg-blue-500 flex items-center justify-center h-20">
-        Step 3
-      </div>
-      </div> -->
- 
+  <van-popup v-model:show="tesk_dialog" closeable  @click-close-icon="onClickCloseIcon"  position="bottom" :style="{ height: '60%' }">
+    <div class="py-3 px-3   relative flex items-center flex-col justify-center h-full w-full">
+      <div class="text-center text-xl  inline-block  font-bold">{{ tesk_dialog_content.option }}</div>
+      <section class="py-4 px-2 w-full">
+        <div  @click="select_item(1)" :class="select_item_ans == 1 ? 'bg-[#f2c65d] bg-opacity-100' : 'bg-[#fe2c2b] bg-opacity-90'" class="h-12 rounded-lg w-full   text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
+          <div class="flex items-center space-x-3">
+            <!-- <span class=" tracking-wider text-lg ">{{separateItem(tesk_dialog_content?.item1)?.name}}</span> -->
+             <span class=" tracking-wider text-lg ">大麦</span>
+
+          </div>
+          <!-- <span class=" tracking-wider text-lg ">{{separateItem(tesk_dialog_content?.item1)?.price}}</span> -->
+          <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item1}}</span>
+        </div>
+        <div  @click="select_item(2)" :class="select_item_ans == 2 ? 'bg-[#f2c65d] bg-opacity-100' : 'bg-[#fe2c2b] bg-opacity-90'" class="h-12 rounded-lg w-full  mt-5 text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
+          <div class="flex items-center space-x-3">
+            <span class=" tracking-wider text-lg ">小麦</span>
+          </div>
+          <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item2}}</span>
+        </div>
+        <div @click="select_item(3)" :class="select_item_ans == 3 ? 'bg-[#f2c65d] bg-opacity-100' : 'bg-[#fe2c2b] bg-opacity-90'"  class="h-12 rounded-lg w-full  mt-5  text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
+          <div class="flex items-center space-x-3">
+            <span class=" tracking-wider text-lg ">玉米</span>
+          </div>
+          <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item3}}</span>
+        </div>
+        <div class="pt-5 w-full">
+          <div class="flex items-center  justify-center px-10 space-x-5 ">
+            <van-button round type="success" style="font-weight: bold;font-size: 16px;color:#000" color="#ccc" block>去做住客</van-button>
+            <van-button round  color="#fe2c2b" style="font-weight: bold;font-size: 18px;" block>任务玩明</van-button>
+
+          </div>
+        </div>
+      </section>
+    </div>
+   </van-popup>
+
 
 
 
@@ -127,57 +162,21 @@ import homepng from "@/assets/home/home.svg";
 
 const router = useRouter();
 const store = useStore();
-const step_card =  [1, 2, 3];;
+const step_card =  [1, 2, 3];
+const background = '#f0eaea';
+const color = '#000';
+const testContentList = ref([])
 const openIndex = ref(null);
-
-const currentNumber = ref(2000); // Start from 2000
-    const targetNumber = ref(1000000); // The final number to reach
-    const duration = 1000; // 10 seconds
-    const steps = 100; // Number of steps (You can increase for smoother transitions)
-    const increment = ref((targetNumber.value - currentNumber.value) / steps);
-    const interval = ref(duration / steps);
-
-const imageShow = ref(false)
-const imageurl = ref([])
-
-    // Keeps track of flipped cards in a nested array format
-    const flippedCards = ref(new Map());
-
-    const toggleCard = (m, n) => {
-      const key = `${m}-${n}`;
-      const currentFlipped = flippedCards.value.get(key) || false;
-      flippedCards.value.set(key, !currentFlipped);
-    };
-
-    const isFlipped = (m, n) => {
-      const key = `${m}-${n}`;
-      return flippedCards.value.get(key) || false;
-    };
-
-
-    const openCard = () => {
-
-    }
-
-function startAnimation() {
-      const step = () => {
-        if (currentNumber.value < targetNumber.value) {
-          currentNumber.value = Math.min(currentNumber.value + increment.value, targetNumber.value);
-          setTimeout(step, interval.value);
-        }
-      };
-      step();
-    }
-
-
-
-const gameAddressList = ref(null);
+const tesk_dialog = ref(false)
+const tesk_dialog_content = ref({})
+const personalMessage = ref(null);
 const carousalImage = ref(null);
 const noticeList = ref(null);
 const loading = ref(false);
-
+const select_item_ans = ref(0)
 const loginInfo = computed(() => store.getters["app/LoginData"]);
 const formattedNumber = computed(() => currentNumber.value.toLocaleString());
+const numRows = computed(() => Math.ceil(testContentList.value.length / 3));
 
 //The list of pictures in the middle, click to enter and browse the article
 const goDetail = (id) => {
@@ -187,11 +186,42 @@ const goCarousal = () => {
   router.push({ name: "HomeDetails" });
 };
 
-// const showImage = (image) => {
-//    image = `https://sxh-cn.oss-cn-hongkong.aliyuncs.com/${image}`
-//    imageurl.value = [image]
-//   imageShow.value = true
-// }
+const onClickCloseIcon = () => {
+  select_item_ans.value = 0
+  tesk_dialog_content.value = {}
+}
+
+const select_item = (index) => {
+  select_item_ans.value = index
+}
+
+const getItem = (index) => {
+  return testContentList.value[index] || {};
+};
+
+  // Function to separate item into name and price
+  function separateItem(item) {
+    if (!item) return { name: '', price: '' };
+
+    // Regular expression to match the name and price
+    const match = item.match(/(\D+)(\d+元)/);
+    if (match) {
+      return { name: match[1], price: match[2] };
+    }
+    return { name: '', price: '' };
+  }
+
+const openTeskDialog = (index) => {
+      //here need to console.log of specific postion of array value from testContentList
+      if (index < testContentList.value.length) {
+        console.log(testContentList.value[index]);
+        tesk_dialog_content.value = testContentList.value[index]
+        tesk_dialog.value = true
+      } else {
+        console.log('Index out of range');
+        tesk_dialog_content.value = {}
+      }
+    }
 
 const showImage = (image) => {
   image = `https://sxh-cn.oss-cn-hongkong.aliyuncs.com/${image}`
@@ -208,18 +238,28 @@ const showImage = (image) => {
 const onRefresh = () => {
   setTimeout(() => {
    // showToast("刷新成功");
-    getHomePageArticleList();
+    //getHomePageArticleList();
     getNotice();
-    getHomePageRotograph();
+   // getHomePageRotograph();
     loading.value = false;
   }, 1000);
 };
 
-const getHomePageArticleList = async () => {
+const getTaskContent = async () => {
   try {
-    const res = await homeApi.getHomePageArticleList();
+    const res = await homeApi.getTaskContentApi();
     if (res?.data?.success && res?.data?.code == 200) {
-      gameAddressList.value = res?.data?.data;
+      testContentList.value = res?.data?.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+const setPersonalMessage = async () => {
+  try {
+    const res = await homeApi.setPersonalMessage();
+    if (res?.data?.success && res?.data?.code == 200) {
+      personalMessage.value = res?.data?.data;
     }
   } catch (error) {
     console.log(error);
@@ -237,12 +277,11 @@ const getNotice = async () => {
   }
 };
 
-//for carousalImage
-const getHomePageRotograph = async () => {
-  let data = { address: 1 };
+const getQuestion = async () => {
+  let data = { username: 'mma123', password: '123AAA'};
   try {
-    const res = await homeApi.getHomePageRotograph(data);
-    console.log('cccccccccccc ', res)
+    const res = await homeApi.getQuestion(data);
+    console.log('getQuestion ', res)
     if (res?.data?.success && res?.data?.code == 200) {
       carousalImage.value = res?.data?.data;
     }
@@ -252,10 +291,9 @@ const getHomePageRotograph = async () => {
 };
 
 onMounted(() => {
-  getHomePageRotograph();
-  getHomePageArticleList();
+  getTaskContent()
+  setPersonalMessage()
   getNotice();
-  startAnimation()
 });
 </script>
 
@@ -267,6 +305,30 @@ onMounted(() => {
   overflow-y: auto;
   /* background: #050a30; */
 }
+
+.custom-notice-bar {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  /* padding: 10px; */
+  box-sizing: border-box;
+}
+
+.notice-content {
+  display: inline-block;
+  animation: scroll 10s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 .rolling-enter-active {
   transition: transform 0.3s ease-out;
 }
@@ -325,19 +387,5 @@ onMounted(() => {
 
 .is-flipped .card-inner {
   transform: rotateY(180deg);
-}
-</style>
-
-<style>
-
-.my-rolling-text {
-  /* --van-rolling-text-background: #1989fa; */
-  --van-rolling-text-color: #f2cd78;
-  --van-rolling-text-font-size: 30px;
-  --van-rolling-text-font-weight:bold;
-  --van-rolling-text-gap: 8px;
-  --van-rolling-text-item-border-radius: 8px;
-  font-weight: 700;
-  /* --van-rolling-text-item-width: 40px; */
 }
 </style>

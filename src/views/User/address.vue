@@ -1,7 +1,7 @@
 <template>
   <div id="newmessage" class="w-full h-full relative">
     <div
-      class="h-20  w-full flex justify-between items-center px-3 text-base font-bold"
+      class="h-12 bg-[#fd3130] text-white  w-full flex justify-between items-center px-3 text-base font-bold"
     >
       <div @click="goBack" class="">
         <van-icon name="arrow-left" />
@@ -13,11 +13,10 @@
     <section
       v-if=" addressData == null || addressData == ''"
     >
-      <div class="py-20 text-center">
-        <van-empty
+      <div class="py-20 text-center text-black">
+        <van-empty 
           description="还没有收货地址"
-          color="#fff"
-          style="color: white"
+         
         />
         <div class="pt-3 px-5">
           <van-button
@@ -25,7 +24,7 @@
             block
             class="back_muli font-bold"
             style="
-              background-color: #063970;
+              background-color: #fd3130;
               border: none;
               color: #fff;
               height: 56px;
@@ -45,7 +44,7 @@
         <div class="flex justify-between items-center px-3 bg-white border border-gray-300 rounded-lg  py-4 text-sm">
 
           <div class=" tracking-widest">
-              {{addressData?.name}}sdfds
+              {{addressData?.name}}
           </div>
         </div>
       </div>
@@ -57,7 +56,7 @@
         <div class="flex justify-between items-center px-3 bg-white border border-gray-300 rounded-lg  py-4 text-sm text-black">
  
           <div class=" tracking-widest">
-             {{addressData?.phone}}sdfdsf
+             {{addressData?.phone}}
           </div>
         </div>
       </div>
@@ -68,7 +67,7 @@
         <div class="flex justify-between w-full  items-center px-3 bg-white border border-gray-300 rounded-lg  py-4 text-sm">
 
           <div class=" tracking-widest van-ellipsis max-w-[80%]">
-             {{addressData?.address}}sdfds
+             {{addressData?.address}}
           </div>
         </div>
       </div>
@@ -152,6 +151,9 @@ onMounted(()=> {
 
 <style scoped>
 #newmessage :deep() .van-empty__description {
-  color: white !important;
+  color: #000 !important;
 }
+
+
 </style>
+

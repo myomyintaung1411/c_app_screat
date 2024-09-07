@@ -51,7 +51,8 @@ export default {
     },
     bindBank(data) { // editBankInfo and Edit AddBankInfo is same method
         return instance({
-            url: '/opt/bindBank',
+            //url: '/opt/bindBank',
+            url:'/opt/editBankInfo',
             method: 'post',
             data: data,
             requestBase: '/api',

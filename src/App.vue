@@ -24,7 +24,7 @@ const { isOnline, onlineAt } = toRefs(network);
 
 </script>
 <template>
-  <div  class="w-full h-full relative sm:max-w-md sm:mx-auto sm:bg-[#4d03d4] ">
+  <div  class="w-full h-full relative sm:max-w-md sm:mx-auto   ">
   <div v-if="isOnline">
     <!-- <div v-if="loading" class="w-full h-screen flex flex-col justify-center items-center">
       <div class="spinner"></div>

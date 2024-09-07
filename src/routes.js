@@ -11,7 +11,7 @@ export const routes = [
     name: 'Main',
     component: Main,
     meta: { title: 'Main',requireAuth: true },
-    redirect: '/login',
+    redirect: '/home',
     children: [
       {
         path: '/home',
@@ -164,30 +164,30 @@ const router = createRouter({
   routes,
 })
 
-// router.beforeEach((to, from, next) => {
-//   const loginInfo = computed(()=> store.getters["app/LoginData"])
-//   // console.log(loginInfo.value);
-//   const token = loginInfo.value?.token
-//   console.log(token,"router token");
-//   if (to.matched.some(record => record.meta.requiresVisitor)
-//   ) {
-//     if (token) {
-//       next('/')
-//     } else {
-//       next()
-//     }
-//   } else if (to.matched.some(record => record.meta.requireAuth)) {
-//     if (!token) {
-//       next('/login')
-//     } else {
-//       next()
-//     }
-//   } else {
-//     next()
-//   }
-//   // next()
+router.beforeEach((to, from, next) => {
+  const loginInfo = computed(()=> store.getters["app/LoginData"])
+  // console.log(loginInfo.value);
+  const token = loginInfo.value?.token
+  console.log(token,"router token");
+  if (to.matched.some(record => record.meta.requiresVisitor)
+  ) {
+    if (token) {
+      next('/')
+    } else {
+      next()
+    }
+  } else if (to.matched.some(record => record.meta.requireAuth)) {
+    if (!token) {
+      next('/login')
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+  // next()
 
-// });
+});
 
 
 /* Default title tag */

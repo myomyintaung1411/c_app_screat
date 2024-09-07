@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full relative">
     <div
-      class="h-20  w-full flex justify-between items-center px-3 text-base font-bold"
+      class="h-12 bg-[#fd3130] text-white w-full flex justify-between items-center px-3 text-base font-bold"
     >
       <div @click="goBack" class="">
         <van-icon name="arrow-left" />
@@ -68,7 +68,7 @@
               accept="image/*"
               v-model="frontImage"
               :max-count="1"
-              :max-size="3000 * 1024"
+              :max-size="5000 * 1024"
               @oversize="onOversize"
               :after-read="frontafterRead"
             />
@@ -79,12 +79,25 @@
               accept="image/*"
               v-model="backImage"
               :max-count="1"
-              :max-size="3000 * 1024"
+              :max-size="5000 * 1024"
               @oversize="onOversize"
               :after-read="backafterRead"
             />
             <!-- <img src="https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg" alt=""> -->
             <span class="text-gray-600 pt-2">身份证反面照地址</span>
+
+          </div>
+            <div class="flex flex-col  items-center   ">
+            <van-uploader
+              accept="image/*"
+              v-model="personalImage"
+              :max-count="1"
+              :max-size="5000 * 1024"
+              @oversize="onOversize"
+              :after-read="personalafterRead"
+            />
+            <!-- <img src="https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg" alt=""> -->
+            <span class="text-gray-600 pt-2">个人照片</span>
 
           </div>
           </div>
@@ -120,7 +133,7 @@
             :disabled="disabledBtn"
             class="back_muli"
             style="
-              background-color: #050a30;
+              background-color: #fd3130;
               border: none;
               color: #fff;
               height: 50px;
@@ -155,10 +168,12 @@ const disabledBtn = ref(false)
 
 const frontImage = ref([]);
 const backImage = ref([]);
+const personalImage = ref([]);
 const frontImageUrl = ref("");
 const backImageUrl = ref("");
+const personalImageUrl = ref("");
 const realname = ref("");
-const id_code = ref("");
+const id_code = ref("330302199808180355");
 const loading = ref(false);
 const userInfo = computed(() => store.getters["app/ProfileInfoData"]);
 
@@ -177,9 +192,34 @@ const goBack = () => {
 
 const onOversize = (file) => {
   console.log(file);
-  showToast("文件大小不能超过 3MB");
+  showToast("文件大小不能超过 5MB");
 };
 
+async function personalafterRead(file, detail) {
+  console.log(file.file, "personalafterRead");
+  try {
+    showLoadingToast({
+      message: "上传中...",
+      forbidClick: true,
+      duration: 2000,
+    });
+    // console.log(imageUrl.value);
+    let formData = new FormData();
+    formData.append("file", file.file); // 因为要上传多个文件，所以需要遍历一下才行
+    console.log(formData, "ddd");
+    const res = await userApi.UploadImage(formData);
+    closeToast();
+    // console.log(res);
+    if (res?.data?.code == "0") {
+      personalImageUrl.value = res?.data?.data?.url;
+    }
+    console.log(res, "resssssssss");
+  } catch (err) {
+    personalImage.value = [];
+    showToast("图片上传错误");
+    console.log(err, "imageupload error");
+  }
+}
 async function frontafterRead(file, detail) {
   console.log(file.file, "frontafterRead");
   try {
@@ -255,10 +295,11 @@ const onSubmit = async () => {
 
   loading.value = true;
   let data = {
-    realname: realname.value,
+    true_name: realname.value,
     id_code: id_code.value,
-    // id_front_url: frontImageUrl.value,
-    // id_back_url: backImageUrl.value,
+     id_front_url: frontImageUrl.value,
+     id_back_url: backImageUrl.value,
+     id_hand_url: personalImageUrl.value,
   };
   try {
     showLoadingToast({

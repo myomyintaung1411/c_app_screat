@@ -139,6 +139,10 @@ background-color: transparent;
   /* background: #4286f5; */
   background: #fd3130;
   line-height: 0;
+  /* max-width: 448px;
+  margin: 0 auto;
+  left: 50%;
+  transform: translateX(-50%); */
 }
 .van-tabbar-item--active {
   background-color: transparent;

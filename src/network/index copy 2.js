@@ -4,6 +4,7 @@ import router from '../routes'
 import { computed,ref } from 'vue'
 import { showToast,showDialog  } from "vant";
 import store from '@/store/index'
+import aes from './aes'
 
 let BaseUrl = ''
 let loginInfo = computed(()=> store.getters["app/LoginData"])
@@ -22,7 +23,12 @@ const instance = axios.create({
 instance.interceptors.request.use((config) => {
   let token = loginInfo?.value?.token
   //config.headers.Authorization = `Bearer ${token}`
+
   config.headers.token = `${token}`
+ // let cd = config?.data ? JSON.parse(JSON.stringify(config.data)) : {}
+ // let cd_enc = aes.encrypt(JSON.stringify(cd));
+   // config.data = { data: cd };
+
   return config
 }, (error) => {
   Promise.reject(error)
@@ -31,6 +37,10 @@ instance.interceptors.request.use((config) => {
 
 // 响应拦截器
 instance.interceptors.response.use((response) => {
+  //console.log(response)
+  let cd_enc = response.data; 
+  let decryptedData = JSON.parse(aes.decrypt(cd_enc));
+ // response.data = cd_enc;
   return response
 }, (error) => {
   if (error?.response && error?.response?.status) {

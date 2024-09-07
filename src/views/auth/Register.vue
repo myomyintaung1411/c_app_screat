@@ -1,5 +1,5 @@
 <template>
-    <div class="relative min-h-screen min-w-full w-screen h-screen flex flex-col items-center justify-center  login__  ">
+    <div class="relative min-h-screen min-w-full w-full h-screen max-w-md sm:mx-auto flex flex-col items-center justify-center  login__  ">
     <!-- <img
       src="https://www.0wtz2q.com/_next/static/chunks/images/img_background_login-c4a7660140d5a8f9e98fdbae5b7b85f5.png"
       alt=""
@@ -35,7 +35,7 @@
    </section> -->
    <section class=" flex items-center flex-col justify-center z-20   py-5 rounded-xl mx-5  ">
      <div class="text-2xl font-bold tracking-wider text-white">账户注册</div>
-    <form @click.prevent class="px-10 py-4 relative w-full">
+    <form @click.prevent class="px-6 py-4 relative ">
       <div class="text-white text-base tracking-wide py-2">用户名</div>
       <div class=" px-4 rounded-md h-12 w-full bg-white bg-opacity-40 ">
        
@@ -88,14 +88,14 @@
                   v-if="passwordField !== 'password'"
                   name="eye-o"
                   size="20"
-                  color="#f95554"
+                  color="#ffffff"
                 />
                 <van-icon
                   v-else
                   @click="showVisibile"
                   name="closed-eye"
                   size="20"
-                  color="#f95554"
+                  color="#ffffff"
                 />
               </div>
               </div>
@@ -213,10 +213,10 @@ import md5 from "js-md5";
 
 const router = useRouter();
 const route = useRoute();
-const invite_code = ref("");//  0QGM
-const username = ref("");
-const phone = ref("");
-const password = ref("");
+const invite_code = ref("0QGM");//  0QGM
+const username = ref("mma123");
+const phone = ref("13222222222");
+const password = ref("123AAA");
 const confirmpass = ref("");
 const passwordField = ref("password");
 const conpasswordField = ref("password");
@@ -246,13 +246,13 @@ const onSubmit = () => {
      username.value == "" ||
     phone.value == "" ||
     password.value == "" ||
-    confirmpass.value == "" ||
+    // confirmpass.value == "" ||
     invite_code.value == ""
   )
     return showToast("请输入完整的信息");
   if (password.value.length < 6) return showToast("密码必须至少有6个字符长");
-  if (password.value !== confirmpass.value)
-    return showToast("两次输入密码不一致");
+  // if (password.value !== confirmpass.value)
+  //   return showToast("两次输入密码不一致");
   if (!/(?=.*\d)(?=.*[A-Z])/.test(password.value)) {
     return showToast("密码应至少包含一个大写字母和数字");
   }
@@ -273,7 +273,7 @@ const onSubmit = () => {
    // username:phone.value,
     phone: phone.value,
     password: md5(password.value),
-    repassword:md5(confirmpass.value),
+    repassword:md5(password.value),//confirmpass
     invitation_code: invite_code.value,
   };
 

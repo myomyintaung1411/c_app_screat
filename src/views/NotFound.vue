@@ -13,7 +13,7 @@
         </router-link>
         <div class="py-3 w-[200px] ">
           <div  class="btn_login text-center py-3 cursor-pointer text-lg text-white">
-            <van-button @click="goService" block  hairline color="#AD8E58">联系客服</van-button>
+            <van-button @click="goService" block  hairline color="#d63436">联系客服</van-button>
           </div>
         </div>
       </div>

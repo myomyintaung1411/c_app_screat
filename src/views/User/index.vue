@@ -1,12 +1,13 @@
 <template>
-  <div class="w-full relative pb-10 h-full ">
-   <section class="w-full  bg-[#fe2c2b] relative">
+  <div class="w-full relative  h-[calc(100vh_-_68px)] overflow-y-auto pb-10  ">
+    <van-pull-refresh v-model="loading" @refresh="onRefresh">
+    <section class="w-full  bg-[#fe2c2b] relative">
     <div class=" w-full rounded-b-[50%] bg-red-400">
-      <div class="flex justify-end py-2 px-3 font-bold tracking-wider text-right text-black">可用积分 0</div>
-     <div class="flex items-center justify-center flex-col py-2">
+      <div class="flex justify-end py-5 px-3 font-bold tracking-wider text-right text-black">可用积分 {{userInfo?.referral_score}}</div>
+     <div @click="goProfileInfo" class="flex items-center justify-center flex-col py-2">
       <img :src="avatar" alt="avatar" class="w-18">
-       <div class="text-white py-2 font-medium tracking-wider">用户名区</div>
-       <div class="text-xl tracking-wider text-white font-bold pb-2">0 平衡</div>
+       <div class="text-white py-2 font-medium tracking-wider">{{userInfo?.name}}</div>
+       <div class="text-xl tracking-wider text-white font-bold pb-2">{{userInfo?.balance}} 平衡</div>
      </div>
     </div>
     <div class="flex items-center justify-center py-5 px-10 ">
@@ -14,38 +15,62 @@
     </div>
    </section>
     <section class="py-2 w-full space-y-5 px-4 pt-4">
-        <div class="h-14 rounded-lg w-full bg-[#f8f8f8] text-[#febf32] font-bold flex items-center justify-between px-4 text-base">
+        <div  @click="goSection(0)" class="h-12 rounded-lg w-full bg-[#f8f8f8] text-[#febf32] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
-            <img :src="fileCheck" alt="filecheck" class="w-8">
-            <span class=" tracking-wider text-base">客户服务</span>
+            <img :src="cardpng" alt="filecheck" class="w-6">
+            <span class=" tracking-wider text-base ">添加银行</span>
           </div>
-          <van-icon name="arrow" color="#febf32" size="20"  />
+          <van-icon name="arrow" color="#fe2c2b" size="20"  />
         </div>
-        <div class="h-14 rounded-lg w-full bg-[#f8f8f8] text-[#7437a2] font-bold flex items-center justify-between px-4 text-base">
+        <div  @click="goSection(1)" class="h-12 rounded-lg w-full bg-[#f8f8f8] text-[#febf32] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
-            <img :src="service" alt="filecheck" class="w-8">
-            <span class=" tracking-wider text-base">客户服务</span>
+            <img :src="usersvg" alt="filecheck" class="w-6">
+            <span class=" tracking-wider text-base">真实姓名</span>
           </div>
-          <van-icon name="arrow" color="#febf32" size="20"  />
+          <van-icon name="arrow" color="#fe2c2b" size="20"  />
         </div>
-        <div class="h-14 rounded-lg w-full bg-[#f8f8f8] text-[#6a8fee] font-bold flex items-center justify-between px-4 text-base">
+        <div @click="goSection(2)" class="h-12 rounded-lg w-full bg-[#f8f8f8] text-[#febf32] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
-            <img :src="service" alt="filecheck" class="w-8">
-            <span class=" tracking-wider text-base">客户服务</span>
+            <img :src="password" alt="filecheck" class="w-6">
+            <span class=" tracking-wider text-base">更改密码</span>
           </div>
-          <van-icon name="arrow" color="#febf32" size="20"  />
+          <van-icon name="arrow" color="#fe2c2b" size="20"  />
         </div>
-        <div class="h-14 rounded-lg w-full bg-[#f8f8f8] text-[#a3e584] font-bold flex items-center justify-between px-4 text-base">
+        <div @click="goSection(3)" class="h-12 rounded-lg w-full bg-[#f8f8f8] text-[#febf32] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
-            <img :src="service" alt="filecheck" class="w-8">
-            <span class=" tracking-wider text-base">客户服务</span>
+            <img :src="addresspng" alt="filecheck" class="w-6">
+            <span class=" tracking-wider text-base">地址簿</span>
           </div>
-          <van-icon name="arrow" color="#febf32" size="20"  />
+          <van-icon name="arrow" color="#fe2c2b" size="20"  />
         </div>
 
       </section>
-  </div>
+      <div class="py-5 px-4 relative w-full ">
+            <van-button @click="logout"    block class="back_muli "  style=" background:#fe2c2b; border: none;color:#fff;height:48px;">
+               退出
+            </van-button>
+    </div>
+  </van-pull-refresh>
 
+  </div>
+  <van-dialog
+    className="customBackround"
+    v-model:show="logoutDialog"
+    confirm-button-text="确认"
+    cancel-button-text="取消"
+    :cancelButtonColor="'#252a3e'"
+    :confirm-button-color="'#fe2c2b'"
+    show-cancel-button
+    @confirm="confirmLogout"
+    @cancel="logoutDialog = false"
+  >
+    <template #title>
+      <div>
+        提示
+      </div>
+    </template>
+    <p class="text-center py-2 text-black">是否确认退出？</p>
+  </van-dialog>
   
 </template>
 
@@ -148,6 +173,10 @@ const onOversize = (file) => {
   console.log(file);
   showToast("文件大小不能超过 3MB");
 };
+
+const goProfileInfo = () => {
+  router.push('/profileinfo')
+}
 
 async function frontafterRead(file, detail) {
   console.log(file.file, "frontafterRead");

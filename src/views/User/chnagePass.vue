@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full relative">
     <div
-      class="h-20  w-full flex justify-between items-center px-3 text-base font-bold"
+      class="h-12 bg-[#fd3130] text-white  w-full flex justify-between items-center px-3 text-base font-bold"
     >
       <div @click="goBack" class="">
         <van-icon name="arrow-left" />
@@ -38,14 +38,14 @@
                 v-if="oldpasswordField !== 'password'"
                 name="eye-o"
                 size="20"
-                 color="#febf32"
+                 color="#fd3130"
               />
               <van-icon
                 v-else
                 @click="oldshowVisibile"
                 name="closed-eye"
                 size="20"
-                 color="#febf32"
+                 color="#fd3130"
               />
             </div>
           </div>
@@ -75,14 +75,14 @@
                 v-if="passwordField !== 'password'"
                 name="eye-o"
                 size="20"
-                 color="#febf32"
+                 color="#fd3130"
               />
               <van-icon
                 v-else
                 @click="showVisibile"
                 name="closed-eye"
                 size="20"
-                 color="#febf32"
+                 color="#fd3130"
               />
             </div>
           </div>
@@ -112,14 +112,14 @@
                 v-if="conpasswordField !== 'password'"
                 name="eye-o"
                 size="20"
-                 color="#febf32"
+                 color="#fd3130"
               />
               <van-icon
                 v-else
                 @click="conshowVisibile"
                 name="closed-eye"
                 size="20"
-                 color="#febf32"
+                 color="#fd3130"
               />
             </div>
           </div>
@@ -131,7 +131,7 @@
               :loading="loading"  :disabled="loading"
               class="back_muli"
               style="
-                background-color: #050a30;
+                background-color: #fd3130;
                 border: none;
                 color: #fff;
                 height: 50px;

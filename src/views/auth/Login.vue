@@ -1,5 +1,5 @@
 <template>
-  <div class="relative min-h-screen min-w-full w-screen h-screen flex flex-col items-center justify-center  login__  ">
+  <div class="relative min-h-screen min-w-full w-screen h-screen flex flex-col items-center max-w-md sm:mx-auto justify-center  login__   ">
     <!-- <img
       src="https://www.0wtz2q.com/_next/static/chunks/images/img_background_login-c4a7660140d5a8f9e98fdbae5b7b85f5.png"
       alt=""
@@ -38,7 +38,7 @@
    <section class=" flex items-center flex-col justify-center z-20  py-5 rounded-xl mx-5  ">
     <!-- <div class="text-2xl font-bold tracking-wider text-white pb-3">登录帐户</div> -->
  
-    <form @click.prevent class="px-10 py-4 relative w-full">
+    <form @click.prevent class="px-10 py-4 relative   ">
       <div class="text-white text-base tracking-wide py-2">用户名</div>
       <div class=" px-4 rounded-md h-12 w-full  formDiv bg-white bg-opacity-40">
         <div
@@ -141,8 +141,8 @@ import md5 from "js-md5";
 const router = useRouter();
 const route = useRoute();
 const store = useStore();
-const account = ref("hello@gmail.com");
-const password = ref("123aaa");
+const account = ref("mma123");
+const password = ref("123AAA");
 const passwordField = ref("password");
 const loading = ref(false);
 const checked = ref(false);
@@ -167,9 +167,9 @@ const goSection = (number) => {
 };
 
 const onSubmit = () => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (account.value == "" || password.value == "") return showToast("请输入完整的登录信息");
-  if (!emailRegex.test(account.value))  return  showToast("请输入有效的电子邮件地址");
+  //if (!emailRegex.test(account.value))  return  showToast("请输入有效的电子邮件地址");
     
         
       
@@ -177,31 +177,30 @@ const onSubmit = () => {
     username: account.value,
     password: md5(password.value),
   };
-   router.push("/home");
-  // showLoadingToast({
-  //   message: "加载中...",
-  //   forbidClick: true,
-  //   loadingType: "spinner",
-  // });
-  // loading.value = true;
-  // authApi
-  //   .Login(data)
-  //   .then((res) => {
-  //     loading.value = false;
-  //     console.log(res.data);
-  //     showToast({ message: res?.data?.msg, duration: 2000 });
-  //     //closeToast();
-  //     showToast(res?.data?.msg);
-  //     if (res?.data?.success == true && res?.data?.code == 200) {
-  //       store.commit("app/LOGIN_DATA", res.data?.data);
-  //       router.push("/");
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     loading.value = false;
-  //     closeToast();
-  //     console.log(err, "error");
-  //   });
+  showLoadingToast({
+    message: "加载中...",
+    forbidClick: true,
+    loadingType: "spinner",
+  });
+  loading.value = true;
+  authApi
+    .Login(data)
+    .then((res) => {
+      loading.value = false;
+      console.log(res.data);
+      showToast({ message: res?.data?.msg, duration: 2000 });
+      //closeToast();
+      showToast(res?.data?.msg);
+      if (res?.data?.success == true && res?.data?.code == '200') {
+        store.commit("app/LOGIN_DATA", res.data?.data);
+        router.push("/");
+      }
+    })
+    .catch((err) => {
+      loading.value = false;
+      closeToast();
+      console.log(err, "error");
+    });
 };
 
 onMounted(() => {
