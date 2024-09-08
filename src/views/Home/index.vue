@@ -33,8 +33,10 @@
             </div>
           </transition-group>
         </div> -->
-        <van-rolling-text  class="my-rolling-text"  :start-num="0"
-        :target-num="1000000" :duration="1" />
+        <!-- <van-rolling-text  class="my-rolling-text  font-bold"  :start-num="0"
+        :target-num="1000000" :duration="1" /> -->
+        <van-rolling-text  class="my-rolling-text  font-bold"  :start-num="0" :text-list="textList"
+         :duration="1" />
         <div class="absolute bottom-7 right-7  flex items-center justify-end w-full  ">
         <div class="bg-[#f2cd78] text-[#fff] text-base  px-6 py-2 font-bold">提取</div>
         </div>
@@ -174,6 +176,15 @@ const carousalImage = ref(null);
 const noticeList = ref(null);
 const loading = ref(false);
 const select_item_ans = ref(0)
+const textList = ref([
+      '0,111,111',
+      '0,222,222',
+      '0,333,333',
+      '0,444,444',
+      '0,777,777',
+      '0,999,999',
+      '1,000,000',
+    ]);
 const loginInfo = computed(() => store.getters["app/LoginData"]);
 const formattedNumber = computed(() => currentNumber.value.toLocaleString());
 const numRows = computed(() => Math.ceil(testContentList.value.length / 3));
@@ -387,5 +398,15 @@ onMounted(() => {
 
 .is-flipped .card-inner {
   transform: rotateY(180deg);
+}
+
+.my-rolling-text {
+  /* --van-rolling-text-background: #1989fa; */
+  --van-rolling-text-color: #f2cd78;
+  --van-rolling-text-font-size: 35px;
+  --van-rolling-text-gap: 1px;
+  --van-rolling-text-item-border-radius: 5px;
+  --van-rolling-text-item-width: 18px;
+
 }
 </style>
