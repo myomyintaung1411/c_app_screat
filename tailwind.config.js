@@ -13,9 +13,31 @@ export default {
         fadeleft: 'fadeInLeft 1s 0.2s ease both',
         wiggle: 'wiggle 2s linear infinite',
         "tracking-in-expand": "tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000)   both",
+        zoomIn: 'zoomIn 0.5s ease-in-out forwards',
+        zoomInRotateX: 'zoomInRotateX 0.5s ease-in-out forwards',
 
       },
       keyframes: {
+        zoomIn: {
+          '0%': {
+            transform: 'scale(0)',
+            opacity: '0',
+          },
+          '100%': {
+            transform: 'scale(1)',
+            opacity: '1',
+          },
+        }, 
+        zoomInRotateX: {
+          '0%': {
+            transform: 'rotateX(90deg)',
+            opacity: '0',
+          },
+          '100%': {
+            transform: ' rotateX(0deg)',
+            opacity: '1',
+          },
+        },
         flip: {
           '0%': {
             opacity:0,
