@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full relative">
     <div
-      class="h-12 bg-[#fd3130] text-white w-full flex justify-between items-center px-3 text-base font-bold"
+      class="h-12 bg-[#B3000A] text-white w-full flex justify-between items-center px-3 text-base font-bold"
     >
       <div @click="goBack" class="">
         <van-icon name="arrow-left" />
@@ -9,7 +9,7 @@
       <div class="">{{isEdit ? '修改' : '添加'}} 收货地址</div>
       <div class="flex-none"></div>
     </div>
-    <section class="bg-white h-[calc(100vh_-_80px)] flex flex-col loginForm mt-0">
+    <section class="bg-[#B3000A] h-[calc(100vh_-_48px)] flex flex-col loginForm mt-0">
       <div class="formSection px-5">
         <van-form>
          <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5">姓名</div>
@@ -74,7 +74,7 @@
             block
             class="back_muli"
             style="
-              background-color: #fd3130;
+              background-color: #FF4855;
               border: none;
               color: #fff;
               height: 50px;

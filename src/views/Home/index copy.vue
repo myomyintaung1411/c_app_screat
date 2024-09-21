@@ -1,47 +1,64 @@
 <template>
-  <div class="w-full h-full text-center  relative home_bg pb-10     " >
-   <section class="py-3 w-full h-64 ">
-    <div class=" px-3 w-full h-10 ">
-      <div class=" relative w-full h-10    ">
-        <img src="@/assets/home/notice_bg.png" alt="" class="h-full w-full object-fill">
-        <div class="absolute h-full top-0 right-0 w-full ">
-          <div class="w-full h-full pl-8 ">
-            <van-notice-bar  background="none" color="#fff" scrollable>
-                  <div  class="">{{ noticeList?.content }}</div>
+  <div class="w-full h-full text-center  relative home_bg pb-10   " >
+    <section class="bg-[#f0eaea] pt-2">
+        <div @click="goNotice" class="w-full px-4  mx-auto flex items-center justify-between ">
+            <div class="w-6 h-6 rounded-full bg-[#ed155e] flex items-center justify-center">
+              <img src="@/assets/user/sound.svg" alt="sound" class="w-4">
+            </div>
+            <div class="flex-1  w-[60%]  ">
+                <van-notice-bar  background="#f0eaea" color="#000" scrollable>
+                  <div  class="text-black">{{ noticeList?.content }}</div>
                 </van-notice-bar>
-          </div>
+                <!-- <Vue3Marquee class="w-full" style="width: 100%;">
+                  <div v-html="noticeList?.content"  class="text-black w-full"></div>
+               </Vue3Marquee> -->
+            </div>
+            <div class="relative">
+                <van-badge :content="0">
+                  <img src="@/assets/user/notice_fill.svg" alt="button_more" class=" w-6">
+               </van-badge>
+            </div>
         </div>
-      </div>
-    </div>
-   </section>
-   
-   <section class="h-40   w-full px-3 bg-transparent ">
-    <div class="h-20">
-     <div class="flex items-center justify-center h-full">
-      <van-rolling-text  class="my-rolling-text  font-bold"  :start-num="0" :text-list="textList"
-      :duration="1" />
-     </div>
-    </div>
-    <div class="h-20 flex items-center justify-center">
-      <img src="@/assets/home/withdraw.png" alt="withdraw" class="w-48 ">
-    </div>
-   </section>
+    </section>
+    <section class=" w-full  relative px-4 py-4  ">
+      <!-- <img src="@/assets/loginbg.jpg" alt="loginbg" class="w-full h-full relative"> -->
+       <div class="px-4 bg-[#FF4855] h-48 w-full rounded-sm">
+       <div class="h-full flex items-center w-full  relative justify-center space-x-2 text-[#f2cd78]">
+        <van-icon name="cash-o" size="45" color="#fcd24c" />
+        <!-- <div ref="animationRollingnumber" class="text-4xl font-bold">1,000,000</div> -->
+        <!-- <div class="number-container relative overflow-hidden h-14   flex items-center justify-center">
+          <transition-group name="rolling" tag="div" class="text-4xl font-bold">
+            <div :key="formattedNumber" class="number-item h-full flex items-center justify-center">
+              {{ formattedNumber }}
+            </div>
+          </transition-group>
+        </div> -->
+        <!-- <van-rolling-text  class="my-rolling-text  font-bold"  :start-num="0"
+        :target-num="1000000" :duration="1" /> -->
+        <van-rolling-text  class="my-rolling-text  font-bold"  :start-num="0" :text-list="textList"
+         :duration="1" />
+        <div class="absolute bottom-7 right-7  flex items-center justify-end w-full  ">
+        <div class="bg-[#f2cd78] text-[#fff] text-base  px-6 py-2 font-bold">提取</div>
+        </div>
+       </div>
 
-   <section class="w-full px-3 h-[460px]">
-    <div class="answer_bg">
-      <div class="h-[60px] "></div>
-      <div class="px-3">
-        <van-row  v-for="(rowIndex) in numRows" :key="rowIndex"  gutter="1" class="h-[100px]"  align="center" >
+      </div>
+    </section>
+    <section class="py-1 w-full flex items-center justify-center">
+      <div class="bg-[#f2cd78] text-[#fff] py-2 px-7 font-bold rounded-full text-base tracking-wider">任务任务图</div>
+    </section>
+    <section class="py-3 w-full px-4 ">
+      <van-row  v-for="(rowIndex) in numRows" :key="rowIndex"  gutter="5" class="py-3"  align="center" >
             <van-col    span="3">
               <div class="flex items-center whitespace-nowrap">
-                <div class="font-bold text-base tracking-wide text-[#fff]">{{ rowIndex }}期</div>
+                <div class="font-bold text-base tracking-wide text-[#f2c65d]">{{ rowIndex }}期</div>
               </div>
             </van-col>
             <!-- here need to  click testContentList array of positon 0,3,6,9 -->
             <van-col    span="5">
               <!-- @click="openTeskDialog((rowIndex - 1) * 3)" -->
-                <div @click="showAnimation((rowIndex - 1) * 3)"  class=" h-16 flex items-center justify-center w-full bg-[#F965B]">
-                 <img src="@/assets/home/ans_1.png" alt="box" class="w-full h-full">
+                <div @click="showAnimation((rowIndex - 1) * 3)"  class=" h-16 flex items-center justify-center w-full bg-[#f2c65d]">
+                 <img src="@/assets/box.png" alt="box" class="w-full h-full">
                 </div>
             </van-col>
             <van-col   span="3">
@@ -49,40 +66,128 @@
                   <!-- <van-icon name="success" size="25" /> -->
                 <img src="@/assets/arrow-both.svg" alt="arrow-both" class="w-7">
               
-                  <div class="text-xs tracking-wide text-white">2选1</div>
+                  <div class="text-xs tracking-wide">2选1</div>
                 </div>
             </van-col>
                         <!-- here show testContentList array of positon 1,4,7,10 -->
 
             <van-col   span="5">
               <!-- @click="openTeskDialog((rowIndex - 1) *  3 + 1)" -->
-                <div @click="showAnimation((rowIndex - 1) *  3 + 1)" class=" h-16 flex items-center justify-center w-full bg-[#F965B]">
-                  <img src="@/assets/home/ans_1.png" alt="box" class="w-full h-full">
+                <div @click="showAnimation((rowIndex - 1) *  3 + 1)" class=" h-16 flex items-center justify-center w-full bg-[#f2c65d]">
+                  <img src="@/assets/box.png" alt="box" class="w-full h-full">
 
                 </div>
             </van-col>
             <van-col   span="3">
               <!-- <van-icon name="arrow-double-right" size="25" /> -->
-              <div class="flex items-center justify-center ">
-                <img src="@/assets/home/arrow-right.png" alt="arrow-double-right" class="w-7">
+              <div class="flex items-center justify-center">
+                <img src="@/assets/arrow-right-double.svg" alt="arrow-double-right" class="w-7">
               </div>
             </van-col>
                <!-- here show testContentList array of positon 3,5,8,11 -->
             <van-col   span="5">
               <!-- @click="openTeskDialog((rowIndex - 1) * 3 + 2)" -->
-                <div  @click="showAnimation((rowIndex - 1) * 3 + 2)"  class=" z-10 relative flex  h-16   items-center justify-center w-full flex-col text-base font-bold text-white">
+                <div  @click="showAnimation((rowIndex - 1) * 3 + 2)"  class=" h-16 flex items-center justify-center w-full bg-[#FF4855] text-base font-bold text-white">
                   <!-- 免费包 -->
-                   <img src="@/assets/home/crown.png" alt="crown" class="w-8 absolute -top-6">
-                  <img src="@/assets/home/ans3.png" alt="box" class="w-full h-full">
+                  <img src="@/assets/box.png" alt="box" class="w-full h-full">
                 </div>
             </van-col>
        </van-row>
+
+
+
+
+       <!-- <div v-for="m in 3" :key="m" class="flex items-center justify-center px-3 py-4 w-full  ">
+    <div v-for="n in 3" :key="n" class="flex w-full items-center justify-center  ">
+      <div
+        @click="toggleCard(m, n)"
+        :class="['card bg-red-500 ', { 'is-flipped': isFlipped(m, n) }]"
+      >
+        <div class="card-inner  h-20 ">
+          <div class="card-front text-center   flex items-center justify-center  ">
+            Step {{ n }}
+          </div>
+          <div class="card-back text-center w-full flex items-center justify-center ">
+            Content for Step {{ n }}
+          </div>
+        </div>
+      </div>
+      <div class="flex-1" v-if="n !== 3">
+        <van-icon name="arrow-double-right" />
       </div>
     </div>
-   </section>
+  </div> -->
 
-   <section class="h-20"></section>
-    
+
+  <van-popup v-model:show="tesk_dialog" closeable  @click-close-icon="onClickCloseIcon"  position="bottom" :style="{ height: '60%' }">
+    <div class="py-3 px-3   relative flex items-center flex-col justify-center h-full w-full">
+      <div class="text-center text-xl  inline-block  font-bold">{{ tesk_dialog_content.option }}</div>
+      <section class="py-4 px-2 w-full">
+        <div  @click="select_item(1)" :class="select_item_ans == 1 ? 'bg-[#f2c65d] bg-opacity-100' : 'bg-[#fe2c2b] bg-opacity-90'" class="h-12 rounded-lg w-full   text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
+          <div class="flex items-center space-x-3">
+            <!-- <span class=" tracking-wider text-lg ">{{separateItem(tesk_dialog_content?.item1)?.name}}</span> -->
+             <span class=" tracking-wider text-lg ">大麦</span>
+
+          </div>
+          <!-- <span class=" tracking-wider text-lg ">{{separateItem(tesk_dialog_content?.item1)?.price}}</span> -->
+          <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item1}}</span>
+        </div>
+        <div  @click="select_item(2)" :class="select_item_ans == 2 ? 'bg-[#f2c65d] bg-opacity-100' : 'bg-[#fe2c2b] bg-opacity-90'" class="h-12 rounded-lg w-full  mt-5 text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
+          <div class="flex items-center space-x-3">
+            <span class=" tracking-wider text-lg ">小麦</span>
+          </div>
+          <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item2}}</span>
+        </div>
+        <div @click="select_item(3)" :class="select_item_ans == 3 ? 'bg-[#f2c65d] bg-opacity-100' : 'bg-[#fe2c2b] bg-opacity-90'"  class="h-12 rounded-lg w-full  mt-5  text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
+          <div class="flex items-center space-x-3">
+            <span class=" tracking-wider text-lg ">玉米</span>
+          </div>
+          <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item3}}</span>
+        </div>
+        <div class="pt-5 w-full">
+          <div class="flex items-center  justify-center px-10 space-x-5 ">
+            <van-button round type="success" style="font-weight: bold;font-size: 16px;color:#000" color="#ccc" block>去做住客</van-button>
+            <van-button round  color="#fe2c2b" style="font-weight: bold;font-size: 18px;" block>任务玩明</van-button>
+
+          </div>
+        </div>
+      </section>
+    </div>
+   </van-popup>
+
+   <!-- <div v-if="zoomedImageIndex !== null" class="zoom-overlay " @click="closeZoom"> -->
+    <!-- <van-popup v-model:show="imagePopup"  position="center"  >
+      <div class=" ">
+        <img src="`@/assets/box.png`" alt="zoomed image" class="zoomed-image animate-flip">  
+      </div>
+    </van-popup> -->
+
+    <van-popup v-model:show="imagePopup" style="background: none;"  position="center" class=" bg-none bg-transparent">
+     <div class=" w-full h-64    ">
+      <img src="`@/assets/box.png`" alt="zoomed image" class=" w-full h-full animate-zoomInRotateX   ">  
+     </div>
+    </van-popup>
+
+    <!-- <div v-if="zoomedImageIndex !== null" class="zoom-overlay " >
+      <div class="absolute  top-2 right-3 text-white">
+        <van-icon name="cross" size="25" @click="closeZoom" />
+      </div>
+      <img src="`@/assets/box.png`" alt="zoomed image" class="zoomed-image animate-fadefromTop">  
+    </div> -->
+
+    <van-popup v-model:show="showNotice" @click-overlay="closeEvent" @close="closeEvent" @click-close-icon="closeEvent" closeable  round  position="center" class=" bg-none bg-transparent">
+     <div class=" w-full    px-5 py-2  ">
+      <div class="py-2 flex flex-col justify-center items-center ">
+        <img src="@/assets/box.png" alt="" class="w-20">
+      </div>
+      <div v-html="noticeList?.content" class="text-base text-center " > </div>
+      <!-- <img src="`@/assets/box.png`" alt="zoomed image" class=" w-full h-full animate-zoomInRotateX   ">   -->
+     </div>
+    </van-popup>
+
+
+    </section>
+
   </div>
 </template>
 
@@ -282,30 +387,13 @@ onMounted(() => {
 
 
 <style scoped>
-.answer_bg{
-  background: #700000;
-  height: 100%;
-  width: 100%;
-  background-image: url(@/assets/home/answer_bg.png);
-  background-repeat: no-repeat;
-  /* background-size: cover; */
-  background-size: 100% 100%;
-}
 .home_bg{
-  background: #700000;
   height: calc(100vh - 68px);
-  /* overflow-y: auto; */
-  width: 100%;
-  background-image: url(@/assets/home/home_bg.png);
-  background-repeat: no-repeat;
-  background-size: cover;
+  /* background: #f; */
+  overflow-y: auto;
+  /* background: #050a30; */
 }
-.notice_section{
-  background-image: url(@/assets/home/notice_bg.png);
-  background-repeat: no-repeat;
-  background-size: contain 100%;
-  /* background-position: top; */
-}
+
 .custom-notice-bar {
   display: flex;
   align-items: center;

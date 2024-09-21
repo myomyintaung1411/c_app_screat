@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full h-full relative">
+  <div class="w-full h-full  bg-[#B3000A] relative">
     <div
-      class="h-12 bg-[#fd3130] text-white  w-full flex justify-between items-center px-3 text-base font-bold"
+      class="h-12 bg-[#B3000A] text-white  w-full flex justify-between items-center px-3 text-base font-bold"
     >
       <div @click="goBack" class="">
         <van-icon name="arrow-left" />
@@ -9,10 +9,10 @@
       <div class="">更改密码</div>
       <div class="flex-none"></div>
     </div>
-    <section class="px-5 text-center loginForm bg-white h-[calc(100vh_-_80px)]">
+    <section class="px-5 text-center loginForm bg-[#B3000A] h-[calc(100vh_-_48px)] ">
       <div class="formSection pt-5">
         <form @click.prevent>
-          <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5">旧密码</div>
+          <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5">当前密码</div>
           <div
             class="w-full flex items-center relative rounded-lg h-14 white_color border-gray-300 border mt-1"
           >
@@ -22,7 +22,7 @@
               <input
                 v-model="oldpassword"
                 autocomplete="off"
-                placeholder="请输入旧密码"
+                placeholder="请输入当前密码"
                 class="input-name text-[#000] bg-transparent px-3 border-none outline-none focus:outline-none focus:border-none w-full h-full placeholder:text-gray-600 placeholder:tracking-widest"
                 min="6"
                 max="17"
@@ -38,14 +38,14 @@
                 v-if="oldpasswordField !== 'password'"
                 name="eye-o"
                 size="20"
-                 color="#fd3130"
+                 color="#FF4855"
               />
               <van-icon
                 v-else
                 @click="oldshowVisibile"
                 name="closed-eye"
                 size="20"
-                 color="#fd3130"
+                 color="#FF4855"
               />
             </div>
           </div>
@@ -75,14 +75,14 @@
                 v-if="passwordField !== 'password'"
                 name="eye-o"
                 size="20"
-                 color="#fd3130"
+                 color="#FF4855"
               />
               <van-icon
                 v-else
                 @click="showVisibile"
                 name="closed-eye"
                 size="20"
-                 color="#fd3130"
+                 color="#FF4855"
               />
             </div>
           </div>
@@ -112,14 +112,14 @@
                 v-if="conpasswordField !== 'password'"
                 name="eye-o"
                 size="20"
-                 color="#fd3130"
+                 color="#FF4855"
               />
               <van-icon
                 v-else
                 @click="conshowVisibile"
                 name="closed-eye"
                 size="20"
-                 color="#fd3130"
+                 color="#FF4855"
               />
             </div>
           </div>
@@ -131,7 +131,7 @@
               :loading="loading"  :disabled="loading"
               class="back_muli"
               style="
-                background-color: #fd3130;
+                background-color: #FF4855;
                 border: none;
                 color: #fff;
                 height: 50px;

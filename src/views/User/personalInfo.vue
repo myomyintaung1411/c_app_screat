@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full relative">
-    <div class="h-12 bg-[#fd3130] text-white w-full flex justify-between items-center px-3 text-base font-bold ">
+    <div class="h-12 bg-[#FF4855] text-white w-full flex justify-between items-center px-3 text-base font-bold ">
       <div @click="goBack" class="">
         <van-icon name="arrow-left" />
       </div>

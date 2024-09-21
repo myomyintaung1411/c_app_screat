@@ -3,7 +3,7 @@
     
     class="w-full h-full sm:max-w-md sm:mx-auto sm:flex sm:justify-center sm:items-center relative"
   >
-  <div class="relative  h-[calc(100vh_-_68px)]  w-full main  ">
+  <div class="relative  h-[calc(100vh_-_68px)]  w-full main overflow-y-auto  ">
 
       <router-view></router-view>
 
@@ -11,7 +11,7 @@
       <NoInterNet></NoInterNet>
     </div> -->
 
-    <van-tabbar
+    <!-- <van-tabbar
       :border="false"
       route
       v-model="active"
@@ -30,7 +30,7 @@
         <template #icon="props">
           <img :src="props.active ? user.active : user.inactive" />
         </template>
-      </van-tabbar-item>
+      </van-tabbar-item> -->
 
       <!-- <van-tabbar-item to="/team">
         <span>团队</span>
@@ -44,23 +44,30 @@
           <img :src="props.active ? user.active : user.inactive" />
         </template>
       </van-tabbar-item> -->
-    </van-tabbar>
-    <!-- <section class="fixed left-0 bottom-0 z-50 h-[68px] flex w-full sm:max-w-md sm:relative border-none  bg-[#050a30]  ">
-      <div class="w-full  h-full flex items-center px-12 border-none ">
-        <div class=" flex items-center w-full  py-2 px-3 mx-auto my-2 bg-[#0f2a57] rounded-full space-x-3  " >
-          <div @click="TabClick(1)" class=" flex items-center space-x-2 flex-1 py-1 rounded-full pl-3" :class="activeRoute === '/home' ? 'bg-[#febf32] text-white animate-fadeleft' : 'text-[#febf32]'">
-            <img v-if="activeRoute === '/home'" src="@/assets/home/homea.svg" alt="home" class="w-8">
-            <img v-else src="@/assets/home/home.svg" alt="home" class="w-8">
-            <span class="pl-2 text-lg">主页</span>
+    <!-- </van-tabbar> -->
+    <section class="fixed left-0 bottom-0 z-50 h-[68px]  bg_bottom_navi flex w-full sm:max-w-md sm:relative border-none    ">
+      <div class="w-full  h-full flex items-center  border-none ">
+        <div class=" flex items-center w-full  py-2  mx-auto     " >
+          <div @click="TabClick(1)" class=" flex flex-col items-center justify-center flex-1 py-1 rounded-full " :class="activeRoute === '/home' ? ' text-white animate-fadeleft' : 'text-[#ccc]'">
+            <img  src="@/assets/home/home_a.png" alt="home" class="w-10">
+            <!-- <img v-if="activeRoute === '/home'" src="@/assets/home/homea.svg" alt="home" class="w-8"> -->
+            <!-- <img v-else src="@/assets/home/home.svg" alt="home" class="w-8"> -->
+            <span class=" text-sm">主页</span>
           </div>
-          <div @click="TabClick(2)" class="flex items-center flex-1  space-x-2 py-1 rounded-full pl-3 " :class="activeRoute === '/user' ? 'bg-[#febf32] text-white animate-fadeleft' : 'text-[#febf32]'">
+          <div @click="TabClick(2)" class=" flex flex-col items-center justify-center flex-1 py-1 rounded-full " :class="activeRoute === '/user' ? ' text-white animate-fadeleft' : 'text-[#ccc]'">
+            <img  src="@/assets/home/user.png" alt="home" class="w-10">
+            <!-- <img v-if="activeRoute === '/home'" src="@/assets/home/homea.svg" alt="home" class="w-8"> -->
+            <!-- <img v-else src="@/assets/home/home.svg" alt="home" class="w-8"> -->
+            <span class=" text-sm">轮廓</span>
+          </div>
+          <!-- <div @click="TabClick(2)" class="flex items-center flex-1  space-x-2 py-1 rounded-full pl-3 " :class="activeRoute === '/user' ? ' text-white animate-fadeleft' : 'text-[#febf32]'">
             <img v-if="activeRoute === '/user'" src="@/assets/home/usera.svg" alt="home" class="w-8">
             <img v-else src="@/assets/home/user.svg" alt="home" class="w-8">
             <span class="text-lg">轮廓</span>
-          </div>
+          </div> -->
         </div>
     </div>
-    </section> -->
+    </section>
     </div>
   </div>
 </template>
@@ -128,6 +135,11 @@ const user = {
 </script>
 
 <style scoped>
+.bg_bottom_navi{
+  background-image: url(@/assets/home/bottom_navi.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
 /* #main :deep() .van-tabbar {
     background-color: #2A2F4F;
 }
@@ -137,7 +149,7 @@ background-color: transparent;
 
 #main :deep() .van-tabbar {
   /* background: #4286f5; */
-  background: #fd3130;
+  background: #FF4855;
   line-height: 0;
   /* max-width: 448px;
   margin: 0 auto;

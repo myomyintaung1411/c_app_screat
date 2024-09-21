@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full h-full relative">
+  <div class="w-full  relative bg-[#B3000A]">
     <div
-      class="h-12 bg-[#fd3130] text-white w-full flex justify-between items-center px-3 text-base font-bold"
+      class="h-12 bg-[#B3000A] text-white w-full flex justify-between items-center px-3 text-base font-bold"
     >
       <div @click="goBack" class="">
         <van-icon name="arrow-left" />
@@ -9,17 +9,17 @@
       <div class="">实名认证</div>
       <div class="flex-none"></div>
     </div>
-    <section class="text-center loginForm mt-0 h-[calc(100vh_-_80px)] px-5 bg-white">
+    <section class="text-center loginForm mt-0  bg-[#B3000A] h-[calc(100vh_-_48px)] px-5  text-white">
       <div class="formSection py-5">
         <van-form>
 
           <div
             class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5"
           >
-            真实姓名
+           姓名
           </div>
           <div
-            class="w-full flex items-center relative rounded-lg h-14 white_color border-gray-300 border  mt-1"
+            class="w-full flex items-center relative rounded-lg h-14 white_color   mt-1"
           >
             <div
               class=" w-full h-full text-sm flex justify-center items-center relative"
@@ -38,11 +38,11 @@
           <div
             class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5"
           >
-            身份证号
+           身份证号
           </div>
 
           <div
-            class="w-full flex items-center relative rounded-lg h-14 white_color border-gray-300 border  mt-1"
+            class="w-full flex items-center relative rounded-lg h-14 white_color   mt-1"
           >
             <div
               class=" w-full h-full text-sm flex justify-center items-center relative"
@@ -60,9 +60,9 @@
           <div
             class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5"
           >
-            Photo of Passport
+          身份证照片
           </div>
-          <div class="flex items-center py-2 space-x-5">
+          <div class="flex items-center py-2 space-x-5 justify-between">
             <div class="flex flex-col  items-center  ">
             <van-uploader
               accept="image/*"
@@ -72,7 +72,7 @@
               @oversize="onOversize"
               :after-read="frontafterRead"
             />
-            <span class="text-gray-600 pt-2">身份证反面照地址</span>
+            <span class=" pt-2">身份证正面</span>
           </div>
             <div class="flex flex-col  items-center   ">
             <van-uploader
@@ -84,7 +84,7 @@
               :after-read="backafterRead"
             />
             <!-- <img src="https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg" alt=""> -->
-            <span class="text-gray-600 pt-2">身份证反面照地址</span>
+            <span class=" pt-2">身份证反面</span>
 
           </div>
             <div class="flex flex-col  items-center   ">
@@ -97,7 +97,7 @@
               :after-read="personalafterRead"
             />
             <!-- <img src="https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg" alt=""> -->
-            <span class="text-gray-600 pt-2">个人照片</span>
+            <span class=" pt-2">手持身份证</span>
 
           </div>
           </div>
@@ -133,7 +133,7 @@
             :disabled="disabledBtn"
             class="back_muli"
             style="
-              background-color: #fd3130;
+              background-color: #FF4855;
               border: none;
               color: #fff;
               height: 50px;

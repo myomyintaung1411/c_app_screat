@@ -1,15 +1,15 @@
 <template>
   <div class="w-full h-full relative">
     <div
-      class="h-12 bg-[#fd3130] text-white w-full flex justify-between items-center px-3 text-base font-bold "
+      class="h-12 bg-[#B3000A] text-white w-full flex justify-between items-center px-3 text-base font-bold "
     >
       <div @click="goBack" class="">
         <van-icon name="arrow-left" />
       </div>
-      <div class="">{{ userInfo?.bank == null || !userInfo.bank || userInfo.bank_card == null || !userInfo.bank_card ? '綁定个人银行卡信息' : '修改个人银行信息' }}</div>
+      <div class="">{{ userInfo?.isBindBank == 0 ? '綁定个人银行卡信息' : '修改个人银行信息' }}</div>
       <div class="flex-none"></div>
     </div>
-    <section class="   loginForm mt-0 bg-white h-[calc(100vh_-_80px)] flex flex-col">
+    <section class="   loginForm mt-0 bg-[#B3000A] h-[calc(100vh_-_48px)] flex flex-col">
       <!-- <section class="bg-[#fafafa] w-full relative flex items-center py-3 justify-center">
         <img src="@/assets/loginbg.jpg" alt="loginbg" class="h-20 w-20">
       </section> -->
@@ -17,7 +17,7 @@
         <van-form>
          <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5">银行账户名称</div>
           <div
-            class="w-full flex items-center relative rounded-lg h-14 border-gray-300 border   mt-1"
+            class="w-full flex items-center relative rounded-lg white_color h-14    mt-1"
           >
             <div
               class=" w-full h-full text-sm flex justify-center items-center relative"
@@ -35,7 +35,7 @@
 
           <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5"> 银行卡号</div>
           <div
-            class="w-full flex items-center relative rounded-lg h-14 white_color border-gray-300 border mt-1"
+            class="w-full flex items-center relative rounded-lg h-14 white_color  mt-1"
           >
           
             <div
@@ -54,7 +54,7 @@
 
           <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5">电话号码</div>
           <div
-            class="w-full flex items-center relative rounded-lg h-14 white_color border-gray-300 border mt-1"
+            class="w-full flex items-center relative rounded-lg h-14 white_color  mt-1"
           >
             <div
               class=" w-full h-full text-sm flex justify-center items-center relative"
@@ -89,7 +89,7 @@
             block
             class="back_muli"
             style="
-              background-color: #fd3130;
+              background-color: #FF4855;
               border: none;
               color: #fff;
               height: 50px;

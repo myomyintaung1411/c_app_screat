@@ -86,7 +86,7 @@
 <template>
   <div class="w-full h-full relative">
     <div
-      class="h-12 bg-[#fd3130] text-white  w-full flex justify-between items-center px-3 text-base font-bold"
+      class="h-12 bg-[#B3000A] text-white  w-full flex justify-between items-center px-3 text-base font-bold"
     >
       <div @click="goBack" class="">
         <van-icon name="arrow-left" />
@@ -94,7 +94,7 @@
       <div class="">更换手机号</div>
       <div class="flex-none"></div>
     </div>
-    <section class="px-5 text-center loginForm bg-white h-[calc(100vh_-_80px)]">
+    <section class="px-5 text-center loginForm bg-[#B3000A] h-[calc(100vh_-_48px)]">
       <div class="formSection pt-5">
         <form @click.prevent>
           <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5">登录密码</div>
@@ -123,14 +123,14 @@
                 v-if="passwordField !== 'password'"
                 name="eye-o"
                 size="20"
-                 color="#fd3130"
+                 color="#FF4855"
               />
               <van-icon
                 v-else
                 @click="showVisibile"
                 name="closed-eye"
                 size="20"
-                 color="#fd3130"
+                 color="#FF4855"
               />
             </div>
           </div>
@@ -179,7 +179,7 @@
               :loading="loading"  :disabled="loading"
               class="back_muli"
               style="
-                background-color: #fd3130;
+                background-color: #FF4855;
                 border: none;
                 color: #fff;
                 height: 50px;

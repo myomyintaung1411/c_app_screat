@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full h-full relative">
+  <div class="w-full h-full relative bg-[#B3000A]">
     <div
-      class="h-12 tab_color w-full flex justify-between items-center px-3 text-base font-bold"
+      class="h-12 bg-[#B3000A] text-white w-full flex justify-between items-center px-3 text-base font-bold"
     >
       <div @click="goBack" class="">
         <van-icon name="arrow-left" />
@@ -9,37 +9,48 @@
       <div class="">提现</div>
       <div class="flex-none"></div>
     </div>
-    <section class="px-5 py-3 text-center loginForm ">
+    <section class="px-5 py-3 bg-[#B3000A] h-[calc(100vh_-_48px)] text-center  ">
       <div class="formSection">
         <form @click.prevent>
+          <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5">提现</div>
+          <div
+            class="w-full border h-14 px-3 flex items-center relative rounded-lg  white_color mt-1"
+          >
+          <van-radio-group v-model="withdraw_type" direction="horizontal">
+            <van-radio :name="1" checked-color="#FF4855">余额提现</van-radio>
+            <van-radio :name="2" checked-color="#FF4855">推荐金提现</van-radio>
+          </van-radio-group>
+
+          </div>
+
           <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5">提现金额</div>
           <div
-            class="w-full flex items-center relative rounded-lg h-14 white_color mt-1"
+            class="w-full flex items-center relative rounded-lg h-14 bg-white   mt-1"
           >
             <div
-              class="border-none w-full h-full text-sm flex justify-center items-center relative"
+              class=" w-full h-full text-sm flex justify-center items-center relative"
             >
               <input
                 v-model="amount"
                 autocomplete="off"
                 placeholder="请输入提现金额"
-                class="input-name text-[#000] bg-transparent px-3 border-none outline-none focus:outline-none focus:border-none w-full h-full placeholder:text-gray-600 placeholder:tracking-widest"
+                class="input-name text-[#000] bg-transparent px-3 border-none outline-none focus:outline-none focus:border-none w-full h-full placeholder:text-gray-400 placeholder:tracking-widest"
                 min="6"
                 max="17"
                 maxlength="17"
                 type="tel"
               />
             </div>
-
           </div>
-          <div class="mt-5">
+
+          <div class="mt-8">
             <van-button
               @click="onSubmit"
               block
               :loading="loading"  :disabled="loading"
               class="back_muli"
               style="
-                background-color: #4286f5;
+                background-color: #FF4855;
                 border: none;
                 color: #fff;
                 height: 50px;
@@ -70,7 +81,7 @@ const amount = ref("");
 const newpassword = ref("");
 const confirmpass = ref("");
 const loading = ref(false)
-
+const withdraw_type = ref(1)
 const oldpasswordField = ref("password");
 const passwordField = ref("password");
 const conpasswordField = ref("password");
@@ -100,7 +111,8 @@ const onSubmit = async () => {
 
   loading.value = true
   let data = {
-    withdraw_amount:amount.value
+    withdraw_amount:amount.value,
+    type:withdraw_type.value
   };
   try {
     showLoadingToast({

@@ -1,7 +1,7 @@
 <template>
   <div id="newmessage" class="w-full h-full relative">
     <div
-      class="h-12 bg-[#fd3130] text-white  w-full flex justify-between items-center px-3 text-base font-bold"
+      class="h-12 bg-[#B3000A] text-white  w-full flex justify-between items-center px-3 text-base font-bold"
     >
       <div @click="goBack" class="">
         <van-icon name="arrow-left" />
@@ -11,9 +11,9 @@
     </div>
 
     <section
-      v-if=" addressData == null || addressData == ''"
+      v-if=" userInfo?.isHaveAddeess == 0" class="bg-[#B3000A] h-[calc(100vh_-_48px)]"
     >
-      <div class="py-20 text-center text-black">
+      <div class="py-20 text-center text-white">
         <van-empty 
           description="还没有收货地址"
          
@@ -24,7 +24,7 @@
             block
             class="back_muli font-bold"
             style="
-              background-color: #fd3130;
+              background-color: #FF4855;
               border: none;
               color: #fff;
               height: 56px;
@@ -36,7 +36,7 @@
       </div>
     </section>
 
-    <section v-else  class="bg-white h-[calc(100vh_-_80px)] px-4">
+    <section v-else  class="bg-[#B3000A] h-[calc(100vh_-_48px)] px-4">
       <div  class="py-2 px-1 w-full ">
         <div class="font-bold text-sm  text_color py-3">
            姓名
@@ -79,7 +79,7 @@
             block
             class="back_muli font-bold"
             style="
-              background-color: #050a30;
+              background-color: #FF4855;
               border: none;
               color: #fff;
               height: 50px;
@@ -142,7 +142,7 @@ const GetUserAddress = async () => {
   }
 };
 onMounted(()=> {
-   // globaljs.getUserInfo();
+   globaljs.getUserInfo();
    GetUserAddress()
 })
 </script>
@@ -151,7 +151,7 @@ onMounted(()=> {
 
 <style scoped>
 #newmessage :deep() .van-empty__description {
-  color: #000 !important;
+  color: #ffffff !important;
 }
 
 
