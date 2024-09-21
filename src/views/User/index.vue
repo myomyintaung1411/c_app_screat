@@ -1,55 +1,152 @@
 <template>
-  <div class="w-full relative  h-[calc(100vh_-_68px)] overflow-y-auto pb-10  ">
+  <div class="w-full relative bg-[#B3000A]  h-[calc(100vh_-_68px)]  overflow-y-auto  pb-10  ">
     <van-pull-refresh v-model="loading" @refresh="onRefresh">
-    <section class="w-full  bg-[#fe2c2b] relative">
-    <div class=" w-full rounded-b-[50%] bg-red-400">
-      <div class="flex justify-end py-5 px-3 font-bold tracking-wider text-right text-black">可用积分 {{userInfo?.referral_score}}</div>
-     <div @click="goProfileInfo" class="flex items-center justify-center flex-col py-2">
-      <img :src="avatar" alt="avatar" class="w-18">
-       <div class="text-white py-2 font-medium tracking-wider">{{userInfo?.name}}</div>
-       <div class="text-xl tracking-wider text-white font-bold pb-2">{{userInfo?.balance}} 平衡</div>
-     </div>
-    </div>
-    <div class="flex items-center justify-center py-5 px-10 ">
-      <div class="px-3 py-3 bg-white bg-opacity-35 h-20 w-full  "></div>
+    <section class="w-full   relative">
+    <div class=" w-full rounded-b-[50%] bg-[#830009] pb-2  ">
+     <section @click="goProfileInfo" class="w-full px-4 flex items-center justify-between  pt-6 relative">
+      <div class="flex items-center space-x-3">
+        <img :src="avatar" alt="avatar" class="w-16">
+        <span class="text-white font-bold text-xl">{{ userInfo?.name }}</span>
+      </div>
+      <div>
+        <img src="@/assets/user/service.png" alt="service" class="w-9">
+      </div>
+     </section>
+     <section class="flex items-center w-full justify-center px-4 pt-6">
+      <van-row  gutter="12">
+        <van-col span="12">
+          <div class="relative h-20 ">
+            <img src="@/assets/user/11.png" alt="11" class=" w-full h-full">
+           <div class="absolute w-full h-full top-0 left-0 right-0">
+            <div class="pl-11 text-base pt-3 text-white">余额</div>
+            <div class="pl-5 text-xl tracking-wide font-bold pt-1 text-white">{{userInfo?.balance}}</div>
+           </div>
+          </div>
+        </van-col>
+        <van-col span="12">
+          <div class="relative h-20 ">
+            <img src="@/assets/user/11.png" alt="11" class="h-full w-full ">
+           <div class="absolute w-full h-full top-0 left-0 right-0">
+            <div class="pl-11 text-base pt-3 text-white">推荐金</div>
+            <div class="pl-5 text-xl tracking-wide font-bold pt-1 text-white">{{userInfo?.referral_score}}</div>
+           </div>
+          </div>
+        </van-col>
+      </van-row>
+     </section>
     </div>
    </section>
-    <section class="py-2 w-full space-y-5 px-4 pt-4">
-        <div  @click="goSection(0)" class="h-12 rounded-lg w-full bg-[#f8f8f8] text-[#febf32] font-bold flex items-center justify-between px-4 text-base">
+
+   <section class="w-full relative px-4 pt-3">
+    <div class="bg_ans_sec relative ">
+      <div class="h-14"></div>
+      <div class="  h-40  relative px-3 flex flex-col items-center justify-center  ">
+        <!-- <div class="h-20 flex items-center justify-between">
+          <div class="relative w-full">
+            <img src="@/assets/user/ans_box.png" alt="ans" class="w-1/2">
+          </div>
+          <div class="relative">
+            <img src="@/assets/user/ans_box.png" alt="ans" class="w-1/2">
+          </div>
+        </div> -->
+        <van-row gutter="12">
+          <van-col span="12">
+         <section class="h-20 flex items-center justify-center">
+          <div class="relative w-full h-10 ">
+              <img src="@/assets/user/ans_box.png" alt="ans" class="h-full w-full" >
+              <div class="absolute h-full w-full right-0 left-0 top-0 flex items-center ">
+                <div class="pl-4  text-base text-[#830009]">A</div>
+                <div class="pl-5 text-white text-sm tracking-wider">问题回答A</div>
+              </div>
+            </div>
+        </section>
+          </van-col>
+          <van-col span="12">
+         <section class="h-20 flex items-center justify-center">
+            <div class="relative w-full h-10 ">
+              <img src="@/assets/user/ans_box.png" alt="ans" class="h-full w-full" >
+              <div class="absolute h-full w-full right-0 left-0 top-0 flex items-center ">
+                <div class="pl-4  text-base text-[#830009]">B</div>
+                <div class="pl-5 text-white text-sm tracking-wider">问题回答B</div>
+              </div>
+            </div>
+        </section>
+          </van-col>
+        </van-row>
+        <van-row gutter="12">
+          <van-col span="12">
+         <section class="h-20 flex items-center justify-center">
+          <div class="relative w-full h-10 ">
+              <img src="@/assets/user/ans_box.png" alt="ans" class="h-full w-full" >
+              <div class="absolute h-full w-full right-0 left-0 top-0 flex items-center ">
+                <div class="pl-4  text-base text-[#830009]">C</div>
+                <div class="pl-5 text-white text-sm tracking-wider">问题回答C</div>
+              </div>
+            </div>
+        </section>
+          </van-col>
+          <van-col span="12">
+         <section class="h-20 flex items-center justify-center">
+          <div class="relative w-full h-10 ">
+              <img src="@/assets/user/ans_box.png" alt="ans" class="h-full w-full" >
+              <div class="absolute h-full w-full right-0 left-0 top-0 flex items-center ">
+                <div class="pl-4  text-base text-[#830009] ">D</div>
+                <div class="pl-5 text-white text-sm tracking-wider">问题回答D</div>
+              </div>
+            </div>
+        </section>
+          </van-col>
+        </van-row>
+      </div>
+    </div>
+   </section>
+
+   <section class="py-2 w-full space-y-5 px-4 pt-4">
+        <div  @click="goSection(0)" class="h-12 rounded-lg w-full bg-[#f8f8f8] text-[#000] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
             <img :src="cardpng" alt="filecheck" class="w-6">
-            <span class=" tracking-wider text-base ">添加银行</span>
+            <span class=" tracking-wider text-sm ">绑定银行卡</span>
           </div>
-          <van-icon name="arrow" color="#fe2c2b" size="20"  />
+          <img src="@/assets/user/arrow.png" alt="arrow" class="w-5 object-cover">
         </div>
-        <div  @click="goSection(1)" class="h-12 rounded-lg w-full bg-[#f8f8f8] text-[#febf32] font-bold flex items-center justify-between px-4 text-base">
+        <div  @click="goSection(1)" class="h-12 rounded-lg w-full bg-[#f8f8f8] text-[#000] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
             <img :src="usersvg" alt="filecheck" class="w-6">
-            <span class=" tracking-wider text-base">真实姓名</span>
+            <span class=" tracking-wider text-sm">实名认证</span>
           </div>
-          <van-icon name="arrow" color="#fe2c2b" size="20"  />
+          <img src="@/assets/user/arrow.png" alt="arrow" class="w-5 object-cover">
         </div>
-        <div @click="goSection(2)" class="h-12 rounded-lg w-full bg-[#f8f8f8] text-[#febf32] font-bold flex items-center justify-between px-4 text-base">
+        <div @click="goSection(2)" class="h-12 rounded-lg w-full bg-[#f8f8f8] text-[#000] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
             <img :src="password" alt="filecheck" class="w-6">
-            <span class=" tracking-wider text-base">更改密码</span>
+            <span class=" tracking-wider text-sm">更改密码</span>
           </div>
-          <van-icon name="arrow" color="#fe2c2b" size="20"  />
+          <img src="@/assets/user/arrow.png" alt="arrow" class="w-5 object-cover">
         </div>
-        <div @click="goSection(3)" class="h-12 rounded-lg w-full bg-[#f8f8f8] text-[#febf32] font-bold flex items-center justify-between px-4 text-base">
+        <div @click="goSection(3)" class="h-12 rounded-lg w-full bg-[#f8f8f8] text-[#000] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
             <img :src="addresspng" alt="filecheck" class="w-6">
-            <span class=" tracking-wider text-base">地址簿</span>
+            <span class=" tracking-wider text-sm">地址簿</span>
           </div>
-          <van-icon name="arrow" color="#fe2c2b" size="20"  />
+          <img src="@/assets/user/arrow.png" alt="arrow" class="w-5 object-cover">
+        </div>
+        <div @click="goSection(4)" class="h-12 rounded-lg w-full bg-[#f8f8f8] text-[#000] font-bold flex items-center justify-between px-4 text-base">
+          <div class="flex items-center space-x-3">
+            <img :src="comment" alt="filecheck" class="w-6">
+            <span class=" tracking-wider text-sm">展示评论区</span>
+          </div>
+          <img src="@/assets/user/arrow.png" alt="arrow" class="w-5 object-cover">
+        </div>
+        <div @click="goSection(5)" class="h-12 rounded-lg w-full bg-[#f8f8f8] text-[#000] font-bold flex items-center justify-between px-4 text-base">
+          <div class="flex items-center space-x-3">
+            <img :src="service" alt="filecheck" class="w-6">
+            <span class=" tracking-wider text-sm">联系客服</span>
+          </div>
+          <img src="@/assets/user/arrow.png" alt="arrow" class="w-5 object-cover">
         </div>
 
       </section>
-      <div class="py-5 px-4 relative w-full ">
-            <van-button @click="logout"    block class="back_muli "  style=" background:#fe2c2b; border: none;color:#fff;height:48px;">
-               退出
-            </van-button>
-    </div>
+
   </van-pull-refresh>
 
   </div>
@@ -80,13 +177,13 @@ import { ref, computed, onMounted } from "vue";
 import realname from '@/assets/user/realname.svg'
 import withdraw from '@/assets/user/withdraw.svg'
 import avatar from "@/assets/avatar.svg";
-import usersvg from "@/assets/user/user.svg"
+import usersvg from "@/assets/user/person_check.png"
 import personalpng from "@/assets/user/personal.svg"
-import cardpng from "@/assets/user/card.svg"
-import password from "@/assets/user/password.svg"
-import addresspng from "@/assets/user/area.svg"
-import fileCheck from "@/assets/user/file-check.svg"
-import service from "@/assets/user/service.svg"
+import cardpng from "@/assets/user/card.png"
+import password from "@/assets/user/lock.png"
+import addresspng from "@/assets/user/gg.png"
+import comment from "@/assets/user/message.png"
+import service from "@/assets/user/customer.png"
 import { showToast, showLoadingToast, closeToast } from "vant";
 import userApi from "@/network/user.js";
 import { useStore } from "vuex";
@@ -154,6 +251,7 @@ const goSection = (number) => {
          router.push('/address')
       }
         break;
+
     // case 4:
     //     router.push('/real-name');
     //     break;
@@ -237,9 +335,16 @@ onMounted(() => {
 </script>
 
 
-<style>
+<style >
+.bg_ans_sec{
+  height: 220px;
+  width: 100%;
+  background-image: url(@/assets/user/ans.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
 .van-pull-refresh {
-  min-height: calc(100vh - 50px) !important;
-  overflow-y: auto !important;
+  min-height: calc(100vh - 68px) !important;
+  /* overflow-y: auto !important; */
 }
 </style>
