@@ -29,7 +29,7 @@
       <img src="@/assets/auth/logo.png" alt="service" class="w-24 ">
     </div>
 
-   <section class="  z-20  w-full  rounded-xl px-8 pt-6 ">
+   <section class="  z-20  w-full  rounded-xl px-8 pt-6 max-w-md mx-auto">
     <!-- <div class="text-2xl font-bold tracking-wider text-white pb-3">登录帐户</div> -->
  
     <form @click.prevent class="   relative text-[#999999]  ">

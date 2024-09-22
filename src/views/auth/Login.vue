@@ -29,10 +29,10 @@
       <img src="@/assets/auth/logo.png" alt="service" class="w-24 ">
     </div>
 
-   <section class="  z-20  w-full  rounded-xl px-8 pt-6 ">
+   <section class="  z-20  w-full  rounded-xl px-8 pt-6 max-w-md mx-auto">
     <!-- <div class="text-2xl font-bold tracking-wider text-white pb-3">登录帐户</div> -->
  
-    <form @click.prevent class="   relative text-[#999999]  ">
+    <form @click.prevent class="   relative text-[#999999]  w-full ">
       <!-- <div class="text-white text-base tracking-wide py-2">用户名</div> -->
       <div class=" px-4 rounded-md h-12 w-full  formDiv bg-white border border-[#999999]">
         <div
@@ -113,8 +113,8 @@
               <div
                 class="absolute right-0 h-full top-0 w-20 bg-[#bbb] flex items-center justify-center "
               >
-               <div class=" flex text-white text-lg tracking-wide font-bold items-center justify-center w-full h-full ">
-                1234
+               <div @click="createFourRandom" class=" flex text-white text-lg tracking-wide font-bold items-center justify-center w-full h-full ">
+                {{randomNumber}}
                </div>
               </div>
       </div>
@@ -164,11 +164,15 @@ const passwordField = ref("password");
 const inputValidation = ref('')
 const loading = ref(false);
 const checked = ref(false);
-
+const randomNumber = ref('')
 const showVisibile = () => {
   passwordField.value =
     passwordField.value === "password" ? "text" : "password";
 };
+
+const createFourRandom = () => {
+  randomNumber.value = Array.from({ length: 4 }, () => Math.floor(Math.random() * 10)).join('')
+}
 
 const goSection = (number) => {
   switch (number) {
@@ -188,7 +192,7 @@ const onSubmit = () => {
   //const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (account.value == "" || password.value == "") return showToast("请输入完整的登录信息");
   //if (!emailRegex.test(account.value))  return  showToast("请输入有效的电子邮件地址");
-    
+  if(inputValidation.value !== randomNumber.value) return showToast("提示: 验证码不正确!");
         
       
   let data = {
@@ -222,6 +226,7 @@ const onSubmit = () => {
 };
 
 onMounted(() => {
+  createFourRandom()
   if (route?.query !== undefined && route.query?.acc !== undefined) {
     account.value = route.query?.acc;
   }

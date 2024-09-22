@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full relative bg-[#B3000A]  h-[calc(100vh_-_68px)]  overflow-y-auto  pb-10  ">
+  <div class="w-full relative bg-[#700000]  h-[calc(100vh_-_68px)]  overflow-y-auto  pb-10  ">
     <van-pull-refresh v-model="loading" @refresh="onRefresh">
     <section class="w-full   relative">
     <div class=" w-full rounded-b-[50%] bg-[#830009] pb-2  ">
@@ -144,7 +144,7 @@
           </div>
           <img src="@/assets/user/arrow.png" alt="arrow" class="w-5 object-cover">
         </div>
-
+       <div class="h-10"></div>
       </section>
 
   </van-pull-refresh>
@@ -195,7 +195,6 @@ const router = useRouter();
 const store = useStore();
 // const userData = ref(null)
 const userInfo = computed(()=> store.getters["app/ProfileInfoData"])
-const loginInfo = computed(()=> store.getters["app/LoginData"])
 const frontImage = ref([]);//
 const frontImageUrl = ref("");//
 const loading = ref(false)

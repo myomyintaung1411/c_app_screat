@@ -100,7 +100,7 @@ const conshowVisibile = () => {
 };
 
 const goBack = () => {
-  router.push("/user");
+  router.push("/home");
 };
 
 const onSubmit = async () => {
