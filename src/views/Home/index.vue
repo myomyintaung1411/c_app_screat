@@ -34,19 +34,21 @@
    </section>
 
    <section class="w-full px-3 h-[640px]  ">
-    <div class="answer_bg">
+    <div class="answer_bg ">
       <div class="h-[80px] "></div>
       <div class="px-3">
-        <van-row  v-for="(rowIndex) in numRows" :key="rowIndex"  gutter="1" class=" h-[130px] "  align="center" >
-            <van-col    span="3">
-              <div class="flex items-center whitespace-nowrap">
+        <van-row  v-for="(rowIndex) in numRows" :key="rowIndex"  gutter="1" class=" h-[130px]  "  align="center" >
+ 
+          <van-col    span="3">
+              <div class="flex items-center whitespace-nowrap ">
                 <div class="font-bold text-base tracking-wide text-[#FBE7C9]">{{ rowIndex }}期</div>
               </div>
             </van-col>
             <!-- here need to  click testContentList array of positon 0,3,6,9 -->
             <van-col    span="5">
-              <!-- @click="openTeskDialog((rowIndex - 1) * 3)" -->
-                <div @click="showAnimation((rowIndex - 1) * 3)"  class=" h-18 flex items-center justify-center w-full bg-[#F965B]">
+
+              <!-- @click="openTeskDialog((rowIndex - 1) * 3)" @click="showAnimation((rowIndex - 1) * 3)" -->
+                <div @click="(event) => showAnimation((rowIndex - 1) * 3, event)"   class=" animation_d h-18 flex items-center justify-center w-full bg-[#F965B]">
                  <img src="@/assets/home/ans_1.png" alt="box" class="w-full h-full">
                 </div>
             </van-col>
@@ -61,8 +63,9 @@
                         <!-- here show testContentList array of positon 1,4,7,10 -->
 
             <van-col   span="5">
-              <!-- @click="openTeskDialog((rowIndex - 1) *  3 + 1)" -->
-                <div @click="showAnimation((rowIndex - 1) *  3 + 1)" class=" h-18 flex items-center justify-center w-full bg-[#F965B]">
+
+              <!-- @click="openTeskDialog((rowIndex - 1) *  3 + 1)" @click="showAnimation((rowIndex - 1) *  3 + 1)"-->
+                <div  @click="(event) => showAnimation((rowIndex - 1) * 3 + 1, event)" class=" animation_d h-18 flex items-center justify-center w-full bg-[#F965B]">
                   <img src="@/assets/home/ans_1.png" alt="box" class="w-full h-full">
 
                 </div>
@@ -73,15 +76,16 @@
                 <img src="@/assets/home/arrow-right.png" alt="arrow-double-right" class="w-7">
               </div>
             </van-col>
-               <!-- here show testContentList array of positon 3,5,8,11 -->
+               <!-- here show testContentList array of positon 3,5,8,11  -->
             <van-col   span="5">
-              <!-- @click="openTeskDialog((rowIndex - 1) * 3 + 2)" -->
-                <div  @click="showAnimation((rowIndex - 1) * 3 + 2)"  class=" z-10 relative flex  h-18   items-center justify-center w-full flex-col text-base font-bold text-white">
+              <!-- @click="openTeskDialog((rowIndex - 1) * 3 + 2)"  @click="showAnimation((rowIndex - 1) * 3 + 2)" -->
+                <div @click="(event) => showAnimation((rowIndex - 1) * 3 + 2, event)"   class=" animation_d z-10 relative flex  h-18   items-center justify-center w-full flex-col text-base font-bold text-white">
                   <!-- 免费包 -->
                    <img src="@/assets/home/crown.png" alt="crown" class="w-8 absolute -top-6">
                   <img src="@/assets/home/ans3.png" alt="box" class="w-full h-full">
                 </div>
             </van-col>
+     
        </van-row>
       </div>
     </div>
@@ -132,12 +136,44 @@
       </section>
     </div>
    </van-popup>
+   <!-- <div v-if="imagePopup" class="zoom-overlay " >
+      <div class="absolute  top-2 right-3 text-white">
+        <van-icon name="cross" size="25" @click="closeZoom" />
+      </div>
+      <img src="`@/assets/box.png`" alt="zoomed image" class="zoomed-image animate-fadefromTop">  
+    </div>  -->
+       <!-- Image Popup with fade and zoom effect -->
+       <!-- <div v-if="imagePopup" class="zoom-overlay" :style="zoomStyle">
+            <div class="absolute top-2 right-3 text-white">
+              <van-icon name="cross" size="25" @click="closeZoom" />
+            </div>
+            <img src="@/assets/box.png" alt="zoomed image" class="zoomed-image " />
+          </div> -->
+          <!-- :class="['zoom-overlay', { active: imagePopup }]" -->
+          <div v-if="imagePopup"  :style="zoomStyle" class="zoom-overlay">
+            <div class="absolute top-2 right-3 text-black bg-white w-12 h-12 flex items-center justify-center rounded-full ">
+              <van-icon name="cross" size="25" @click="closeZoom" />
+            </div>
+            <!-- <div class="zoomed-image w-full  flex items-center justify-center ">
+              <img :src="currentImage" alt="zoomed image" class="w-48 animate-flip" />
+            </div> -->
+            <div class="zoomed-image w-full   ">
+             <div v-if="showCrownDiv" class="flex flex-col items-center justify-center animate-flip">
+              <img src="@/assets/home/crown.png" alt="crown" class="w-20">
+              <img :src="ans3_img" alt="zoomed image" class="w-48 " />
+             </div>
+             <div v-else class="flex flex-col items-center justify-center animate-flip">
+              <img :src="ans1_img" alt="zoomed image" class="w-48 " />
+             </div>
+
+            </div>
+          </div>
   </div>
 </template>
 
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted ,reactive} from "vue";
 import homeApi from "@/network/home.js";
 import { useRouter, useRoute } from "vue-router";
 import { showToast, showLoadingToast, closeToast,showImagePreview } from "vant";
@@ -146,7 +182,8 @@ import homeactive from "@/assets/home/homea.svg";
 import homepng from "@/assets/home/home.svg";
 import boxImage from "@/assets/box.png";
 import globaljs from "@/utils/global";
-
+import ans1_img from '@/assets/home/ans_1.png'
+import ans3_img from '@/assets/home/ans3.png'
 const router = useRouter();
 const store = useStore();
 const step_card =  [1, 2, 3];
@@ -163,6 +200,7 @@ const carousalImage = ref(null);
 const noticeList = ref(null);
 const loading = ref(false);
 const zoomedImageIndex = ref(null);
+const originalPosition = ref(null);
 const tesk_loading = ref(false)
 const select_item_ans = ref(0)
 const textList = ref([
@@ -174,11 +212,26 @@ const textList = ref([
       '0,999,999',
       '1,000,000',
     ]);
+    const zoomStyle = reactive({
+      top: '0px',
+      left: '0px',
+      width: '100vw',
+      height: '100vh',
+      transform: 'scale(1)',
+    });
+
  const userInfo = computed(()=> store.getters["app/ProfileInfoData"])
 // Define a computed property with a getter and setter for v-model
 const showNotice = ref(false)
 const showPopup = computed(() => store.getters["app/IsShowNotice"]);
-
+// Computed property to check if zoomedImageIndex is 2, 5, 8, 11
+const showCrownDiv = computed(() => {
+  return [2, 5, 8, 11].includes(zoomedImageIndex.value);
+});
+// Show ans3_img for indexes 2, 5, 8, 11, and ans1_img for all other indexes
+const currentImage = computed(() => {
+  return [2, 5, 8, 11].includes(zoomedImageIndex.value) ? ans3_img : ans1_img;
+});
 // const showPopup = computed({
 //   get() {
 //     return store.getters["app/IsShowNotice"];
@@ -198,6 +251,8 @@ const goCarousal = () => {
   router.push({ name: "HomeDetails" });
 };
 
+
+
 const closeEvent = () => {
   //  store.commit('app/ISSHOWNOTICE',false)
   showNotice.value = false
@@ -214,6 +269,34 @@ const select_item = (index) => {
 
 const getItem = (index) => {
   return testContentList.value[index] || {};
+};
+
+// const closeZoom = () => {
+//   imagePopup.value = false;
+// };
+
+const closeZoom = () => {
+  // Select all elements with the `animation_d` class
+  const colElements = document.querySelectorAll('.animation_d');
+  
+  // Get the correct element based on the `zoomedImageIndex`
+  const clickedElement = colElements[zoomedImageIndex.value]?.getBoundingClientRect();
+
+  if (clickedElement) {
+    // Animate back to the clicked element's original position
+    zoomStyle.top = `${clickedElement.top}px`;
+    zoomStyle.left = `${clickedElement.left}px`;
+    zoomStyle.width = `${clickedElement.width}px`;
+    zoomStyle.height = `${clickedElement.height}px`;
+    zoomStyle.transform = 'scale(0.5)';
+
+    // Wait for the transition to complete before hiding the popup
+    setTimeout(() => {
+      imagePopup.value = false;
+    }, 500); // Match the transition duration
+  } else {
+    console.error("Failed to find clicked element for closing animation.");
+  }
 };
 
 const submitAns =  async (tesk) => {
@@ -253,16 +336,55 @@ const submitAns =  async (tesk) => {
     return { name: '', price: '' };
   }
 
-  const showAnimation = (index) => {
-    imagePopup.value = true
-    zoomedImageIndex.value = index;
-    console.log(index,"dd")
-    console.log(testContentList.value[index]);
-  }
+  // const showAnimation = (index) => {
+  //   imagePopup.value = true
+  //   zoomedImageIndex.value = index;
+  //   console.log(index,"dd")
+  //   console.log(testContentList.value[index]);
+  // }
 
-  const closeZoom = () => {
-  zoomedImageIndex.value = null;
+  const showAnimation = (index, event) => {
+  const target = event.currentTarget.getBoundingClientRect();
+  // Set initial position to match the clicked element
+  zoomStyle.top = `${target.top}px`;
+  zoomStyle.left = `${target.left}px`;
+  zoomStyle.width = `${target.width}px`;
+  zoomStyle.height = `${target.height}px`;
+  zoomStyle.transform = 'scale(0.5)'; // Small initial scale for zoom in effect
+
+  zoomedImageIndex.value = index;
+  imagePopup.value = true;
+
+  // Animate to full screen after a small delay
+  setTimeout(() => {
+    zoomStyle.top = '0px';
+    zoomStyle.left = '0px';
+    zoomStyle.width = '100vw';
+    zoomStyle.height = '100vh';
+    zoomStyle.transform = 'scale(1)';
+  }, 50);
 };
+
+// const showAnimation = (index, event) => {
+//   const target = event.currentTarget.getBoundingClientRect();
+//   zoomStyle.top = `${target.top}px`;
+//   zoomStyle.left = `${target.left}px`;
+//   zoomStyle.width = `${target.width}px`;
+//   zoomStyle.height = `${target.height}px`;
+
+//   imagePopup.value = true;
+//   zoomedImageIndex.value = index
+//   setTimeout(() => {
+//     zoomStyle.top = '0px';
+//     zoomStyle.left = '0px';
+//     zoomStyle.width = '100vw';
+//     zoomStyle.height = '100vh';
+//     zoomStyle.transform = 'scale(1)';
+//   }, 50);
+// };
+
+
+  
 
 const openTeskDialog = (index) => {
       //here need to console.log of specific postion of array value from testContentList
@@ -276,17 +398,7 @@ const openTeskDialog = (index) => {
       }
     }
 
-const showImage = (image) => {
-  image = `https://sxh-cn.oss-cn-hongkong.aliyuncs.com/${image}`
-  if (image == null) return showToast("没有可用的图像");
-  showImagePreview({
-    closeable: true, 
-    images: [image],
-    className:'showImageClass',
-    onClose() {
-    },
-  });
-};
+
 
 const onRefresh = () => {
   setTimeout(() => {
@@ -476,7 +588,7 @@ onMounted(() => {
 
 }
 
-.zoom-overlay {
+/* .zoom-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -497,5 +609,25 @@ onMounted(() => {
 
 .zoomed-image:hover {
   transform: scale(1.1);
+} */
+
+.zoom-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: top 0.5s ease, left 0.5s ease, width 0.5s ease, height 0.5s ease, transform 0.5s ease;
 }
+
+.zoomed-image {
+  max-width: 90%;
+  max-height: 90%;
+}
+
 </style>
