@@ -19,18 +19,18 @@ export const routes = [
         meta: { title: 'Home',requireAuth: true  },
         component: () => import('./views/Home/index.vue')
       },
-      {
-        path: '/envelope',
-        name: '鄉',
-        meta: { title: '鄉',requireAuth: true  },
-        component: () => import('./views/Envelope/index.vue')
-      },
-      {
-        path: '/team',
-        name: 'Team',
-        meta: { title: 'Team',requireAuth: true  },
-        component: () => import('./views/Team/index.vue')
-      },
+      // {
+      //   path: '/envelope',
+      //   name: '鄉',
+      //   meta: { title: '鄉',requireAuth: true  },
+      //   component: () => import('./views/Envelope/index.vue')
+      // },
+      // {
+      //   path: '/team',
+      //   name: 'Team',
+      //   meta: { title: 'Team',requireAuth: true  },
+      //   component: () => import('./views/Team/index.vue')
+      // },
       {
         path: '/user',
         name: 'User',
@@ -40,24 +40,24 @@ export const routes = [
     ],
 
   },
-  {
-    path: '/homeArticle',
-    name: 'HomeDetails',
-    meta: { title: 'Article Detail Page',requireAuth: true },
-    component: () => import('./views/home/CarousalDetails.vue')
-  },
+  // {
+  //   path: '/homeArticle',
+  //   name: 'HomeDetails',
+  //   meta: { title: 'Article Detail Page',requireAuth: true },
+  //   component: () => import('./views/home/CarousalDetails.vue')
+  // },
   {
     path: '/address',
     name: 'Shipment Address',
     meta: { title: 'Shipment Address',requireAuth: true },
     component: () => import('./views/user/address.vue')
   },
-  {
-    path: '/chat',
-    name: 'Chat',
-    meta: { title: 'Chat',requireAuth: true },
-    component: () => import('./views/user/chat.vue')
-  },
+  // {
+  //   path: '/chat',
+  //   name: 'Chat',
+  //   meta: { title: 'Chat',requireAuth: true },
+  //   component: () => import('./views/user/chat.vue')
+  // },
   {
     path: '/bankcard',
     name: 'my card pack',
@@ -76,12 +76,12 @@ export const routes = [
     meta: { title: 'addAddress',requireAuth: true },
     component: () => import('./views/user/addAddress.vue')
   },
-  {
-    path: '/envelopeRecord',
-    name: 'Envelope Record',
-    meta: { title: 'Envelope Record',requireAuth: true },
-    component: () => import('./views/Envelope/EnvelopeRecord.vue')
-  },
+  // {
+  //   path: '/envelopeRecord',
+  //   name: 'Envelope Record',
+  //   meta: { title: 'Envelope Record',requireAuth: true },
+  //   component: () => import('./views/Envelope/EnvelopeRecord.vue')
+  // },
   {
     path: '/profileinfo',
     name: 'ProfileInfo',
@@ -89,29 +89,35 @@ export const routes = [
     component: () => import('./views/user/personalInfo.vue')
   },
   {
-    path: '/teamdetails',
-    name: 'TeamDetails',
-    meta: { title: 'TeamDetails',requireAuth: true },
-    component: () => import('./views/Team/TeamDetail.vue')
+    path: '/comment',
+    name: 'Comment',
+    meta: { title: 'Comment',requireAuth: true },
+    component: () => import('./views/user/comment.vue')
   },
-  {
-    path: '/appdownload',
-    name: 'AppDownload',
-    meta: { title: 'AppDownload',requireAuth: true },
-    component: () => import('./views/user/downApp.vue')
-  },
-  {
-    path: '/promotion',
-    name: 'Promotion',
-    meta: { title: 'Promotion',requireAuth: true },
-    component: () => import('./views/user/promotion.vue')
-  },
-  {
-    path: '/accsetting',
-    name: 'AccountSetting',
-    meta: { title: 'Account Setting',requireAuth: true },
-    component: () => import('./views/user/accountSetting.vue')
-  },
+  // {
+  //   path: '/teamdetails',
+  //   name: 'TeamDetails',
+  //   meta: { title: 'TeamDetails',requireAuth: true },
+  //   component: () => import('./views/Team/TeamDetail.vue')
+  // },
+  // {
+  //   path: '/appdownload',
+  //   name: 'AppDownload',
+  //   meta: { title: 'AppDownload',requireAuth: true },
+  //   component: () => import('./views/user/downApp.vue')
+  // },
+  // {
+  //   path: '/promotion',
+  //   name: 'Promotion',
+  //   meta: { title: 'Promotion',requireAuth: true },
+  //   component: () => import('./views/user/promotion.vue')
+  // },
+  // {
+  //   path: '/accsetting',
+  //   name: 'AccountSetting',
+  //   meta: { title: 'Account Setting',requireAuth: true },
+  //   component: () => import('./views/user/accountSetting.vue')
+  // },
   {
     path: '/changepass',
     name: 'PasswordChange',

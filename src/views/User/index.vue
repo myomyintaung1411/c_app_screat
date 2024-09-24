@@ -3,8 +3,8 @@
     <van-pull-refresh v-model="loading" @refresh="onRefresh">
     <section class="w-full   relative">
     <div class=" w-full rounded-b-[50%] bg-[#830009] pb-2  ">
-     <section @click="goProfileInfo" class="w-full px-4 flex items-center justify-between  pt-6 relative">
-      <div class="flex items-center space-x-3">
+     <section  class="w-full px-4 flex items-center justify-between  pt-6 relative">
+      <div @click="goProfileInfo" class="flex items-center space-x-3">
         <img :src="avatar" alt="avatar" class="w-16">
         <span class="text-white font-bold text-xl">{{ userInfo?.name }}</span>
       </div>
@@ -186,6 +186,7 @@ import comment from "@/assets/user/message.png"
 import service from "@/assets/user/customer.png"
 import { showToast, showLoadingToast, closeToast } from "vant";
 import userApi from "@/network/user.js";
+import homeApi from "@/network/home.js";
 import { useStore } from "vuex";
 import { useRouter, useRoute } from "vue-router";
 import globaljs from "@/utils/global";
@@ -195,6 +196,7 @@ const router = useRouter();
 const store = useStore();
 // const userData = ref(null)
 const userInfo = computed(()=> store.getters["app/ProfileInfoData"])
+const passInfo = computed(()=> store.getters["app/PASSWORD_INFO"])
 const frontImage = ref([]);//
 const frontImageUrl = ref("");//
 const loading = ref(false)
@@ -251,9 +253,9 @@ const goSection = (number) => {
       }
         break;
 
-    // case 4:
-    //     router.push('/real-name');
-    //     break;
+    case 4:
+        router.push('/comment');
+        break;
     // case 5:
     //     router.push('/accsetting')
     //     break;
@@ -315,20 +317,36 @@ const confirmLogout = () => {
   }, 500);
 }
 
-// const getUserInfo = async () => {
-//     try {
-//     const res = await userApi.getUserInfo();
-//      showToast(res?.data?.msg);
-//     if (res?.data?.success == true && res?.data?.code == 200) {
-//      store.commit("app/PROFILE_USER_INFO", res.data?.data);
-//       userData.value = res?.data?.data;
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+const getQuestion = async () => {
+  let data = { username: userInfo?.value?.name, password: passInfo.value};
+    try {
+    const res = await homeApi.getQuestion(data);
+    console.log(res,"getQuestion ************")
+     showToast(res?.data?.msg);
+    if (res?.data?.success == true && res?.data?.code == 200) {
+    // store.commit("app/PROFILE_USER_INFO", res.data?.data);
+    //  userData.value = res?.data?.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+const getAnswer = async () => {
+  let data = { username: userInfo?.value?.name, password: passInfo.value};
+  try {
+    const res = await homeApi.getAnswer(data);
+    console.log('getAnswer ', res)
+    if (res?.data?.success && res?.data?.code == 200) {
+      carousalImage.value = res?.data?.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 onMounted(() => {
+  getQuestion()
+  getAnswer()
   globaljs.getUserInfo();
 })
 </script>

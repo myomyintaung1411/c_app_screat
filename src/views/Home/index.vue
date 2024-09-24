@@ -33,20 +33,20 @@
     </div>
    </section>
 
-   <section class="w-full px-3 h-[480px]  ">
+   <section class="w-full px-3 h-[640px]  ">
     <div class="answer_bg">
-      <div class="h-[60px] "></div>
+      <div class="h-[80px] "></div>
       <div class="px-3">
-        <van-row  v-for="(rowIndex) in numRows" :key="rowIndex"  gutter="1" class="h-[100px]"  align="center" >
+        <van-row  v-for="(rowIndex) in numRows" :key="rowIndex"  gutter="1" class=" h-[130px] "  align="center" >
             <van-col    span="3">
               <div class="flex items-center whitespace-nowrap">
-                <div class="font-bold text-base tracking-wide text-[#fff]">{{ rowIndex }}期</div>
+                <div class="font-bold text-base tracking-wide text-[#FBE7C9]">{{ rowIndex }}期</div>
               </div>
             </van-col>
             <!-- here need to  click testContentList array of positon 0,3,6,9 -->
             <van-col    span="5">
               <!-- @click="openTeskDialog((rowIndex - 1) * 3)" -->
-                <div @click="showAnimation((rowIndex - 1) * 3)"  class=" h-16 flex items-center justify-center w-full bg-[#F965B]">
+                <div @click="showAnimation((rowIndex - 1) * 3)"  class=" h-18 flex items-center justify-center w-full bg-[#F965B]">
                  <img src="@/assets/home/ans_1.png" alt="box" class="w-full h-full">
                 </div>
             </van-col>
@@ -62,7 +62,7 @@
 
             <van-col   span="5">
               <!-- @click="openTeskDialog((rowIndex - 1) *  3 + 1)" -->
-                <div @click="showAnimation((rowIndex - 1) *  3 + 1)" class=" h-16 flex items-center justify-center w-full bg-[#F965B]">
+                <div @click="showAnimation((rowIndex - 1) *  3 + 1)" class=" h-18 flex items-center justify-center w-full bg-[#F965B]">
                   <img src="@/assets/home/ans_1.png" alt="box" class="w-full h-full">
 
                 </div>
@@ -76,7 +76,7 @@
                <!-- here show testContentList array of positon 3,5,8,11 -->
             <van-col   span="5">
               <!-- @click="openTeskDialog((rowIndex - 1) * 3 + 2)" -->
-                <div  @click="showAnimation((rowIndex - 1) * 3 + 2)"  class=" z-10 relative flex  h-16   items-center justify-center w-full flex-col text-base font-bold text-white">
+                <div  @click="showAnimation((rowIndex - 1) * 3 + 2)"  class=" z-10 relative flex  h-18   items-center justify-center w-full flex-col text-base font-bold text-white">
                   <!-- 免费包 -->
                    <img src="@/assets/home/crown.png" alt="crown" class="w-8 absolute -top-6">
                   <img src="@/assets/home/ans3.png" alt="box" class="w-full h-full">
@@ -88,7 +88,50 @@
    </section>
 
    <section class="h-20"></section>
-    
+   <van-popup v-model:show="showNotice" @click-overlay="closeEvent" @close="closeEvent" @click-close-icon="closeEvent" closeable  round  position="center" class=" bg-none bg-transparent">
+     <div class=" w-full    px-5 py-2  ">
+      <div class="py-2 flex flex-col justify-center items-center ">
+        <img src="@/assets/box.png" alt="" class="w-20">
+      </div>
+      <div v-html="noticeList?.content" class="text-base text-center " > </div>
+      <!-- <img src="`@/assets/box.png`" alt="zoomed image" class=" w-full h-full animate-zoomInRotateX   ">   -->
+     </div>
+    </van-popup>
+    <van-popup v-model:show="tesk_dialog" closeable  @click-close-icon="onClickCloseIcon"  position="bottom" :style="{ height: '60%' }">
+    <div class="py-3 px-3   relative flex items-center flex-col justify-center h-full w-full">
+      <div class="text-center text-xl  inline-block  font-bold">{{ tesk_dialog_content.option }}</div>
+      <section class="py-4 px-2 w-full">
+        <div  @click="select_item(1)" :class="select_item_ans == 1 ? 'bg-[#f2c65d] bg-opacity-100' : 'bg-[#700000] bg-opacity-90'" class="h-12 rounded-lg w-full   text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
+          <div class="flex items-center space-x-3">
+            <!-- <span class=" tracking-wider text-lg ">{{separateItem(tesk_dialog_content?.item1)?.name}}</span> -->
+             <span class=" tracking-wider text-lg ">大麦</span>
+
+          </div>
+          <!-- <span class=" tracking-wider text-lg ">{{separateItem(tesk_dialog_content?.item1)?.price}}</span> -->
+          <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item1}}</span>
+        </div>
+        <div  @click="select_item(2)" :class="select_item_ans == 2 ? 'bg-[#f2c65d] bg-opacity-100' : 'bg-[#700000] bg-opacity-90'" class="h-12 rounded-lg w-full  mt-5 text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
+          <div class="flex items-center space-x-3">
+            <span class=" tracking-wider text-lg ">小麦</span>
+          </div>
+          <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item2}}</span>
+        </div>
+        <div @click="select_item(3)" :class="select_item_ans == 3 ? 'bg-[#f2c65d] bg-opacity-100' : 'bg-[#700000] bg-opacity-90'"  class="h-12 rounded-lg w-full  mt-5  text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
+          <div class="flex items-center space-x-3">
+            <span class=" tracking-wider text-lg ">玉米</span>
+          </div>
+          <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item3}}</span>
+        </div>
+        <div class="pt-5 w-full">
+          <div class="flex items-center  justify-center px-10 space-x-5 ">
+            <van-button round type="success" style="font-weight: bold;font-size: 16px;color:#000" color="#ccc" block>去做住客</van-button>
+            <van-button round @click="submitAns(tesk_dialog_content)" :loading="tesk_loading" :disabled="tesk_loading"  color="#700000" style="font-weight: bold;font-size: 18px;" block>任务玩明</van-button>
+
+          </div>
+        </div>
+      </section>
+    </div>
+   </van-popup>
   </div>
 </template>
 
@@ -120,6 +163,7 @@ const carousalImage = ref(null);
 const noticeList = ref(null);
 const loading = ref(false);
 const zoomedImageIndex = ref(null);
+const tesk_loading = ref(false)
 const select_item_ans = ref(0)
 const textList = ref([
       '0,111,111',
@@ -171,6 +215,31 @@ const select_item = (index) => {
 const getItem = (index) => {
   return testContentList.value[index] || {};
 };
+
+const submitAns =  async (tesk) => {
+  // console.log(tesk,"gg")
+  let itemId = select_item_ans.value == 1 ? tesk.item1 :  select_item_ans.value == 2 ? tesk.item2 : tesk.item3
+  // console.log(itemId,"jafa")
+  tesk_loading.value = true
+  showLoadingToast({
+    message: "加载中...",
+    forbidClick: true,
+    loadingType: "spinner",
+  });
+  let data = { task_id: tesk.task_id, item_id: itemId ,image:''};
+  try {
+    const res = await homeApi.getuploadTaskCertificate(data);
+    showToast({ message: res?.data?.msg, duration: 2000 });
+    console.log('getuploadTaskCertificate ', res)
+    tesk_loading.value = false
+    if (res?.data?.success && res?.data?.code == 200) {
+      carousalImage.value = res?.data?.data;
+    }
+  } catch (error) {
+    tesk_loading.value = false
+    console.log(error);
+  }
+}
 
   // Function to separate item into name and price
   function separateItem(item) {
@@ -269,19 +338,6 @@ const getNotice = async () => {
       }
       store.commit("app/ISSHOWNOTICE", true);
 
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const getQuestion = async () => {
-  let data = { username: 'mma123', password: '123AAA'};
-  try {
-    const res = await homeApi.getQuestion(data);
-    console.log('getQuestion ', res)
-    if (res?.data?.success && res?.data?.code == 200) {
-      carousalImage.value = res?.data?.data;
     }
   } catch (error) {
     console.log(error);

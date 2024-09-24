@@ -152,15 +152,6 @@ body {
   color: #fff;
 }
 
-.logo_bg{
-  background-image: url(@/assets/loginbg.jpg);
-  background-repeat: no-repeat;
-  width: 100%;
-  background-size: 100% 100%;
-  position: relative;
-  overflow: hidden;
-}
-
     .blur {
       width: 100%;
       height: 100%;

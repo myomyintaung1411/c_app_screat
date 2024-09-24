@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="w-full flex flex-col items-center justify-center pt-3">
-                      <img src="@/assets/logo.png" alt="" class="w-28 rounded-full">
+                      <!-- <img src="@/assets/logo.png" alt="" class="w-28 rounded-full"> -->
                       <p class="text-white font-bold font-mono text-base tracking-wider pt-2">鄉</p>
                     </div>
             <!-- <van-button
@@ -101,7 +101,7 @@ const Global = xxy; // call unknow.js object as global
 
 <style scoped>
 .bg_img{
-  background-image: url(@/assets/share.jpg);
+  /* background-image: url(@/assets/share.jpg); */
   background-size: 100% 100%;
   background-repeat: no-repeat;
 

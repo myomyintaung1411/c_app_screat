@@ -9,7 +9,7 @@
       <div class="flex-none"></div> -->
     </div>
     <div  class="w-full relative carousal_img ">
-       <img src="@/assets/loginbg.jpg" alt="" class="w-full h-full">
+       <!-- <img src="@/assets/loginbg.jpg" alt="" class="w-full h-full"> -->
     </div>
     </div>
 </template>

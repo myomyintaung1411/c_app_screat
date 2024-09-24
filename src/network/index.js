@@ -54,12 +54,22 @@ instance.interceptors.response.use((response) => {
         });
         break
       case 403:
-        showToast({ message: "会话已过期，请重新登录", duration: 2000 })
-        window.localStorage.clear();
-        setTimeout(() => {
-          window.location.reload()
-          router.push('/')
-        }, 500);
+        // showToast({ message: "会话已过期，请重新登录", duration: 2000 })
+        // window.localStorage.clear();
+        // setTimeout(() => {
+        //   window.location.reload()
+        //   router.push('/')
+        // }, 500);
+        showDialog({
+          title: '提示',
+          message: '会话已过期，请重新登录',
+        }).then(() => {
+          window.localStorage.clear();
+          setTimeout(() => {
+            window.location.reload()
+            router.push('/')
+          }, 500);
+        });
         break
       case 404:
         message = '请求地址出错'
