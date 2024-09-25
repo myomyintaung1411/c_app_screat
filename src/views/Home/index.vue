@@ -105,7 +105,7 @@
     <div class="py-3 px-3   relative flex items-center flex-col justify-center h-full w-full">
       <div class="text-center text-xl  inline-block  font-bold">{{ tesk_dialog_content.option }}</div>
       <section class="py-4 px-2 w-full">
-        <div  @click="select_item(1)" :class="select_item_ans == 1 ? 'bg-[#f2c65d] bg-opacity-100' : 'bg-[#700000] bg-opacity-90'" class="h-12 rounded-lg w-full   text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
+        <div  @click="select_item(1)" :class="select_item_ans == 1 ? 'bg-[#f2c65d] bg-opacity-100 animate-tracking-in-expand' : 'bg-[#700000] bg-opacity-90 '" class="h-12 rounded-lg w-full   text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
             <!-- <span class=" tracking-wider text-lg ">{{separateItem(tesk_dialog_content?.item1)?.name}}</span> -->
              <span class=" tracking-wider text-lg ">大麦</span>
@@ -114,13 +114,13 @@
           <!-- <span class=" tracking-wider text-lg ">{{separateItem(tesk_dialog_content?.item1)?.price}}</span> -->
           <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item1}}</span>
         </div>
-        <div  @click="select_item(2)" :class="select_item_ans == 2 ? 'bg-[#f2c65d] bg-opacity-100' : 'bg-[#700000] bg-opacity-90'" class="h-12 rounded-lg w-full  mt-5 text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
+        <div  @click="select_item(2)" :class="select_item_ans == 2 ? 'bg-[#f2c65d] bg-opacity-100 animate-tracking-in-expand' : 'bg-[#700000] bg-opacity-90 '" class="h-12 rounded-lg w-full  mt-5 text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
             <span class=" tracking-wider text-lg ">小麦</span>
           </div>
           <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item2}}</span>
         </div>
-        <div @click="select_item(3)" :class="select_item_ans == 3 ? 'bg-[#f2c65d] bg-opacity-100' : 'bg-[#700000] bg-opacity-90'"  class="h-12 rounded-lg w-full  mt-5  text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
+        <div @click="select_item(3)" :class="select_item_ans == 3 ? 'bg-[#f2c65d] bg-opacity-100 animate-tracking-in-expand' : 'bg-[#700000] bg-opacity-90 '"  class="h-12 rounded-lg w-full  mt-5  text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
             <span class=" tracking-wider text-lg ">玉米</span>
           </div>
@@ -158,14 +158,13 @@
               <img :src="currentImage" alt="zoomed image" class="w-48 animate-flip" />
             </div> -->
             <div class="zoomed-image w-full   ">
-             <div v-if="showCrownDiv" class="flex flex-col items-center justify-center animate-flip">
+             <div v-if="showCrownDiv" @click="teskPopup" class="flex flex-col items-center justify-center animate-flip">
               <img src="@/assets/home/crown.png" alt="crown" class="w-20">
               <img :src="ans3_img" alt="zoomed image" class="w-48 " />
              </div>
-             <div v-else class="flex flex-col items-center justify-center animate-flip">
+             <div v-else  @click="teskPopup" class="flex flex-col items-center justify-center animate-flip">
               <img :src="ans1_img" alt="zoomed image" class="w-48 " />
              </div>
-
             </div>
           </div>
   </div>
@@ -232,14 +231,7 @@ const showCrownDiv = computed(() => {
 const currentImage = computed(() => {
   return [2, 5, 8, 11].includes(zoomedImageIndex.value) ? ans3_img : ans1_img;
 });
-// const showPopup = computed({
-//   get() {
-//     return store.getters["app/IsShowNotice"];
-//   },
-//   set(value) {
-//     store.commit("app/ISSHOWNOTICE", value);
-//   }
-// });
+
 const formattedNumber = computed(() => currentNumber.value.toLocaleString());
 const numRows = computed(() => Math.ceil(testContentList.value.length / 3));
 
@@ -250,8 +242,6 @@ const goDetail = (id) => {
 const goCarousal = () => {
   router.push({ name: "HomeDetails" });
 };
-
-
 
 const closeEvent = () => {
   //  store.commit('app/ISSHOWNOTICE',false)
@@ -271,17 +261,11 @@ const getItem = (index) => {
   return testContentList.value[index] || {};
 };
 
-// const closeZoom = () => {
-//   imagePopup.value = false;
-// };
-
 const closeZoom = () => {
   // Select all elements with the `animation_d` class
   const colElements = document.querySelectorAll('.animation_d');
-  
   // Get the correct element based on the `zoomedImageIndex`
   const clickedElement = colElements[zoomedImageIndex.value]?.getBoundingClientRect();
-
   if (clickedElement) {
     // Animate back to the clicked element's original position
     zoomStyle.top = `${clickedElement.top}px`;
@@ -363,28 +347,16 @@ const submitAns =  async (tesk) => {
     zoomStyle.height = '100vh';
     zoomStyle.transform = 'scale(1)';
   }, 50);
+  //here need to console.log of specific postion of array value from testContentList
+  if (index < testContentList.value.length) {
+    console.log(testContentList.value[index]);
+    tesk_dialog_content.value = testContentList.value[index]
+    // tesk_dialog.value = true
+  } else {
+    console.log('Index out of range');
+    tesk_dialog_content.value = {}
+  }
 };
-
-// const showAnimation = (index, event) => {
-//   const target = event.currentTarget.getBoundingClientRect();
-//   zoomStyle.top = `${target.top}px`;
-//   zoomStyle.left = `${target.left}px`;
-//   zoomStyle.width = `${target.width}px`;
-//   zoomStyle.height = `${target.height}px`;
-
-//   imagePopup.value = true;
-//   zoomedImageIndex.value = index
-//   setTimeout(() => {
-//     zoomStyle.top = '0px';
-//     zoomStyle.left = '0px';
-//     zoomStyle.width = '100vw';
-//     zoomStyle.height = '100vh';
-//     zoomStyle.transform = 'scale(1)';
-//   }, 50);
-// };
-
-
-  
 
 const openTeskDialog = (index) => {
       //here need to console.log of specific postion of array value from testContentList
@@ -397,8 +369,10 @@ const openTeskDialog = (index) => {
         tesk_dialog_content.value = {}
       }
     }
-
-
+ const teskPopup = () => {
+  closeZoom()
+  tesk_dialog.value = true
+ }
 
 const onRefresh = () => {
   setTimeout(() => {
@@ -439,6 +413,18 @@ const setPersonalMessage = async () => {
   }
 };
 
+const getPersonalMessage = async () => {
+  try {
+    const res = await homeApi.getPersonalMessage();
+    console.log(res,"getPersonalMessage")
+    if (res?.data?.success && res?.data?.code == 200) {
+     // personalMessage.value = res?.data?.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const getNotice = async () => {
   try {
     const res = await homeApi.getNotice();
@@ -459,7 +445,7 @@ const getNotice = async () => {
 onMounted(() => {
   globaljs.getUserInfo()
   getTaskContent()
-  // setPersonalMessage()
+  getPersonalMessage()
   getNotice();
 });
 </script>

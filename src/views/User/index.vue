@@ -39,8 +39,11 @@
 
    <section class="w-full relative px-4 pt-3">
     <div class="bg_ans_sec relative ">
-      <div class="h-14"></div>
-      <div class="  h-40  relative px-3 flex flex-col items-center justify-center  ">
+      <div class="h-16"></div>
+      <!-- <div class="text-center text-white  w-full px-3 text-ellipsis overflow-hidden ">
+        {{ questionData?.question }}
+      </div> -->
+      <div class="  h-40   relative px-3 flex flex-col items-center justify-center  ">
         <!-- <div class="h-20 flex items-center justify-between">
           <div class="relative w-full">
             <img src="@/assets/user/ans_box.png" alt="ans" class="w-1/2">
@@ -51,23 +54,23 @@
         </div> -->
         <van-row gutter="12">
           <van-col span="12">
-         <section class="h-20 flex items-center justify-center">
-          <div class="relative w-full h-10 ">
+         <section class="h-16 flex items-center justify-center ">
+          <div class="relative w-full h-10  ">
               <img src="@/assets/user/ans_box.png" alt="ans" class="h-full w-full" >
               <div class="absolute h-full w-full right-0 left-0 top-0 flex items-center ">
                 <div class="pl-4  text-base text-[#830009]">A</div>
-                <div class="pl-5 text-white text-sm tracking-wider">问题回答A</div>
+                <div class="pl-5 text-white text-sm tracking-wider text-ellipsis overflow-hidden">{{questionData?.answer1}}</div>
               </div>
             </div>
         </section>
           </van-col>
           <van-col span="12">
-         <section class="h-20 flex items-center justify-center">
+         <section class="h-16 flex items-center justify-center">
             <div class="relative w-full h-10 ">
               <img src="@/assets/user/ans_box.png" alt="ans" class="h-full w-full" >
               <div class="absolute h-full w-full right-0 left-0 top-0 flex items-center ">
                 <div class="pl-4  text-base text-[#830009]">B</div>
-                <div class="pl-5 text-white text-sm tracking-wider">问题回答B</div>
+                <div class="pl-5 text-white text-sm tracking-wider text-ellipsis overflow-hidden">{{questionData?.answer2}}</div>
               </div>
             </div>
         </section>
@@ -75,23 +78,23 @@
         </van-row>
         <van-row gutter="12">
           <van-col span="12">
-         <section class="h-20 flex items-center justify-center">
+         <section class="h-16 flex items-center justify-center">
           <div class="relative w-full h-10 ">
               <img src="@/assets/user/ans_box.png" alt="ans" class="h-full w-full" >
               <div class="absolute h-full w-full right-0 left-0 top-0 flex items-center ">
                 <div class="pl-4  text-base text-[#830009]">C</div>
-                <div class="pl-5 text-white text-sm tracking-wider">问题回答C</div>
+                <div class="pl-5 text-white text-sm tracking-wider text-ellipsis overflow-hidden">{{questionData?.answer3}}</div>
               </div>
             </div>
         </section>
           </van-col>
           <van-col span="12">
-         <section class="h-20 flex items-center justify-center">
+         <section class="h-16 flex items-center justify-center">
           <div class="relative w-full h-10 ">
               <img src="@/assets/user/ans_box.png" alt="ans" class="h-full w-full" >
               <div class="absolute h-full w-full right-0 left-0 top-0 flex items-center ">
                 <div class="pl-4  text-base text-[#830009] ">D</div>
-                <div class="pl-5 text-white text-sm tracking-wider">问题回答D</div>
+                <div class="pl-5 text-white text-sm tracking-wider text-ellipsis overflow-hidden">{{questionData?.answer4}}</div>
               </div>
             </div>
         </section>
@@ -196,13 +199,14 @@ const router = useRouter();
 const store = useStore();
 // const userData = ref(null)
 const userInfo = computed(()=> store.getters["app/ProfileInfoData"])
-const passInfo = computed(()=> store.getters["app/PASSWORD_INFO"])
+const passInfo = computed(()=> store.getters["app/PasswordInfo"])
 const frontImage = ref([]);//
 const frontImageUrl = ref("");//
 const loading = ref(false)
-
+const questionData = ref(null)
 
  const onRefresh = () => {
+  getQuestion()
       setTimeout(() => {
         showToast('刷新成功');
       globaljs.getUserInfo();
@@ -324,6 +328,7 @@ const getQuestion = async () => {
     console.log(res,"getQuestion ************")
      showToast(res?.data?.msg);
     if (res?.data?.success == true && res?.data?.code == 200) {
+      questionData.value = res?.data?.data
     // store.commit("app/PROFILE_USER_INFO", res.data?.data);
     //  userData.value = res?.data?.data;
     }
@@ -354,7 +359,7 @@ onMounted(() => {
 
 <style >
 .bg_ans_sec{
-  height: 220px;
+  height: 230px;
   width: 100%;
   background-image: url(@/assets/user/ans.png);
   background-repeat: no-repeat;

@@ -215,7 +215,7 @@ const onSubmit = () => {
       showToast(res?.data?.msg);
       if (res?.data?.success == true && res?.data?.code == '200') {
         store.commit("app/LOGIN_DATA", res.data?.data);
-        store.commit("app/PASSWORD_INFO",md5(password.value))
+        store.commit("app/PASSWORD_INFO", md5(password.value))
         router.push("/");
       }
     })

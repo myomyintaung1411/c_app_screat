@@ -81,9 +81,17 @@ export default {
             requestBase: '/api',
         })
     },
-    getComment(data) {
+    postComment(data) {
         return instance({
             url: '/opt/comment',
+            method: 'post',
+            data: data,
+            requestBase: '/api',
+        })
+    },
+    getComment(data) {
+        return instance({
+            url: '/opt/get_comment',
             method: 'post',
             data: data,
             requestBase: '/api',
