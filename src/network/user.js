@@ -25,9 +25,9 @@ export default {
             requestBase: '/api',
         })
     },
-    editAddress(data) { // Add_Address and Edit Address is same method
+    addAddress(data) { // Add_Address and Edit Address is same method
         return instance({
-            url: '/opt/editAddress',
+            url: '/opt/addAddress',
             method: 'post',
             data: data,
             requestBase: '/api',

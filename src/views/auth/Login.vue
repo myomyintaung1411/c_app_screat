@@ -158,8 +158,8 @@ import md5 from "js-md5";
 const router = useRouter();
 const route = useRoute();
 const store = useStore();
-const account = ref("mma123");
-const password = ref("123AAA");
+const account = ref(""); //mma123
+const password = ref(""); //123AAA
 const passwordField = ref("password");
 const inputValidation = ref('')
 const loading = ref(false);

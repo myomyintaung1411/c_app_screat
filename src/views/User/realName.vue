@@ -178,6 +178,7 @@ const loading = ref(false);
 const userInfo = computed(() => store.getters["app/ProfileInfoData"]);
 
 onMounted(() => {
+  globaljs.getUserInfo();
   if (userInfo?.value?.isRealName == 1) {
     btnText.value = " 已实名认证";
     disabledBtn.value = true

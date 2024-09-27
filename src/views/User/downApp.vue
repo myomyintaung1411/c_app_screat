@@ -33,7 +33,7 @@
 
                     <div class="w-full flex flex-col items-center justify-center pt-3">
                       <!-- <img src="@/assets/logo.png" alt="" class="w-28 rounded-full"> -->
-                      <p class="text-white font-bold font-mono text-base tracking-wider pt-2">鄉</p>
+                      <p class="text-white font-bold font-mono text-base tracking-wider pt-2">爱满中华</p>
                     </div>
             <!-- <van-button
               @click="onSubmit"  icon="down"

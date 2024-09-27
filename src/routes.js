@@ -21,8 +21,8 @@ export const routes = [
       },
       // {
       //   path: '/envelope',
-      //   name: '鄉',
-      //   meta: { title: '鄉',requireAuth: true  },
+      //   name: '爱满中华',
+      //   meta: { title: '爱满中华',requireAuth: true  },
       //   component: () => import('./views/Envelope/index.vue')
       // },
       // {
@@ -197,7 +197,7 @@ router.beforeEach((to, from, next) => {
 
 
 /* Default title tag */
-const defaultDocumentTitle = '鄉'
+const defaultDocumentTitle = '爱满中华'
 router.afterEach(to => {
   /* Set document title from route meta */
 

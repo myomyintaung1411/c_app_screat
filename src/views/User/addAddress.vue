@@ -12,7 +12,7 @@
     <section class="bg-[#B3000A] h-[calc(100vh_-_48px)] flex flex-col loginForm mt-0">
       <div class="formSection px-5">
         <van-form>
-         <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5">姓名</div>
+         <!-- <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5">姓名</div>
           <div
             class="w-full flex items-center relative rounded-lg h-14 white_color border-gray-300 border mt-1"
           >
@@ -28,9 +28,9 @@
                 type="text"
               />
             </div>
-          </div>
+          </div> -->
 
-          <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5"> 电话号码</div>
+          <!-- <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5"> 电话号码</div>
           <div
             class="w-full flex items-center relative rounded-lg h-14 white_color border-gray-300 border mt-1"
           >
@@ -47,9 +47,9 @@
                 type="tel"
               />
             </div>
-          </div>
+          </div> -->
 
-          <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5">收货地址</div>
+          <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5 pb-2">收货地址</div>
           <div
             class="w-full flex items-center relative rounded-lg h-14 white_color border-gray-300 border mt-1"
           >
@@ -133,23 +133,23 @@ const goBack = () => {
 const onSubmit = async () => {
   console.log("click button");
   if (
-    name.value == "" ||
-    phone.value == "" ||
+    // name.value == "" ||
+    // phone.value == "" ||
     address.value == "" 
   )
     return showToast("请输入完整的信息");
-    if (phone.value?.length < 11) return showToast("电话号码应为 11 个字符");
+  //   if (phone.value?.length < 11) return showToast("电话号码应为 11 个字符");
 
-  if (
-    !/^((1[3,5,8,7,9][0-9])|(14[5,7])|(17[0,6,7,8])|(19[7]))\d{8}$/.test(
-      phone.value
-    )
-  ) {
-    return showToast("手机号码格式不对");
-  }
+  // if (
+  //   !/^((1[3,5,8,7,9][0-9])|(14[5,7])|(17[0,6,7,8])|(19[7]))\d{8}$/.test(
+  //     phone.value
+  //   )
+  // ) {
+  //   return showToast("手机号码格式不对");
+  // }
   let data = {
-    name: name.value,
-    phone: phone.value,
+    // name: name.value,
+    // phone: phone.value,
     address: address.value,
   };
    loading.value = true
@@ -159,7 +159,7 @@ const onSubmit = async () => {
       forbidClick: true,
       loadingType: "spinner",
     });
-    const res = await userApi.editAddress(data);
+    const res = await userApi.addAddress(data);
      loading.value = false
     showToast({ message: res?.data?.msg, duration: 2000 });
     if (res?.data?.success == true && res?.data?.code == 200) {

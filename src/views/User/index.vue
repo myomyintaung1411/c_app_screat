@@ -229,15 +229,16 @@ const questionData = ref(null)
 const goSection = (number) => {
  switch (number) {
     case 0:
-    if(userInfo.value?.isRealName == 0){ 
-        showToast("请绑定 实名认证") 
+    // if(userInfo.value?.isBindBank == 0){ 
+    //     showToast("请绑定 实名认证") 
 
-        setTimeout(() => {
-          router.push('/real-name')
-        }, 1000);
-      }else{
-        router.push('/bankcard')
-      }
+    //     setTimeout(() => {
+    //       router.push('/real-name')
+    //     }, 1000);
+    //   }else{
+    //     router.push('/bankcard')
+    //   }
+    router.push('/bankcard')
         break;
     case 1:
     router.push('/real-name')
@@ -246,15 +247,16 @@ const goSection = (number) => {
     router.push('/changepass')
         break;
     case 3:
-    if(userInfo.value?.isRealName == 0){ 
-        showToast("请绑定 实名认证") 
+    // if(userInfo.value?.isHaveAddeess == 0){ 
+    //     showToast("请绑定 实名认证") 
 
-        setTimeout(() => {
-          router.push('/real-name')
-        }, 1000);
-      }else{
-         router.push('/address')
-      }
+    //     setTimeout(() => {
+    //       router.push('/real-name')
+    //     }, 1000);
+    //   }else{
+    //      router.push('/address')
+    //   }
+    router.push('/address')
         break;
 
     case 4:
