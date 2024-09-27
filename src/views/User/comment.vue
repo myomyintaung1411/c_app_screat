@@ -73,8 +73,12 @@
             <section class="pb-3 px-4 text-white">
                     <span class="pb-2">选择评论  </span>
                <div v-for="nnn in 3" :key="nnn" class="py-2">
-                <div class="w-full border border-white rounded-md p-2">
-                    无论是内容还是形式,它都展现出了极高的水准。 无论是内容还是形式,它都展现出了极高的水准。
+                <div class="w-full border border-white rounded-md p-2 relative">
+                    <div class="absolute -left-3 bg-[#fddfb9] text-[#96000b] w-8 h-8 flex items-center justify-center rounded-full">
+                     {{nnn}}
+                    </div>
+                    <p class="pl-8">无论是内容还是形式,它都展现出了极高的水准。 无论是内容还是形式,它都展现出了极高的水准。
+                    </p>
                 </div>
                </div>
             </section>
