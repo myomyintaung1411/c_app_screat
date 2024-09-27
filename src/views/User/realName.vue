@@ -62,8 +62,8 @@
           >
           身份证照片
           </div>
-          <div class="flex items-center py-2 space-x-5 justify-between">
-            <div class="flex flex-col  items-center  ">
+          <div v-if="userInfo?.isRealName !== 1" class="flex items-center py-2 space-x-5 justify-between">
+            <div  class="flex flex-col  items-center  ">
             <van-uploader
               accept="image/*"
               v-model="frontImage"
@@ -95,6 +95,40 @@
               :max-size="5000 * 1024"
               @oversize="onOversize"
               :after-read="personalafterRead"
+            />
+            <!-- <img src="https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg" alt=""> -->
+            <span class=" pt-2">手持身份证</span>
+
+          </div>
+          </div>
+          <div v-else class="flex items-center py-2 space-x-5 justify-between">
+            <div  class="flex flex-col  items-center  ">
+              <!-- {{ BaseImageUrl + frontImage }} -->
+              <van-image
+              width="100"
+              height="100"
+             
+              :src="BaseImageUrl + frontImage"
+            />
+            <span class=" pt-2">身份证正面</span>
+          </div>
+            <div class="flex flex-col  items-center   ">
+              <van-image
+              width="100"
+              height="100"
+              
+              :src="BaseImageUrl + backImage"
+            />
+            <!-- <img src="https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg" alt=""> -->
+            <span class=" pt-2">身份证反面</span>
+
+          </div>
+            <div class="flex flex-col  items-center   ">
+              <van-image
+              width="100"
+              height="100"
+             
+              :src="BaseImageUrl + personalImage"
             />
             <!-- <img src="https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg" alt=""> -->
             <span class=" pt-2">手持身份证</span>
@@ -176,6 +210,7 @@ const realname = ref("");
 const id_code = ref("330302199808180355");
 const loading = ref(false);
 const userInfo = computed(() => store.getters["app/ProfileInfoData"]);
+const BaseImageUrl = computed(() => store.getters["app/BaseImageUrl"]);
 
 onMounted(() => {
   globaljs.getUserInfo();
@@ -184,6 +219,9 @@ onMounted(() => {
     disabledBtn.value = true
     realname.value = userInfo?.value?.true_name;
     id_code.value = userInfo?.value?.id_code;
+    frontImage.value[0] = userInfo?.value?.id_front_url;
+    backImage.value[0] = userInfo?.value?.id_back_url;
+    personalImage.value[0] = userInfo?.value?.id_hand_url;
   }
 });
 
