@@ -52,6 +52,12 @@ export const routes = [
     meta: { title: 'Shipment Address',requireAuth: true },
     component: () => import('./views/user/address.vue')
   },
+  {
+    path: '/messageList',
+    name: 'messageList',
+    meta: { title: 'messageList',requireAuth: true },
+    component: () => import('./views/home/MessageList.vue')
+  },
   // {
   //   path: '/chat',
   //   name: 'Chat',
@@ -93,6 +99,12 @@ export const routes = [
     name: 'Comment',
     meta: { title: 'Comment',requireAuth: true },
     component: () => import('./views/user/comment.vue')
+  },
+  {
+    path: '/commentDetails',
+    name: 'commentDetails',
+    meta: { title: 'commentDetails',requireAuth: true },
+    component: () => import('./views/user/commentDetails.vue')
   },
   // {
   //   path: '/teamdetails',

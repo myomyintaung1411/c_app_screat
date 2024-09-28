@@ -87,5 +87,16 @@ export default {
             requestBase: '/api',
         })
     },
+    editAvatar(data) {
+        return instance({ //use instance instead of photo method
+            url: `/opt/editAvatar`,
+            method: 'post',
+            data: data,
+            // headers: {
+            //     'Content-Type': 'multipart/form-data'
+            // },
+            requestBase: '/api',
+        })
+    },
 
 }

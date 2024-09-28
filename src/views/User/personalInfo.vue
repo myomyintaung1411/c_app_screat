@@ -11,6 +11,11 @@
       <div class="flex justify-between items-center my-3 py-3 bg-[#f8f8f8]  rounded-lg shadow  px-5">
         <p class="text-black">头像</p>
         <van-image round width="2.5rem" height="2.5rem" :src="avatar" />
+        <!-- <van-uploader   accept="image/*"  v-model="frontImage"   :max-count="1"
+              :max-size="5000 * 1024"    @oversize="onOversize"
+              :after-read="frontafterRead">
+           <van-image round width="2.5rem" height="2.5rem" :src="avatar" />
+        </van-uploader> -->
       </div>
       <div class="flex justify-between items-center my-3 py-3 bg-[#f8f8f8]  rounded-lg shadow  text-black px-5">
         <p class="text-black">姓名</p>
@@ -60,11 +65,17 @@ import { ref,computed } from "vue";
 import avatar from "@/assets/avatar.svg";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
+import globaljs from "@/utils/global";
+import userApi from "@/network/user.js";
+import { showToast, showLoadingToast, closeToast } from "vant";
 
 const router = useRouter();
 const store = useStore();
 const userInfo = computed(()=> store.getters["app/ProfileInfoData"])
 const logoutDialog = ref(false)
+const loading = ref(false)
+const frontImage = ref([]);
+const frontImageUrl = ref("");
 
 const goBack = () => {
     router.push('/user')
@@ -84,6 +95,72 @@ const confirmLogout = () => {
     router.push("/login");
   }, 500);
 }
+
+const editAvatar = async () => {
+  console.log(frontImageUrl.value);
+  if (
+    frontImageUrl.value == "" 
+  )
+    return showToast("请输入完整的信息");
+
+
+  loading.value = true;
+  let data = {
+    imgUrl:frontImageUrl.value
+  };
+  try {
+    showLoadingToast({
+      message: "加载中...",
+      forbidClick: true,
+      loadingType: "spinner",
+    });
+    const res = await userApi.editAvatar(data);
+    loading.value = false;
+    showToast({ message: res?.data?.msg, duration: 2000 });
+    if (res?.data?.success == true && res?.data?.code == 200) {
+      //addAddressDialog.value = false;
+      await globaljs.getUserInfo();
+    //  router.push("/user");
+    }
+  } catch (error) {
+    loading.value = false;
+    closeToast();
+    console.log(error);
+  }
+};
+
+const onOversize = (file) => {
+  console.log(file);
+  showToast("文件大小不能超过 5MB");
+};
+
+async function frontafterRead(file, detail) {
+  console.log(file.file, "frontafterRead");
+  try {
+    showLoadingToast({
+      message: "上传中...",
+      forbidClick: true,
+      duration: 2000,
+    });
+    // console.log(imageUrl.value);
+    let formData = new FormData();
+    formData.append("file", file.file); // 因为要上传多个文件，所以需要遍历一下才行
+    console.log(formData, "ddd");
+    const res = await userApi.UploadImage(formData);
+    closeToast();
+    // console.log(res);
+    if (res?.data?.code == "0") {
+      frontImageUrl.value = res?.data?.data?.url;
+      await editAvatar()
+    }
+    console.log(res, "resssssssss");
+  } catch (err) {
+    frontImage.value = [];
+    showToast("图片上传错误");
+    console.log(err, "imageupload error");
+  }
+}
+
 </script>
 
 

@@ -51,7 +51,7 @@ export default {
     },
     setPersonalMessage(data) {
         return instance({
-            url: '/opt/setPersonalMessage',
+            url: '/user/setPersonalMessage',
             method: 'post',
             data: data,
             requestBase: '/api',
@@ -59,7 +59,7 @@ export default {
     },
     getPersonalMessage(data) {
         return instance({
-            url: '/opt/getPersonalMessage',
+            url: '/user/getPersonalMessage',
             method: 'post',
             data: data,
             requestBase: '/api',
@@ -92,6 +92,14 @@ export default {
     getComment(data) {
         return instance({
             url: '/opt/get_comment',
+            method: 'post',
+            data: data,
+            requestBase: '/api',
+        })
+    },
+    getPeopleComment(data) {
+        return instance({
+            url: '/opt/get_people_comment',
             method: 'post',
             data: data,
             requestBase: '/api',

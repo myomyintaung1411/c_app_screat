@@ -2,14 +2,19 @@
   <div class="w-full h-full text-center  relative home_bg pb-10     " >
    <section class="py-3 w-full h-56 relative bg_flag ">
     <div class=" px-3 w-full h-10 ">
-      <div class=" relative w-full h-10    ">
+      <div @click="goMessage" class=" relative w-full h-10    ">
         <img src="@/assets/home/notice_bg.png" alt="" class="h-full w-full object-fill">
         <div class="absolute h-full top-0 right-0 w-full ">
-          <div class="w-full h-full pl-8 ">
+          <div class="w-full h-full pl-8 pr-8 ">
             <van-notice-bar  background="none" color="#fff" scrollable>
                   <div  class="">{{ noticeList?.content }}</div>
                 </van-notice-bar>
           </div>
+          <div class="absolute left-4 top-0  flex items-center justify-center">
+                <van-badge :content="0">
+                  <!-- <img src="@/assets/user/notice_fill.svg" alt="button_more" class=" w-6"> -->
+               </van-badge>
+            </div>
         </div>
       </div>
     </div>
@@ -388,8 +393,13 @@ const goWithdraw = () => {
  if(userInfo.value?.isCanWithdraw == 1) {
   router.push('/withdraw')
  } else {
-  console.log('不允许撤回')
+  console.log('無法提取金額')
+  showToast('無法提取金額')
  }
+}
+
+const goMessage = () => {
+  router.push('/messageList')
 }
 
 const getTaskContent = async () => {
@@ -445,7 +455,8 @@ const getNotice = async () => {
 onMounted(() => {
   globaljs.getUserInfo()
   getTaskContent()
-  getPersonalMessage()
+ // setPersonalMessage()
+ // getPersonalMessage()
   getNotice();
 });
 </script>
