@@ -62,7 +62,7 @@
           >
           身份证照片
           </div>
-          <div v-if="userInfo?.isRealName !== 1" class="flex items-center py-2 space-x-5 justify-between">
+          <div v-if="userInfo?.isRealName !== 0" class="flex items-center py-2 space-x-5 justify-between">
             <div  class="flex flex-col  items-center  ">
             <van-uploader
               accept="image/*"
@@ -71,7 +71,11 @@
               :max-size="5000 * 1024"
               @oversize="onOversize"
               :after-read="frontafterRead"
-            />
+            >
+            <div class="bg-white h-20 flex items-center justify-center w-20 rounded ">
+              <img src="@/assets/front.png" alt="front" class="w-10">
+            </div>
+            </van-uploader>
             <span class=" pt-2">身份证正面</span>
           </div>
             <div class="flex flex-col  items-center   ">
@@ -82,7 +86,11 @@
               :max-size="5000 * 1024"
               @oversize="onOversize"
               :after-read="backafterRead"
-            />
+            >
+            <div class="bg-white h-20 flex items-center justify-center w-20 rounded ">
+              <img src="@/assets/front.png" alt="front" class="w-10">
+            </div>
+            </van-uploader>
             <!-- <img src="https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg" alt=""> -->
             <span class=" pt-2">身份证反面</span>
 
@@ -95,7 +103,11 @@
               :max-size="5000 * 1024"
               @oversize="onOversize"
               :after-read="personalafterRead"
-            />
+            >
+            <div class="bg-white h-20 flex items-center justify-center w-20 rounded ">
+              <img src="@/assets/personal.png" alt="front" class="w-10">
+            </div>
+            </van-uploader>
             <!-- <img src="https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg" alt=""> -->
             <span class=" pt-2">手持身份证</span>
 
