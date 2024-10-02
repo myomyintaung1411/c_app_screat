@@ -56,7 +56,19 @@ export const routes = [
     path: '/messageList',
     name: 'messageList',
     meta: { title: 'messageList',requireAuth: true },
-    component: () => import('./views/home/MessageList.vue')
+    component: () => import('./views/Home/messageList.vue')
+  },
+  {
+    path: '/missionPlay',
+    name: 'MissionPlay',
+    meta: { title: 'MissionPlay',requireAuth: true },
+    component: () => import('./views/Home/missionPlay.vue')
+  },
+  {
+    path: '/payQrPage',
+    name: 'PayQr',
+    meta: { title: 'PayQr',requireAuth: true },
+    component: () => import('./views/Home/payQrPage.vue')
   },
   // {
   //   path: '/chat',

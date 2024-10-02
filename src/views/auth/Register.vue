@@ -164,9 +164,9 @@ import md5 from "js-md5";
 const router = useRouter();
 const route = useRoute();
 const invite_code = ref("0QGM");//  0QGM
-const username = ref("mma123");
-const phone = ref("13222222222");
-const password = ref("123AAA");
+const username = ref("");//mma123
+const phone = ref("");//13222222222
+const password = ref("");//123AAA
 const confirmpass = ref("");
 const passwordField = ref("password");
 const conpasswordField = ref("password");

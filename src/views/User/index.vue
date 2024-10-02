@@ -15,7 +15,7 @@
      <section class="flex items-center w-full justify-center px-4 pt-6">
       <van-row  gutter="12">
         <van-col span="12">
-          <div class="relative h-20 ">
+          <div @click="goWithdraw" class="relative h-20 ">
             <img src="@/assets/user/11.png" alt="11" class=" w-full h-full">
            <div class="absolute w-full h-full top-0 left-0 right-0">
             <div class="pl-11 text-base pt-3 text-white">余额</div>
@@ -24,7 +24,7 @@
           </div>
         </van-col>
         <van-col span="12">
-          <div class="relative h-20 ">
+          <div @click="goWithdraw" class="relative h-20 ">
             <img src="@/assets/user/11.png" alt="11" class="h-full w-full ">
            <div class="absolute w-full h-full top-0 left-0 right-0">
             <div class="pl-11 text-base pt-3 text-white">推荐金</div>
@@ -39,11 +39,11 @@
 
    <section class="w-full relative px-4 pt-3">
     <div class="bg_ans_sec relative ">
-      <div class="h-16"></div>
+      <div class="h-20"></div>
       <!-- <div class="text-center text-white  w-full px-3 text-ellipsis overflow-hidden ">
         {{ questionData?.question }}
       </div> -->
-      <div class="  h-40   relative px-3 flex flex-col items-center justify-center  ">
+      <div class="  h-44   relative px-3 flex flex-col items-center justify-center   ">
         <!-- <div class="h-20 flex items-center justify-between">
           <div class="relative w-full">
             <img src="@/assets/user/ans_box.png" alt="ans" class="w-1/2">
@@ -52,9 +52,9 @@
             <img src="@/assets/user/ans_box.png" alt="ans" class="w-1/2">
           </div>
         </div> -->
-        <van-row gutter="12">
+        <van-row gutter="12" class="w-full px-2 ">
           <van-col span="12">
-         <section class="h-16 flex items-center justify-center ">
+         <!-- <section class="h-16 flex items-center justify-center ">
           <div class="relative w-full h-10  ">
               <img src="@/assets/user/ans_box.png" alt="ans" class="h-full w-full" >
               <div class="absolute h-full w-full right-0 left-0 top-0 flex items-center ">
@@ -62,10 +62,30 @@
                 <div class="pl-5 text-white text-sm tracking-wider text-ellipsis overflow-hidden">{{questionData?.answer1}}</div>
               </div>
             </div>
-        </section>
+        </section> -->
+        <div class="h-16  w-full  ">
+          <div @click="clickAns(1,questionData?.answer1)" :class="select_ans === 1 ? 'bg-[#a9000a]   border-[#ff4855]' : 'bg-[#853333]   border-white'" class="h-10 relative rounded-full   border-2 ">
+            <div class="absolute -left-2 -top-1  bg-[#fddfb9] text-[#96000b] w-10 h-10 flex items-center justify-center rounded-full">
+                    A
+            </div>
+            <div class="flex items-center justify-center h-full text-white w-full pl-9  text-ellipsis overflow-x-hidden">
+               <div class="w-full whitespace-nowrap overflow-hidden text-ellipsis ">{{questionData?.answer1}}</div>
+            </div>
+          </div>
+        </div>
           </van-col>
           <van-col span="12">
-         <section class="h-16 flex items-center justify-center">
+          <div class="h-16  w-full   ">
+          <div @click="clickAns(2,questionData?.answer2)" :class="select_ans === 2 ? 'bg-[#a9000a]   border-[#ff4855]' : 'bg-[#853333]   border-white'"  class="h-10 relative rounded-full w-full  border-2 ">
+            <div class="absolute -left-2 -top-1  bg-[#fddfb9] text-[#96000b] w-10 h-10 flex items-center justify-center rounded-full">
+                    B
+            </div>
+            <div class="flex items-center justify-center h-full text-white w-full pl-9  text-ellipsis overflow-x-hidden">
+               <div class="w-full whitespace-nowrap overflow-hidden text-ellipsis ">{{questionData?.answer2}}</div>
+            </div>
+          </div>
+        </div>
+         <!-- <section class="h-16 flex items-center justify-center">
             <div class="relative w-full h-10 ">
               <img src="@/assets/user/ans_box.png" alt="ans" class="h-full w-full" >
               <div class="absolute h-full w-full right-0 left-0 top-0 flex items-center ">
@@ -73,12 +93,12 @@
                 <div class="pl-5 text-white text-sm tracking-wider text-ellipsis overflow-hidden">{{questionData?.answer2}}</div>
               </div>
             </div>
-        </section>
+        </section> -->
           </van-col>
         </van-row>
-        <van-row gutter="12">
+        <van-row gutter="12" class="w-full px-1">
           <van-col span="12">
-         <section class="h-16 flex items-center justify-center">
+         <!-- <section class="h-16 flex items-center justify-center">
           <div class="relative w-full h-10 ">
               <img src="@/assets/user/ans_box.png" alt="ans" class="h-full w-full" >
               <div class="absolute h-full w-full right-0 left-0 top-0 flex items-center ">
@@ -86,10 +106,20 @@
                 <div class="pl-5 text-white text-sm tracking-wider text-ellipsis overflow-hidden">{{questionData?.answer3}}</div>
               </div>
             </div>
-        </section>
+        </section> -->
+        <div class="h-16  w-full  ">
+          <div @click="clickAns(3,questionData?.answer3)" :class="select_ans === 3 ? 'bg-[#a9000a]   border-[#ff4855]' : 'bg-[#853333]   border-white'" class="h-10 relative rounded-full  border-2  ">
+            <div class="absolute -left-2 -top-1  bg-[#fddfb9] text-[#96000b] w-10 h-10 flex items-center justify-center rounded-full">
+                    C
+            </div>
+            <div class="flex items-center justify-center h-full text-white w-full pl-9  text-ellipsis overflow-x-hidden">
+               <div class="w-full whitespace-nowrap overflow-hidden text-ellipsis ">{{questionData?.answer3}} </div>
+            </div>
+          </div>
+        </div>
           </van-col>
           <van-col span="12">
-         <section class="h-16 flex items-center justify-center">
+         <!-- <section class="h-16 flex items-center justify-center">
           <div class="relative w-full h-10 ">
               <img src="@/assets/user/ans_box.png" alt="ans" class="h-full w-full" >
               <div class="absolute h-full w-full right-0 left-0 top-0 flex items-center ">
@@ -97,9 +127,22 @@
                 <div class="pl-5 text-white text-sm tracking-wider text-ellipsis overflow-hidden">{{questionData?.answer4}}</div>
               </div>
             </div>
-        </section>
+        </section> -->
+        <div class="h-16  w-full  ">
+          <div @click="clickAns(4,questionData?.answer4)" :class="select_ans === 4 ? 'bg-[#a9000a]   border-[#ff4855]' : 'bg-[#853333]   border-white'" class="h-10 relative rounded-full  border-2 ">
+            <div class="absolute -left-2 -top-1  bg-[#fddfb9] text-[#96000b] w-10 h-10 flex items-center justify-center rounded-full">
+                    D
+            </div>
+            <div class="flex items-center justify-center h-full text-white w-full pl-9  text-ellipsis overflow-x-hidden">
+               <div class="w-full whitespace-nowrap overflow-hidden text-ellipsis ">{{questionData?.answer4}} </div>
+            </div>
+          </div>
+        </div>
           </van-col>
         </van-row>
+        <div class="image_div w-full h-12 px-10">
+          <img @click="submitAns" src="@/assets/ans_button.png" alt="ans_button" class="w-full h-full object-contain ">
+        </div>
       </div>
     </div>
    </section>
@@ -205,6 +248,45 @@ const frontImageUrl = ref("");//
 const loading = ref(false)
 const questionData = ref(null)
 
+const select_ans = ref(0)
+const user_select_ans = ref('')
+const submitAns = async () => {
+  // console.log(questionData.value)
+  if(select_ans.value === 0) return showToast('請選擇答案')  
+  let data = { id: questionData?.value?.id, answer_index: select_ans?.value};
+  showLoadingToast({
+      message: "上传中...",
+      forbidClick: true,
+      duration: 2000,
+    });
+  try {
+    const res = await homeApi.getAnswer(data);
+    showToast(res?.data?.msg);
+    console.log('getAnswer ', res)
+    if (res?.data?.success && res?.data?.code == 200) {
+     // carousalImage.value = res?.data?.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+const goWithdraw = () => {
+ if(userInfo.value?.isCanWithdraw == 1) {
+  router.push('/withdraw')
+ } else {
+  console.log('無法提取金額')
+  showToast('無法提取金額')
+ }
+}
+
+
+const clickAns = (number,answer) => {
+  // console.log(questionData.value)
+  select_ans.value = number
+  user_select_ans.value = answer
+}
+
  const onRefresh = () => {
   getQuestion()
       setTimeout(() => {
@@ -214,17 +296,17 @@ const questionData = ref(null)
       }, 1000);
     };
 
-    const goWithdraw = () => {
-       if(userInfo.value?.isRealName == 0){ 
-        showToast("请绑定 实名认证") 
+    // const goWithdraw = () => {
+    //    if(userInfo.value?.isRealName == 0){ 
+    //     showToast("请绑定 实名认证") 
 
-        setTimeout(() => {
-          router.push('/real-name')
-        }, 1000);
-      } else {
-        router.push('/withdraw')
-      }
-    }
+    //     setTimeout(() => {
+    //       router.push('/real-name')
+    //     }, 1000);
+    //   } else {
+    //     router.push('/withdraw')
+    //   }
+    // }
 
 const goSection = (number) => {
  switch (number) {
@@ -339,16 +421,16 @@ const getQuestion = async () => {
   }
 }
 const getAnswer = async () => {
-  let data = { username: userInfo?.value?.name, password: passInfo.value};
-  try {
-    const res = await homeApi.getAnswer(data);
-    console.log('getAnswer ', res)
-    if (res?.data?.success && res?.data?.code == 200) {
-      carousalImage.value = res?.data?.data;
-    }
-  } catch (error) {
-    console.log(error);
-  }
+  // let data = { username: userInfo?.value?.name, password: passInfo.value};
+  // try {
+  //   const res = await homeApi.getAnswer(data);
+  //   console.log('getAnswer ', res)
+  //   if (res?.data?.success && res?.data?.code == 200) {
+  //    // carousalImage.value = res?.data?.data;
+  //   }
+  // } catch (error) {
+  //   console.log(error);
+  // }
 };
 
 onMounted(() => {
@@ -361,7 +443,7 @@ onMounted(() => {
 
 <style >
 .bg_ans_sec{
-  height: 230px;
+  height: 270px;
   width: 100%;
   background-image: url(@/assets/user/ans.png);
   background-repeat: no-repeat;

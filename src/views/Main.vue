@@ -49,13 +49,15 @@
       <div class="w-full  h-full flex items-center  border-none ">
         <div class=" flex items-center w-full  py-2  mx-auto     " >
           <div @click="TabClick(1)" class=" flex flex-col items-center justify-center flex-1 py-1 rounded-full " :class="activeRoute === '/home' ? ' text-white animate-fadeleft' : 'text-[#ccc]'">
-            <img  src="@/assets/home/home_a.png" alt="home" class="w-10">
+            <img v-if="activeRoute === '/home'" src="@/assets/home/home_a.png" alt="home" class="w-10">
+            <img  v-else src="@/assets/home/home.png" alt="home" class="w-10">
             <!-- <img v-if="activeRoute === '/home'" src="@/assets/home/homea.svg" alt="home" class="w-8"> -->
             <!-- <img v-else src="@/assets/home/home.svg" alt="home" class="w-8"> -->
             <span class=" text-sm">主页</span>
           </div>
           <div @click="TabClick(2)" class=" flex flex-col items-center justify-center flex-1 py-1 rounded-full " :class="activeRoute === '/user' ? ' text-white animate-fadeleft' : 'text-[#ccc]'">
-            <img  src="@/assets/home/user.png" alt="home" class="w-10">
+            <img v-if="activeRoute === '/user'" src="@/assets/home/user_a.png" alt="home" class="w-10">
+            <img v-else  src="@/assets/home/user.png" alt="home" class="w-10">
             <!-- <img v-if="activeRoute === '/home'" src="@/assets/home/homea.svg" alt="home" class="w-8"> -->
             <!-- <img v-else src="@/assets/home/home.svg" alt="home" class="w-8"> -->
             <span class=" text-sm">轮廓</span>

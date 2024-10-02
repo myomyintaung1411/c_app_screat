@@ -219,7 +219,7 @@ const frontImageUrl = ref("");
 const backImageUrl = ref("");
 const personalImageUrl = ref("");
 const realname = ref("");
-const id_code = ref("330302199808180355");
+const id_code = ref("");//330302199808180355
 const loading = ref(false);
 const userInfo = computed(() => store.getters["app/ProfileInfoData"]);
 const BaseImageUrl = computed(() => store.getters["app/BaseImageUrl"]);

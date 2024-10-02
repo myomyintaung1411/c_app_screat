@@ -100,15 +100,17 @@
    <van-popup v-model:show="showNotice" @click-overlay="closeEvent" @close="closeEvent" @click-close-icon="closeEvent" closeable  round  position="center" class=" bg-none bg-transparent">
      <div class=" w-full    px-5 py-2  ">
       <div class="py-2 flex flex-col justify-center items-center ">
-        <img src="@/assets/box.png" alt="" class="w-20">
+        <img :src="BaseImageUrl + noticeList?.qrcode" alt="" class="w-20">
       </div>
-      <div v-html="noticeList?.content" class="text-base text-center " > </div>
+      <div v-html="noticeList?.content" class="text-base text-center py-2 " > </div>
       <!-- <img src="`@/assets/box.png`" alt="zoomed image" class=" w-full h-full animate-zoomInRotateX   ">   -->
      </div>
     </van-popup>
     <van-popup v-model:show="tesk_dialog" closeable  @click-close-icon="onClickCloseIcon"  position="bottom" :style="{ height: '60%' }">
     <div class="py-3 px-3   relative flex items-center flex-col justify-center h-full w-full">
       <div class="text-center text-xl  inline-block  font-bold">{{ tesk_dialog_content.option }}</div>
+      <!-- <div class="text-left text-base py-3 ">{{ tesk_dialog_content.explain }}</div> -->
+
       <section class="py-4 px-2 w-full">
         <div  @click="select_item(1)" :class="select_item_ans == 1 ? 'bg-[#f2c65d] bg-opacity-100 animate-tracking-in-expand' : 'bg-[#700000] bg-opacity-90 '" class="h-12 rounded-lg w-full   text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
@@ -132,9 +134,9 @@
           <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item3}}</span>
         </div>
         <div class="pt-5 w-full">
-          <div class="flex items-center  justify-center px-10 space-x-5 ">
-            <van-button round type="success" style="font-weight: bold;font-size: 16px;color:#000" color="#ccc" block>去做住客</van-button>
-            <van-button round @click="submitAns(tesk_dialog_content)" :loading="tesk_loading" :disabled="tesk_loading"  color="#700000" style="font-weight: bold;font-size: 18px;" block>任务玩明</van-button>
+          <div class="flex items-center  justify-center px-5 space-x-5 ">
+            <van-button @click="gopayQr(tesk_dialog_content)" round type="success" style="font-weight: bold;font-size: 16px;color:#000" color="#ccc" block>去做任务</van-button>
+            <van-button round @click="showTaskDes()"  color="#700000" style="font-weight: bold;font-size: 18px;" block>任务说明</van-button>
 
           </div>
         </div>
@@ -172,6 +174,10 @@
              </div>
             </div>
           </div>
+
+          <van-dialog v-model:show="task_explain_dialog" title="和任务说明" >
+            <p class="text-black">{{tesk_dialog_content?.explain }}</p>
+         </van-dialog>
   </div>
 </template>
 
@@ -207,6 +213,7 @@ const zoomedImageIndex = ref(null);
 const originalPosition = ref(null);
 const tesk_loading = ref(false)
 const select_item_ans = ref(0)
+const task_explain_dialog = ref(false)
 const textList = ref([
       '0,111,111',
       '0,222,222',
@@ -225,6 +232,8 @@ const textList = ref([
     });
 
  const userInfo = computed(()=> store.getters["app/ProfileInfoData"])
+ const BaseImageUrl = computed(() => store.getters["app/BaseImageUrl"]);
+
 // Define a computed property with a getter and setter for v-model
 const showNotice = ref(false)
 const showPopup = computed(() => store.getters["app/IsShowNotice"]);
@@ -251,6 +260,18 @@ const goCarousal = () => {
 const closeEvent = () => {
   //  store.commit('app/ISSHOWNOTICE',false)
   showNotice.value = false
+}
+
+const gopayQr = (task_content) => {
+  console.log(task_content,"gggggggg")
+  if(select_item.value == 0) return showToast('請先選擇任務') 
+  router.push({ name: 'PayQr', query: { task_content: JSON.stringify(task_content) } })
+
+}
+
+const showTaskDes = () => {
+  console.log('dddddd')
+  task_explain_dialog.value = true
 }
 
 const onClickCloseIcon = () => {

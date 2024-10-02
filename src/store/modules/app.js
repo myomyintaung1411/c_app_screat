@@ -5,7 +5,7 @@ export default {
       profileInfodata:JSON.parse(localStorage.getItem('abcd')) || null,
       passwordInfo:JSON.parse(localStorage.getItem('ear')) || null,
       isShowNotice:false,
-      baseImageUrl:'http://45.116.165.93:6195/statics'
+      baseImageUrl:'http://45.116.165.93:6195/statics/'
     },
 
     getters: {
