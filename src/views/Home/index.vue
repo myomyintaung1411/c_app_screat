@@ -30,7 +30,7 @@
       :duration="1" /> -->
       <!-- <vue3-autocounter ref='counter' :startAmount='0' :endAmount='userInfo.reward_amount' :duration='3'  separator=',' decimalSeparator='.' :decimals='2' :autoinit='true' /> -->
       <div class="flex-1 text-5xl items-center justify-center text-[#f2cd78] tracking-[4px] flex">
-        <Roller class="" :value="userInfo?.reward_money?.toLocaleString()" char-set="number" mode="short" duration="2000"></Roller>
+        <Roller v-if="userInfo?.reward_money" class="" :value="userInfo?.reward_money?.toLocaleString()" char-set="number" mode="short" duration="2000"></Roller>
       </div>
 
       <div class="">
