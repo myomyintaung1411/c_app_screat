@@ -51,8 +51,8 @@ export default {
     },
     bindBank(data) { // editBankInfo and Edit AddBankInfo is same method
         return instance({
-            //url: '/opt/bindBank',
-            url:'/opt/editBankInfo',
+             url: '/opt/bindBank',
+           // url:'/opt/editBankInfo',
             method: 'post',
             data: data,
             requestBase: '/api',
@@ -70,6 +70,14 @@ export default {
     WithdrawAmount(data) {
         return instance({ //use instance instead of photo method
             url: `/opt/withdraw`,
+            method: 'post',
+            data: data,
+            requestBase: '/api',
+        })
+    },
+    Recharge(data) {
+        return instance({ //use instance instead of photo method
+            url: `/user/recharge`,
             method: 'post',
             data: data,
             requestBase: '/api',

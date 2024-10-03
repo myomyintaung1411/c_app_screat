@@ -23,7 +23,7 @@
               class=" w-full h-full text-sm flex justify-center items-center relative"
             >
               <input
-                v-model="card_account"
+                v-model="bank_account_name"
                 autocomplete="off"
                 placeholder="请输入银行账户名称"
                 class="input-name text-[#000] bg-transparent px-3 border-none outline-none focus:outline-none focus:border-none w-full h-full placeholder:text-gray-400 placeholder:tracking-widest"
@@ -129,7 +129,7 @@ const bank_address = ref("");
 const bank = ref("")
 const phone = ref("")
 const card_code = ref("")
-const card_account = ref("")
+const bank_account_name = ref("")
 const loading = ref(false)
 
 const userInfo = computed(()=> store.getters["app/ProfileInfoData"])
@@ -138,7 +138,7 @@ onMounted(()=>{
   bank_address.value = userInfo.value?.bank_address
   bank.value = userInfo.value?.bank
   card_code.value = userInfo.value?.card_code
-  card_account.value = userInfo.value?.bank_account
+  bank_account_name.value = userInfo.value?.bank_account
 })
 
 const goBack = () => {
@@ -178,13 +178,13 @@ const onOversize = (file) => {
 
 const onSubmit = async () => {
   console.log("click button");
-  if ( card_code.value == "" ||phone.value == "" ||  card_account.value == ""  )  return showToast("请输入完整的信息");
-
+  if ( card_code.value == "" ||phone.value == ""  )  return showToast("请输入完整的信息");
+  if(frontImageUrl.value == '' ) return showToast("请上传银行卡图片");
   let data = {
     //id_code: userInfo.value?.id_code,
     card_code: card_code.value,
     phone: phone.value,
-    card_account: card_account.value,
+    card_account: bank_account_name.value ? bank_account_name.value : userInfo.value?.name,
     img: frontImageUrl.value,
     //bank_address: bank_address.value,
     

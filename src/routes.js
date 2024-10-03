@@ -65,10 +65,16 @@ export const routes = [
     component: () => import('./views/Home/missionPlay.vue')
   },
   {
-    path: '/payQrPage',
-    name: 'PayQr',
-    meta: { title: 'PayQr',requireAuth: true },
-    component: () => import('./views/Home/payQrPage.vue')
+    path: '/rechargePage',
+    name: 'Recharge',
+    meta: { title: 'Recharge',requireAuth: true },
+    component: () => import('./views/Home/Recharge.vue')
+  },
+  {
+    path: '/pay',
+    name: 'Pay',
+    meta: { title: 'Pay',requireAuth: true },
+    component: () => import('./views/Home/payPage.vue')
   },
   // {
   //   path: '/chat',

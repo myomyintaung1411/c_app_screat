@@ -60,7 +60,7 @@
             <img v-else  src="@/assets/home/user.png" alt="home" class="w-10">
             <!-- <img v-if="activeRoute === '/home'" src="@/assets/home/homea.svg" alt="home" class="w-8"> -->
             <!-- <img v-else src="@/assets/home/home.svg" alt="home" class="w-8"> -->
-            <span class=" text-sm">轮廓</span>
+            <span class=" text-sm">个人中心</span>
           </div>
           <!-- <div @click="TabClick(2)" class="flex items-center flex-1  space-x-2 py-1 rounded-full pl-3 " :class="activeRoute === '/user' ? ' text-white animate-fadeleft' : 'text-[#febf32]'">
             <img v-if="activeRoute === '/user'" src="@/assets/home/usera.svg" alt="home" class="w-8">

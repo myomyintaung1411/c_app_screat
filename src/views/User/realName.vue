@@ -62,7 +62,7 @@
           >
           身份证照片
           </div>
-          <div v-if="userInfo?.isRealName !== 0" class="flex items-center py-2 space-x-5 justify-between">
+          <div v-if="userInfo?.isRealName == 0" class="flex items-center py-2 space-x-5 justify-between">
             <div  class="flex flex-col  items-center  ">
             <van-uploader
               accept="image/*"

@@ -106,7 +106,7 @@
       <!-- <img src="`@/assets/box.png`" alt="zoomed image" class=" w-full h-full animate-zoomInRotateX   ">   -->
      </div>
     </van-popup>
-    <van-popup v-model:show="tesk_dialog" closeable  @click-close-icon="onClickCloseIcon"  position="bottom" :style="{ height: '60%' }">
+    <van-popup v-model:show="tesk_dialog" closeable  @click-close-icon="onClickCloseIcon"  position="bottom" :style="{ height: tesk_dialog_content?.type == 1 ? '40%' : '60%' }">
     <div class="py-3 px-3   relative flex items-center flex-col justify-center h-full w-full">
       <div class="text-center text-xl  inline-block  font-bold">{{ tesk_dialog_content.option }}</div>
       <!-- <div class="text-left text-base py-3 ">{{ tesk_dialog_content.explain }}</div> -->
@@ -121,13 +121,13 @@
           <!-- <span class=" tracking-wider text-lg ">{{separateItem(tesk_dialog_content?.item1)?.price}}</span> -->
           <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item1}}</span>
         </div>
-        <div  @click="select_item(2)" :class="select_item_ans == 2 ? 'bg-[#f2c65d] bg-opacity-100 animate-tracking-in-expand' : 'bg-[#700000] bg-opacity-90 '" class="h-12 rounded-lg w-full  mt-5 text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
+        <div v-if="tesk_dialog_content?.type == 0"  @click="select_item(2)" :class="select_item_ans == 2 ? 'bg-[#f2c65d] bg-opacity-100 animate-tracking-in-expand' : 'bg-[#700000] bg-opacity-90 '" class="h-12 rounded-lg w-full  mt-5 text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
             <span class=" tracking-wider text-lg ">小麦</span>
           </div>
           <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item2}}</span>
         </div>
-        <div @click="select_item(3)" :class="select_item_ans == 3 ? 'bg-[#f2c65d] bg-opacity-100 animate-tracking-in-expand' : 'bg-[#700000] bg-opacity-90 '"  class="h-12 rounded-lg w-full  mt-5  text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
+        <div v-if="tesk_dialog_content?.type == 0" @click="select_item(3)" :class="select_item_ans == 3 ? 'bg-[#f2c65d] bg-opacity-100 animate-tracking-in-expand' : 'bg-[#700000] bg-opacity-90 '"  class="h-12 rounded-lg w-full  mt-5  text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
             <span class=" tracking-wider text-lg ">玉米</span>
           </div>
@@ -143,27 +143,10 @@
       </section>
     </div>
    </van-popup>
-   <!-- <div v-if="imagePopup" class="zoom-overlay " >
-      <div class="absolute  top-2 right-3 text-white">
-        <van-icon name="cross" size="25" @click="closeZoom" />
-      </div>
-      <img src="`@/assets/box.png`" alt="zoomed image" class="zoomed-image animate-fadefromTop">  
-    </div>  -->
-       <!-- Image Popup with fade and zoom effect -->
-       <!-- <div v-if="imagePopup" class="zoom-overlay" :style="zoomStyle">
-            <div class="absolute top-2 right-3 text-white">
-              <van-icon name="cross" size="25" @click="closeZoom" />
-            </div>
-            <img src="@/assets/box.png" alt="zoomed image" class="zoomed-image " />
-          </div> -->
-          <!-- :class="['zoom-overlay', { active: imagePopup }]" -->
           <div v-if="imagePopup"  :style="zoomStyle" class="zoom-overlay">
             <div class="absolute top-2 right-3 text-black bg-white w-12 h-12 flex items-center justify-center rounded-full ">
               <van-icon name="cross" size="25" @click="closeZoom" />
             </div>
-            <!-- <div class="zoomed-image w-full  flex items-center justify-center ">
-              <img :src="currentImage" alt="zoomed image" class="w-48 animate-flip" />
-            </div> -->
             <div class="zoomed-image w-full   ">
              <div v-if="showCrownDiv" @click="teskPopup" class="flex flex-col items-center justify-center animate-flip">
               <img src="@/assets/home/crown.png" alt="crown" class="w-20">
@@ -178,6 +161,8 @@
           <van-dialog v-model:show="task_explain_dialog" title="和任务说明" >
             <p class="text-black">{{tesk_dialog_content?.explain }}</p>
          </van-dialog>
+
+         
   </div>
 </template>
 
@@ -264,8 +249,8 @@ const closeEvent = () => {
 
 const gopayQr = (task_content) => {
   console.log(task_content,"gggggggg")
-  if(select_item.value == 0) return showToast('請先選擇任務') 
-  router.push({ name: 'PayQr', query: { task_content: JSON.stringify(task_content) } })
+  if(select_item_ans.value === 0) return showToast('請先選擇任務') 
+  router.push({ name: 'Recharge', query: { task_content: JSON.stringify(task_content) , select_item:select_item_ans.value } })
 
 }
 
