@@ -22,12 +22,17 @@
    
    <section class="w-full px-3 py-5  ">
     <div class="h-20 px-4  ">
-     <div class="flex items-center justify-between h-full">
+     <div class="flex items-center justify-between h-full ">
       <div class="">
         <img src="@/assets/home/left_f.png" alt="left_flower" class="w-6">
       </div>
-      <van-rolling-text  class="my-rolling-text  font-bold"  :start-num="0" :text-list="textList"
-      :duration="1" />
+      <!-- <van-rolling-text  class="my-rolling-text  font-bold"  :start-num="0" :text-list="textList"
+      :duration="1" /> -->
+      <!-- <vue3-autocounter ref='counter' :startAmount='0' :endAmount='userInfo.reward_amount' :duration='3'  separator=',' decimalSeparator='.' :decimals='2' :autoinit='true' /> -->
+      <div class="flex-1 text-5xl items-center justify-center text-[#f2cd78] tracking-[4px] flex">
+        <Roller class="" :value="userInfo?.reward_money?.toLocaleString()" char-set="number" mode="short" duration="2000"></Roller>
+      </div>
+
       <div class="">
         <img src="@/assets/home/right_f.png" alt="right_flower" class="w-6">
       </div>
@@ -179,6 +184,9 @@ import boxImage from "@/assets/box.png";
 import globaljs from "@/utils/global";
 import ans1_img from '@/assets/home/ans_1.png'
 import ans3_img from '@/assets/home/ans3.png'
+import { Roller } from "vue-roller";
+import "vue-roller/dist/style.css";
+
 const router = useRouter();
 const store = useStore();
 const step_card =  [1, 2, 3];
@@ -202,9 +210,6 @@ const task_explain_dialog = ref(false)
 const textList = ref([
       '0,111,111',
       '0,222,222',
-      '0,333,333',
-      '0,444,444',
-      '0,777,777',
       '0,999,999',
       '1,000,000',
     ]);
@@ -247,10 +252,33 @@ const closeEvent = () => {
   showNotice.value = false
 }
 
-const gopayQr = (task_content) => {
+const gopayQr = async (task_content) => {
   console.log(task_content,"gggggggg")
-  if(select_item_ans.value === 0) return showToast('請先選擇任務') 
-  router.push({ name: 'Recharge', query: { task_content: JSON.stringify(task_content) , select_item:select_item_ans.value } })
+  if(task_content.type == 0) {
+ if(select_item_ans.value === 0) return showToast('請先選擇任務') 
+ router.push({ name: 'Recharge', query: { task_content: JSON.stringify(task_content) , select_item:select_item_ans.value } })
+  } else {
+  tesk_loading.value = true
+  showLoadingToast({
+    message: "加载中...",
+    forbidClick: true,
+    loadingType: "spinner",
+  });
+  let data = { task_id: task_content.task_id, item_id: 1 ,image:''};
+  try {
+    const res = await homeApi.getuploadTaskCertificate(data);
+    showToast({ message: res?.data?.msg, duration: 2000 });
+    console.log('getuploadTaskCertificate ', res)
+    tesk_loading.value = false
+    if (res?.data?.success && res?.data?.code == 200) {
+     // carousalImage.value = res?.data?.data;
+     tesk_dialog.value = false
+    }
+  } catch (error) {
+    tesk_loading.value = false
+    console.log(error);
+  }
+  }
 
 }
 
@@ -460,6 +488,13 @@ const getNotice = async () => {
 
 onMounted(() => {
   globaljs.getUserInfo()
+  if (userInfo.value && userInfo.value.reward_money !== undefined) {
+  // Format the reward_money number with commas
+  const formattedMoney = Number(userInfo.value.reward_money).toLocaleString();
+  
+  // Push the formatted value to textList
+  textList.value.push(formattedMoney);
+}
   getTaskContent()
  // setPersonalMessage()
  // getPersonalMessage()

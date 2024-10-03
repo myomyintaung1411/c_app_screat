@@ -22,7 +22,8 @@
           </van-radio-group>
 
           </div>
-
+    
+          <section v-if="task_content_data?.type == 0">
           <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5">充值金额</div>
           <div
             class="w-full flex items-center relative rounded-lg h-14 bg-white   mt-1"
@@ -42,7 +43,7 @@
               />
             </div>
           </div>
-
+        </section>
           <div class="mt-8">
             <van-button
               @click="reCharge"
@@ -97,8 +98,10 @@ router.push("/home");
 
 const reCharge = async () => {
   // console.log(itemId,"jafa")
+ if(task_content_data.value == 0) {
   if(amount.value == '') return showToast('请输入充值金额')
   if(amount.value < 300) return showToast('充值金额至少300')
+ }
   loading.value = true
   showLoadingToast({
     message: "加载中...",

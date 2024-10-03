@@ -8,7 +8,6 @@ import store from './store'
 import Vue3Marquee from 'vue3-marquee'
 
 const app = createApp(App)
-
 app.use(router)
 app.use(store)
 app.use(Vant); // Register all Vant UI components globally
