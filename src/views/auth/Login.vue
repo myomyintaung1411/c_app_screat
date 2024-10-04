@@ -3,22 +3,23 @@
     <img
       src="@/assets/auth/background.png"
       alt=""
-      class="w-full h-full object-fill"
+      class="w-full h-full object-fill absolute "
     />
-    <!-- <video
+    <video
       id="register_video"
       class="register__video__3tV1S bg-cover "
-      autoplay="autoplay"
-      muted
-      preload="preload"
-      loop="loop"
+      
+      autoplay loop muted
+      preload="auto"
+      playsInline
     >
       <source
         src="@/assets/loginVideo.mp4"
         type="video/mp4"
       />
-    </video> -->
-   <section class="px-3 py-5 z-10 fixed top-0 left-0 right-0 bottom-0">
+    </video>
+    <!-- fixed top-0 left-0 right-0 bottom-0 -->
+   <section class="px-3 py-5 z-10 fixed top-0 left-0 right-0 bottom-0 ">
     <!-- <div class="flex items-center justify-center text-white tracking-wider space-x-3 text-base px-10  absolute top-20 w-full">
        <img src="@/assets/auth/logo.png" alt="logo" class="w-24">
     </div> -->
@@ -29,7 +30,7 @@
       <img src="@/assets/auth/logo.png" alt="service" class="w-24 ">
     </div>
 
-   <section class="  z-20  w-full  rounded-xl px-8 pt-6 max-w-md mx-auto">
+   <section class="  z-20  w-full  rounded-xl px-8 pt-6 max-w-md mx-auto ">
     <!-- <div class="text-2xl font-bold tracking-wider text-white pb-3">登录帐户</div> -->
  
     <form @click.prevent class="   relative text-[#999999]  w-full ">
@@ -45,7 +46,7 @@
                 <input
                   v-model.trim="account" 
                   autocomplete="off"
-                  placeholder="请输入用户名"
+                  placeholder="请输入手机号码"
                   class="input-name  bg-transparent px-3 border-none outline-none focus:outline-none focus:border-none w-full h-full placeholder:text-[#999999] placeholder:font-medium placeholder:tracking-wide"
                    type="email"
                 />
@@ -191,7 +192,7 @@ const goSection = (number) => {
 const onSubmit = () => {
   //const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (account.value == "" || password.value == "") return showToast("请输入完整的登录信息");
-  //if (!emailRegex.test(account.value))  return  showToast("请输入有效的电子邮件地址");
+  // if (account.value?.length < 11) return showToast("电话号码应为 11 个字符");
   if(inputValidation.value !== randomNumber.value) return showToast("提示: 验证码不正确!");
         
       

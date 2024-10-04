@@ -37,7 +37,7 @@
     </section>
 
     <section v-else  class="bg-[#B3000A] h-[calc(100vh_-_48px)] px-4">
-      <div  class="py-2 px-1 w-full ">
+      <!-- <div  class="py-2 px-1 w-full ">
         <div class="font-bold text-sm  text_color py-3">
            姓名
           </div>
@@ -47,7 +47,7 @@
               {{addressData?.name}}
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="py-2 px-1 w-full">
         <div class="font-bold text-sm text_color py-3">
@@ -56,7 +56,7 @@
         <div class="flex justify-between items-center px-3 bg-white border border-gray-300 rounded-lg  py-4 text-sm text-black">
  
           <div class=" tracking-widest">
-             {{addressData?.phone}}
+             {{userInfo?.phone}}
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@
         </div>
       </div>
      
-
+<!-- 
       <div class="pt-8 px-1">
            <van-button
             @click="onEditAddress"
@@ -87,7 +87,7 @@
           >
             修改 收货地址
           </van-button>
-        </div>
+        </div> -->
     </section>
   </div>
 </template>

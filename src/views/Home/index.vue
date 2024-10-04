@@ -1,6 +1,19 @@
 <template>
   <div class="w-full h-full text-center  relative home_bg pb-10     " >
-   <section class="py-3 w-full h-56 relative bg_flag ">
+    <!-- bg_flag -->
+   <section class="py-3 w-full h-56 relative  ">
+    <video
+      id="register_video " 
+      class="register__video__3tV1S bg-cover absolute top-0 cover"
+      autoplay loop muted
+      preload="auto" width="100%" height="100%"
+      playsInline
+    >
+      <source
+        src="@/assets/loginVideo.mp4"
+        type="video/mp4"
+      />
+    </video>
     <div class=" px-3 w-full h-10 ">
       <div @click="goMessage" class=" relative w-full h-10    ">
         <img src="@/assets/home/notice_bg.png" alt="" class="h-full w-full object-fill">

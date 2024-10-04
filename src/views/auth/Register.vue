@@ -3,21 +3,20 @@
     <img
       src="@/assets/auth/background.png"
       alt=""
-      class="w-full h-full object-fill"
+      class="w-full h-full object-fill absolute"
     />
-    <!-- <video
+    <video
       id="register_video"
       class="register__video__3tV1S bg-cover "
-      autoplay="autoplay"
-      muted
-      preload="preload"
-      loop="loop"
+      autoplay loop muted
+      preload="auto"
+      playsInline
     >
       <source
         src="@/assets/loginVideo.mp4"
         type="video/mp4"
       />
-    </video> -->
+    </video>
    <section class="px-3 py-5 z-10 fixed top-0 left-0 right-0 bottom-0">
     <!-- <div class="flex items-center justify-center text-white tracking-wider space-x-3 text-base px-10  absolute top-20 w-full">
        <img src="@/assets/auth/logo.png" alt="logo" class="w-24">
@@ -45,9 +44,9 @@
                 <input
                   v-model.trim="username" 
                   autocomplete="off"
-                  placeholder="请输入用户名"
+                  placeholder="请输入手机号码"
                   class="input-name  bg-transparent px-3 border-none outline-none focus:outline-none focus:border-none w-full h-full placeholder:text-[#999999] placeholder:font-medium placeholder:tracking-wide"
-                   type="email"
+                   type="tel" min="11" max="11" maxlength="11"
                 />
               </div>
       </div>
@@ -91,7 +90,7 @@
               </div>
       </div>
 
-       <div class="pt-5"></div>
+       <!-- <div class="pt-5"></div>
       <div class=" px-4 rounded-md h-12 w-full  relative  bg-white border border-[#999999] ">
       <div  class="border-none w-full h-full text-sm flex justify-center items-center  "  >
         <div class="flex items-center space-x-1">
@@ -108,12 +107,14 @@
                 />
 
               </div>
-      </div>
+      </div> -->
        <div class="pt-5"></div>
       <div class=" px-4 rounded-md h-12 w-full  relative  bg-white border border-[#999999] ">
       <div  class="border-none w-full h-full text-sm flex justify-center items-center  "  >
-        <div class="flex items-center space-x-1">
-          <van-icon name="passed" class="text-[#000000]" size="16" />
+        <div class="flex items-center space-x-2">
+          <!-- <van-icon name="passed" class="text-[#000000]" size="16" />
+                <span> ：</span> -->
+                <img src="@/assets/auth/guard.png" alt="person" class="w-4 h-4">
                 <span> ：</span>
          </div>
               <input
@@ -194,7 +195,7 @@ const goSection = (number) => {
 const onSubmit = () => {
   if (
      username.value == "" ||
-    phone.value == "" ||
+  
     password.value == "" ||
     // confirmpass.value == "" ||
     invite_code.value == ""
@@ -209,10 +210,10 @@ const onSubmit = () => {
    if (username.value == password.value)
      return showToast("用户名和密码不能相同");
 
-  if (phone.value?.length < 11) return showToast("电话号码应为 11 个字符");
+  if (username.value?.length < 11) return showToast("电话号码应为 11 个字符");
   if (
     !/^((1[3,5,8,7,9][0-9])|(14[5,7])|(17[0,6,7,8])|(19[7]))\d{8}$/.test(
-      phone.value
+      username.value
     )
   ) {
     return showToast("手机号码格式不对");
@@ -221,7 +222,7 @@ const onSubmit = () => {
   let data = {
     username: username.value,
    // username:phone.value,
-    phone: phone.value,
+    phone: username.value,
     password: md5(password.value),
     repassword:md5(password.value),//confirmpass
     invitation_code: invite_code.value,

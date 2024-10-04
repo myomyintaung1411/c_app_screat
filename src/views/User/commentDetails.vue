@@ -41,7 +41,7 @@
          <section class="py-2 px-3 text-white ">
                 <div v-for="com in commentData" :key="com?.Id" class="flex items-center w-full py-2  justify-between border-b border-[#97000ad2]">
                  <div class="flex  space-x-2 items-start">
-                    <img src="@/assets/avatar.svg" alt="userimage" class="w-10" />
+                    <img :src="com?.img" alt="userimage" class="w-10" />
                     <div class="flex flex-col space-y-1">
                         <p class="text-base">{{com?.title}}</p>
                         <p class="text-sm text-[#e7e5e5]">{{com?.text}}</p>
@@ -117,6 +117,9 @@
             </div>
     </section>
     </div>
+     <!-- back to top -->
+    <van-back-top  bottom="10vh" style="background:#FF4855" />
+
 </template>
 
 
@@ -136,6 +139,8 @@ const store = useStore();
 
 const userInfo = computed(()=> store.getters["app/ProfileInfoData"])
 const passInfo = computed(()=> store.getters["app/PasswordInfo"])
+const BaseImageUrl = computed(() => store.getters["app/BaseImageUrl"]);
+
 const pageSize = ref(20);
 const currentPage = ref(1);
 const totalPage = ref(1);
