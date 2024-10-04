@@ -44,7 +44,7 @@
                 <input
                   v-model.trim="username" 
                   autocomplete="off"
-                  placeholder="请输入手机号码"
+                  placeholder=" 请输入用户名"
                   class="input-name  bg-transparent px-3 border-none outline-none focus:outline-none focus:border-none w-full h-full placeholder:text-[#999999] placeholder:font-medium placeholder:tracking-wide"
                    type="tel" min="11" max="11" maxlength="11"
                 />
@@ -90,7 +90,7 @@
               </div>
       </div>
 
-       <!-- <div class="pt-5"></div>
+       <div class="pt-5"></div>
       <div class=" px-4 rounded-md h-12 w-full  relative  bg-white border border-[#999999] ">
       <div  class="border-none w-full h-full text-sm flex justify-center items-center  "  >
         <div class="flex items-center space-x-1">
@@ -100,14 +100,14 @@
               <input
               v-model.trim="phone"
                   autocomplete="off"
-                  placeholder="请输入电话号码"
+                  placeholder="请输入手机号码"
                   class="input-name  bg-transparent px-3 border-none outline-none focus:outline-none focus:border-none w-full h-full placeholder:text-[#999999] placeholder:font-medium placeholder:tracking-wide"
                   maxlength="11" minlength="11"
                   type="tel"
                 />
 
               </div>
-      </div> -->
+      </div>
        <div class="pt-5"></div>
       <div class=" px-4 rounded-md h-12 w-full  relative  bg-white border border-[#999999] ">
       <div  class="border-none w-full h-full text-sm flex justify-center items-center  "  >
@@ -195,8 +195,8 @@ const goSection = (number) => {
 const onSubmit = () => {
   if (
      username.value == "" ||
-  
-    password.value == "" ||
+     phone.value == "" ||
+     password.value == "" ||
     // confirmpass.value == "" ||
     invite_code.value == ""
   )
@@ -210,10 +210,10 @@ const onSubmit = () => {
    if (username.value == password.value)
      return showToast("用户名和密码不能相同");
 
-  if (username.value?.length < 11) return showToast("电话号码应为 11 个字符");
+  if (phone.value?.length < 11) return showToast("电话号码应为 11 个字符");
   if (
     !/^((1[3,5,8,7,9][0-9])|(14[5,7])|(17[0,6,7,8])|(19[7]))\d{8}$/.test(
-      username.value
+      phone.value
     )
   ) {
     return showToast("手机号码格式不对");
@@ -222,7 +222,7 @@ const onSubmit = () => {
   let data = {
     username: username.value,
    // username:phone.value,
-    phone: username.value,
+    phone: phone.value,
     password: md5(password.value),
     repassword:md5(password.value),//confirmpass
     invitation_code: invite_code.value,
