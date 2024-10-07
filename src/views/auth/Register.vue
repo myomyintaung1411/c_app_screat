@@ -129,7 +129,7 @@
               </div>
       </div>
 
-      <div  class="flex justify-between items-center pt-4 text-black font-bold tracking-wider text-sm cursor-pointer"  >
+      <div  class="flex justify-between items-center pt-4 text-white font-bold tracking-wider text-sm cursor-pointer"  >
           <div class="flex items-center">
             <span>已有账户？</span>
             <span @click="goSection(1)" class="text-[#FF4855] text-base"
