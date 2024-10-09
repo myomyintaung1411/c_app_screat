@@ -27,7 +27,7 @@
           <div class="h-28 "></div>
           <div class="h-56  mt-10 mx-10">
             <div class="h-full w-full">
-             <vue-qr class="h-full w-full rounded bg-cover object-cover " v-bind:text="host?.value + '/register' + '?shareCode=' + userInfo?.referralCode"  :margin="20" />
+             <vue-qr class="h-full w-full rounded bg-cover object-cover " v-bind:text="host.value + '/register' + '?shareCode=' + userInfo?.referralCode"  :margin="20" />
           </div>
           </div>
         </div>
@@ -51,7 +51,7 @@ const router = useRouter();
 const store = useStore();
 const { toClipboard } = useClipboard()
 
-const host = ref(null)
+const host = ref('')
 const userInfo = computed(()=> store.getters["app/ProfileInfoData"])
 
 const goBack = () => {
@@ -65,7 +65,7 @@ onMounted(()=>{
 
 const copyAddress = async () => {
     //let copydata = host.value + '/register' + '?shareCode=' + userInfo?.value?.invitation_code
-    let copydata = host?.value + '/register' + '?shareCode=' + userInfo?.value?.referralCode
+    let copydata = host.value + '/register' + '?shareCode=' + userInfo?.value?.referralCode
     try {
         await toClipboard(copydata)
         return showToast ('复制成功')
