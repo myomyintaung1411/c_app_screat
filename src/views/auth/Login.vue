@@ -5,7 +5,7 @@
       alt=""
       class="w-full h-full object-fill absolute "
     />
-    <!-- <video
+    <video
       id="register_video"
       class="register__video__3tV1S bg-cover "
       
@@ -17,25 +17,28 @@
         src="@/assets/loginVideo.mp4"
         type="video/mp4"
       />
-    </video> -->
+    </video>
     <!-- fixed top-0 left-0 right-0 bottom-0 -->
    <section class="px-3 py-5 z-10 fixed top-0 left-0 right-0 bottom-0 ">
     <!-- <div class="flex items-center justify-center text-white tracking-wider space-x-3 text-base px-10  absolute top-20 w-full">
        <img src="@/assets/auth/logo.png" alt="logo" class="w-24">
     </div> -->
-    <div class="flex justify-end py-2">
+    <div class="flex flex-col   items-end py-2">
+     <div class="flex flex-col items-center justify-center">
       <img src="@/assets/auth/service.png" alt="service" class="w-10">
+      <span class="text-white text-sm tracking-wider">联系客服</span>
+     </div>
     </div>
     <div class="flex items-center justify-center py-2">
       <img src="@/assets/auth/logo.png" alt="service" class="w-24 ">
     </div>
 
-   <section class="  z-20  w-full  rounded-xl px-8 pt-6 max-w-md mx-auto ">
+   <section class="  z-20  w-full  rounded-xl px-8 pt-16 max-w-md mx-auto ">
     <!-- <div class="text-2xl font-bold tracking-wider text-white pb-3">登录帐户</div> -->
  
     <form @click.prevent class="   relative text-[#999999]  w-full ">
       <!-- <div class="text-white text-base tracking-wide py-2">用户名</div> -->
-      <div class=" px-4 rounded-md h-12 w-full  formDiv bg-white border border-[#999999]">
+      <div class=" px-4 rounded-md h-12 w-full  formDiv bg-white bg-opacity-80 border border-[#999999]">
         <div
                 class="border-none w-full h-full text-sm flex justify-center items-center relative"
               >
@@ -47,14 +50,14 @@
                   v-model.trim="account" 
                   autocomplete="off"
                   placeholder="请输入用户名"
-                  class="input-name  bg-transparent px-3 border-none outline-none focus:outline-none focus:border-none w-full h-full placeholder:text-[#999999] placeholder:font-medium placeholder:tracking-wide"
-                   type="email"
+                  class="input-name  bg-transparent px-3 text-[#333] border-none outline-none focus:outline-none focus:border-none w-full h-full placeholder:text-[#999999] placeholder:font-medium placeholder:tracking-wide"
+                   type="text"
                 />
               </div>
       </div>
       <!-- <div class="text-white text-base tracking-wide pb-2 pt-3">密码</div> -->
        <div class="pt-5"></div>
-      <div class=" px-4 rounded-md h-12 w-full  relative  bg-white border border-[#999999] ">
+      <div class=" px-4 rounded-md h-12 w-full  relative  bg-white bg-opacity-80 border border-[#999999] ">
         <div  class="border-none w-full h-full text-sm flex justify-center items-center relative "  >
 
         <div class="flex items-center space-x-2">
@@ -65,7 +68,7 @@
               v-model.trim="password"
                   autocomplete="off"
                   placeholder="请输入密码"
-                  class="input-name  bg-transparent px-3 border-none outline-none focus:outline-none focus:border-none w-full h-full placeholder:text-[#999999] placeholder:font-medium placeholder:tracking-wide"
+                  class="input-name  bg-transparent px-3 text-[#333] border-none outline-none focus:outline-none focus:border-none w-full h-full placeholder:text-[#999999] placeholder:font-medium placeholder:tracking-wide"
                   min="6"
                   max="17"
                   maxlength="17"
@@ -93,7 +96,7 @@
       </div>
 
        <div class="pt-5"></div>
-      <div class=" px-4 rounded-md h-12 w-full  relative  bg-white border border-[#999999] ">
+      <div class=" px-4 rounded-md h-12 w-full  relative  bg-white bg-opacity-80 border border-[#999999] ">
       <div  class="border-none w-full h-full text-sm flex justify-center items-center  "  >
         <div class="flex items-center space-x-2">
                 <img src="@/assets/auth/guard.png" alt="person" class="w-4 h-4">
@@ -103,7 +106,7 @@
               v-model.trim="inputValidation"
                   autocomplete="off"
                   placeholder="输入验证吗"
-                  class="input-name  bg-transparent px-3 border-none outline-none focus:outline-none focus:border-none w-full h-full placeholder:text-[#999999] placeholder:font-medium placeholder:tracking-wide"
+                  class="input-name  bg-transparent px-3 text-[#333] border-none outline-none focus:outline-none focus:border-none w-full h-full placeholder:text-[#999999] placeholder:font-medium placeholder:tracking-wide"
                   min="6"
                   max="17"
                   maxlength="4"
@@ -119,10 +122,10 @@
                </div>
               </div>
       </div>
-      <div  class="flex justify-between items-center pt-4 text-[#433C2B] font-semibold tracking-wider text-sm cursor-pointer"  >
+      <div  class="flex justify-between items-center pt-12 text-[#fff] font-semibold tracking-wider text-sm cursor-pointer"  >
           <div class="flex items-center">
             <span>没有帐户？</span>
-            <span @click="goSection(1)" class="text-[#FF4855] text-base"
+            <span @click="goSection(1)" class="text-[#000] text-base"
               >注册</span
             >
           </div>

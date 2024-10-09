@@ -27,7 +27,7 @@
           <div class="h-28 "></div>
           <div class="h-56  mt-10 mx-10">
             <div class="h-full w-full">
-             <vue-qr class="h-full w-full rounded bg-cover object-cover " v-bind:text="Global?.share_url + '/register' + '?shareCode=' + userInfo?.referralCode"  :margin="20" />
+             <vue-qr class="h-full w-full rounded bg-cover object-cover " v-bind:text="host?.value + '/register' + '?shareCode=' + userInfo?.referralCode"  :margin="20" />
           </div>
           </div>
         </div>
@@ -64,7 +64,7 @@ onMounted(()=>{
 
 const copyAddress = async () => {
     //let copydata = host.value + '/register' + '?shareCode=' + userInfo?.value?.invitation_code
-    let copydata = Global?.share_url + '/register' + '?shareCode=' + userInfo?.value?.referralCode
+    let copydata = host?.value + '/register' + '?shareCode=' + userInfo?.value?.referralCode
     try {
         await toClipboard(copydata)
         return showToast ('复制成功')
@@ -74,11 +74,11 @@ const copyAddress = async () => {
     }
 }
 
-const Global = xxy; // call unknow.js object as global
+//const Global = xxy; // call unknow.js object as global
 
-// onMounted(()=>{
-//     host.value = 'https://dlapp.sxh0011.top' // window?.location?.origin
-// })
+onMounted(()=>{
+    host.value = window?.location?.origin // window?.location?.origin
+})
 </script>
 
 
