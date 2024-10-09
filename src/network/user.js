@@ -106,5 +106,12 @@ export default {
             requestBase: '/api',
         })
     },
-
+  GetRealNameInfo(data){
+    return instance({ //use instance instead of photo method
+        url: `/opt/get_realname_info`,
+        method: 'post',
+        data: data,
+        requestBase: '/api',
+    })
+  }
 }

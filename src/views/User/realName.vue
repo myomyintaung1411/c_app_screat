@@ -16,15 +16,21 @@
           <div
             class="text-[#333] font-bold text-sm tracking-wider text-left pl-1 mt-5"
           >
-           姓名
+           姓名             
+
           </div>
           <div
             class="w-full flex items-center relative rounded-lg h-14 white_color   mt-1"
           >
-            <div
+            <div v-if="realInfoData?.real_name"
+              class=" w-full h-full text-sm flex px-3 text-black  items-center relative"
+            >
+              {{realInfoData?.real_name}}
+            </div>
+            <div v-else
               class=" w-full h-full text-sm flex justify-center items-center relative"
             >
-              <input
+              <input 
                 v-model="realname"
                 autocomplete="off"
                 placeholder="请输入真实姓名"
@@ -44,10 +50,15 @@
           <div
             class="w-full flex items-center relative rounded-lg h-14 white_color   mt-1"
           >
-            <div
+          <div v-if="realInfoData?.id_code"
+              class=" w-full h-full text-sm flex px-3 text-black  items-center relative"
+            >
+              {{realInfoData?.id_code}}
+            </div>
+            <div v-else
               class=" w-full h-full text-sm flex justify-center items-center relative"
             >
-              <input
+              <input 
                 v-model="id_code"
                 autocomplete="off"
                 placeholder="请输入身份证号"
@@ -62,7 +73,7 @@
           >
           身份证照片
           </div>
-          <div v-if="userInfo?.isRealName == 0" class="flex text-[#333]  items-center py-2 space-x-5 justify-between">
+          <div v-if="!realInfoData" class="flex text-[#333]  items-center py-2 space-x-5 justify-between">
             <div  class="flex flex-col  items-center  ">
             <van-uploader
               accept="image/*"
@@ -120,7 +131,7 @@
               width="100"
               height="100"
              
-              :src="BaseImageUrl + frontImage"
+              :src="realInfoData?.id_front_url"
             />
             <span class=" pt-2">身份证正面</span>
           </div>
@@ -129,7 +140,7 @@
               width="100"
               height="100"
               
-              :src="BaseImageUrl + backImage"
+              :src="realInfoData?.id_back_url"
             />
             <!-- <img src="https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg" alt=""> -->
             <span class=" pt-2">身份证反面</span>
@@ -140,43 +151,21 @@
               width="100"
               height="100"
              
-              :src="BaseImageUrl + personalImage"
+              :src="realInfoData?.id_hand_url"
             />
             <!-- <img src="https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg" alt=""> -->
             <span class=" pt-2">手持身份证</span>
 
           </div>
           </div>
-          <!-- <div class="flex space-x-4 items-center px-3 z-20 bg-white mt-5">
-            <span class="text-gray-600">身份证反面照地址</span>
-            <van-uploader
-              accept="image/*"
-              v-model="frontImage"
-              :max-count="1"
-              :max-size="3000 * 1024"
-              @oversize="onOversize"
-              :after-read="frontafterRead"
-            />
-          </div>
 
-          <div class="flex space-x-4 items-center px-3 mt-5 z-20 bg-white">
-            <span class="text-gray-600">身份证正面照地址</span>
-            <van-uploader
-              accept="image/*"
-              v-model="backImage"
-              :max-count="1"
-              :max-size="3000 * 1024"
-              @oversize="onOversize"
-              :after-read="backafterRead"
-            />
-          </div> -->
         </van-form>
         <div class="mt-8">
           <van-button
             @click="onSubmit"
             block
             :loading="loading"
-            :disabled="disabledBtn"
+            :disabled="realInfoData?.state == 0 ||  realInfoData?.state == 1"
             class="back_muli"
             style="
               background-color: #E24939;
@@ -185,7 +174,7 @@
               height: 50px;
             "
           >
-            {{ btnText }}
+            {{ realInfoData?.state == 0 ? '未审核' : realInfoData?.state == 1 ? '已通过' : realInfoData?.state == 2 ? '已拒绝' : '确认'  }}
           </van-button>
         </div>
       </div>
@@ -210,9 +199,10 @@ const store = useStore();
 
 const uploadCarousel = ref("");
 const btnText = ref("确认");
-const disabledBtn = ref(false)
+// const disabledBtn = ref(false)
 
 const frontImage = ref([]);
+const realInfoData = ref(null)
 const backImage = ref([]);
 const personalImage = ref([]);
 const frontImageUrl = ref("");
@@ -223,19 +213,21 @@ const id_code = ref("");//330302199808180355
 const loading = ref(false);
 const userInfo = computed(() => store.getters["app/ProfileInfoData"]);
 const BaseImageUrl = computed(() => store.getters["app/BaseImageUrl"]);
-
 onMounted(() => {
+  getRealInfo()
   globaljs.getUserInfo();
-  if (userInfo?.value?.isRealName == 1) {
-    btnText.value = " 已实名认证";
-    disabledBtn.value = true
-    realname.value = userInfo?.value?.true_name;
-    id_code.value = userInfo?.value?.id_code;
-    frontImage.value[0] = userInfo?.value?.id_front_url;
-    backImage.value[0] = userInfo?.value?.id_back_url;
-    personalImage.value[0] = userInfo?.value?.id_hand_url;
-  }
+  // if (userInfo?.value?.isRealName == 1) {
+  //   btnText.value = " 已实名认证";
+  //   disabledBtn.value = true
+    realname.value = realInfoData?.value?.real_name;
+    id_code.value = realInfoData?.value?.id_code;
+  //   frontImage.value[0] = userInfo?.value?.id_front_url;
+  //   backImage.value[0] = userInfo?.value?.id_back_url;
+  //   personalImage.value[0] = userInfo?.value?.id_hand_url;
+  // }
 });
+
+
 
 const goBack = () => {
   router.push("/user");
@@ -365,6 +357,26 @@ const onSubmit = async () => {
       //addAddressDialog.value = false;
       //await globaljs.getUserInfo();
       router.push("/user");
+    }
+  } catch (error) {
+    loading.value = false;
+    closeToast();
+    console.log(error);
+  }
+};
+const getRealInfo = async () => {
+  loading.value = true;
+  try {
+    showLoadingToast({
+      message: "加载中...",
+      forbidClick: true,
+      loadingType: "spinner",
+    });
+    const res = await userApi.GetRealNameInfo();
+    loading.value = false;
+    showToast({ message: res?.data?.msg, duration: 2000 });
+    if (res?.data?.success == true && res?.data?.code == 200) {
+      realInfoData.value = res?.data?.data
     }
   } catch (error) {
     loading.value = false;
