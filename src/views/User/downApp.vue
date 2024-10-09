@@ -27,7 +27,7 @@
           <div class="h-28 "></div>
           <div class="h-56  mt-10 mx-10">
             <div class="h-full w-full">
-             <vue-qr class="h-full w-full rounded bg-cover object-cover " v-bind:text="host.value + '/register' + '?shareCode=' + userInfo?.referralCode"  :margin="20" />
+             <vue-qr class="h-full w-full rounded bg-cover object-cover " v-bind:text="host + '/register' + '?shareCode=' + userInfo?.referralCode"  :margin="20" />
           </div>
           </div>
         </div>
