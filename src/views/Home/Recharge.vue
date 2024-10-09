@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full h-full relative bg-[#B3000A]">
+  <div class="w-full h-full relative _bg_main">
     <div
-      class="h-12 bg-[#B3000A] text-white w-full flex justify-between items-center px-3 text-base font-bold"
+      class="h-12  text-black w-full flex justify-between items-center px-3 text-base font-bold"
     >
       <div @click="goBack" class="">
         <van-icon name="arrow-left" />
@@ -9,22 +9,22 @@
       <div class="">充值</div>
       <div class="flex-none"></div>
     </div>
-    <section class="px-5 py-3 bg-[#B3000A] h-[calc(100vh_-_48px)] text-center  ">
+    <section class="px-5 py-3  h-[calc(100vh_-_48px)] text-center  ">
       <div class="formSection">
         <form @click.prevent>
-          <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5">支付方式</div>
+          <div class="text-[#333] font-bold text-sm tracking-wider text-left pl-1 mt-5">支付方式</div>
           <div
             class="w-full border h-14 px-3 flex items-center relative rounded-lg  white_color mt-1"
           >
           <van-radio-group v-model="recharge_type" direction="horizontal">
-            <van-radio :name="1" checked-color="#FF4855">扫码</van-radio>
-            <van-radio :name="2" checked-color="#FF4855">银行卡</van-radio>
+            <van-radio :name="1" checked-color="#E24939">扫码</van-radio>
+            <van-radio :name="2" checked-color="#E24939">银行卡</van-radio>
           </van-radio-group>
 
           </div>
     
           <section v-if="task_content_data?.type == 0">
-          <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5">充值金额</div>
+          <div class="text-[#333] font-bold text-sm tracking-wider text-left pl-1 mt-5">充值金额</div>
           <div
             class="w-full flex items-center relative rounded-lg h-14 bg-white   mt-1"
           >
@@ -51,7 +51,7 @@
               :loading="loading"  :disabled="loading"
               class="back_muli"
               style="
-                background-color: #FF4855;
+                background-color: #E24939;
                 border: none;
                 color: #fff;
                 height: 50px;
@@ -98,7 +98,7 @@ router.push("/home");
 
 const reCharge = async () => {
   // console.log(itemId,"jafa")
- if(task_content_data.value == 0) {
+ if(task_content_data.value?.type == 0) {
   if(amount.value == '') return showToast('请输入充值金额')
   if(amount.value < 300) return showToast('充值金额至少300')
  }
@@ -145,10 +145,17 @@ onMounted(() => {
 
 <style scoped >
 #payqrPage :deep() .van-nav-bar__title {
-color:#fff !important
+color:#000 !important
 }
 #payqrPage :deep() .van-nav-bar .van-icon {
-color:#fff !important
+color:#000 !important
 
+}
+._bg_main{
+  background-image: url(@/assets/auth/background.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100vh;
 }
 </style>

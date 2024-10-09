@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full h-screen relative bg-[#B3000A]">
-    <div class="h-12 bg-[#B3000A] text-white w-full flex justify-between items-center px-3 text-base font-bold ">
+  <div class="w-full h-screen relative _bg_main">
+    <div class="h-12  text-black w-full flex justify-between items-center px-3 text-base font-bold ">
       <div @click="goBack" class="">
         <van-icon name="arrow-left" />
       </div>
@@ -33,7 +33,7 @@
         <p>{{userInfo?.true_name}}</p>
       </div>
       <div class="py-5  relative w-full ">
-            <van-button @click="logout"    block class="back_muli "  style=" background:#fe2c2b; border: none;color:#fff;height:48px;">
+            <van-button @click="logout"    block class="back_muli "  style=" background:#E24939; border: none;color:#fff;height:48px;">
                退出
             </van-button>
     </div>
@@ -45,7 +45,7 @@
     confirm-button-text="确认"
     cancel-button-text="取消"
     :cancelButtonColor="'#252a3e'"
-    :confirm-button-color="'#fe2c2b'"
+    :confirm-button-color="'#E24939'"
     show-cancel-button
     @confirm="confirmLogout"
     @cancel="logoutDialog = false"
@@ -165,4 +165,11 @@ async function frontafterRead(file, detail) {
 
 
 <style scoped>
+._bg_main{
+  background-image: url(@/assets/auth/background.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100vh;
+}
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <div id="newmessage" class="w-full h-full relative">
+  <div id="newmessage" class="w-full h-full relative _bg_main">
     <div
-      class="h-12 bg-[#B3000A] text-white  w-full flex justify-between items-center px-3 text-base font-bold"
+      class="h-12  text-[#000]   w-full flex justify-between items-center px-3 text-base font-bold"
     >
       <div @click="goBack" class="">
         <van-icon name="arrow-left" />
@@ -11,7 +11,7 @@
     </div>
 
     <section
-      v-if=" userInfo?.isHaveAddeess == 0" class="bg-[#B3000A] h-[calc(100vh_-_48px)]"
+      v-if=" userInfo?.isHaveAddeess == 0" class=" h-[calc(100vh_-_48px)]"
     >
       <div class="py-20 text-center text-white">
         <van-empty 
@@ -24,7 +24,7 @@
             block
             class="back_muli font-bold"
             style="
-              background-color: #FF4855;
+              background-color:#E24939;
               border: none;
               color: #fff;
               height: 56px;
@@ -36,7 +36,7 @@
       </div>
     </section>
 
-    <section v-else  class="bg-[#B3000A] h-[calc(100vh_-_48px)] px-4">
+    <section v-else  class=" h-[calc(100vh_-_48px)] px-4">
       <!-- <div  class="py-2 px-1 w-full ">
         <div class="font-bold text-sm  text_color py-3">
            姓名
@@ -49,19 +49,8 @@
         </div>
       </div> -->
 
-      <div class="py-2 px-1 w-full">
-        <div class="font-bold text-sm text_color py-3">
-            手机号
-          </div>
-        <div class="flex justify-between items-center px-3 bg-white border border-gray-300 rounded-lg  py-4 text-sm text-black">
- 
-          <div class=" tracking-widest">
-             {{userInfo?.phone}}
-          </div>
-        </div>
-      </div>
-        <div class="py-2 px-1 w-full text-black">
-          <div class="font-bold text-sm text_color whitespace-nowrap py-3">
+        <div class="py-2 px-1 w-full text-[#333]">
+          <div class="font-bold text-sm  whitespace-nowrap py-3">
             收货地址
           </div>
         <div class="flex justify-between w-full  items-center px-3 bg-white border border-gray-300 rounded-lg  py-4 text-sm">
@@ -79,7 +68,7 @@
             block
             class="back_muli font-bold"
             style="
-              background-color: #FF4855;
+              background-color: #E24939;
               border: none;
               color: #fff;
               height: 50px;
@@ -151,9 +140,15 @@ onMounted(()=> {
 
 <style scoped>
 #newmessage :deep() .van-empty__description {
-  color: #ffffff !important;
+  color: #333 !important;
 }
 
-
+._bg_main{
+  background-image: url(@/assets/auth/background.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100vh;
+}
 </style>
 

@@ -1,8 +1,7 @@
 <template>
   <div class="w-full h-full text-center  relative home_bg pb-10     " >
-    <van-pull-refresh v-model="loading" @refresh="onRefresh">
     <!-- bg_flag -->
-   <section class="py-5 w-full  relative  ">
+   <section class="py-3 w-full h-56 relative bg_flag ">
     <!-- <video
       id="register_video " 
       class="register__video__3tV1S bg-cover absolute top-0 cover"
@@ -20,7 +19,7 @@
         <img src="@/assets/home/notice_bg.png" alt="" class="h-full w-full object-fill">
         <div class="absolute h-full top-0 right-0 w-full ">
           <div class="w-full h-full pl-8 pr-8 ">
-            <van-notice-bar  background="none" color="#333333" scrollable>
+            <van-notice-bar  background="none" color="#fff" scrollable>
                   <div  class="">{{ noticeList?.content }}</div>
                 </van-notice-bar>
           </div>
@@ -33,18 +32,9 @@
       </div>
     </div>
    </section>
-
-   <section class=" h-48   px-3">
-    <div class="bg-white border-2 border-solid border-[#C2AF78] rounded h-full">
-
-    </div>
-   </section>
-
-
    
-   <section class="w-full px-3 py-5   ">
-    <section class="bg-white rounded  border-2 border-solid border-[#C2AF78] ">
-    <div class="h-20 px-4   ">
+   <section class="w-full px-3 py-5  ">
+    <div class="h-20 px-4  ">
      <div class="flex items-center justify-between h-full ">
       <div class="">
         <img src="@/assets/home/left_f.png" alt="left_flower" class="w-6">
@@ -52,7 +42,7 @@
       <!-- <van-rolling-text  class="my-rolling-text  font-bold"  :start-num="0" :text-list="textList"
       :duration="1" /> -->
       <!-- <vue3-autocounter ref='counter' :startAmount='0' :endAmount='userInfo.reward_amount' :duration='3'  separator=',' decimalSeparator='.' :decimals='2' :autoinit='true' /> -->
-      <div class="flex-1 text-5xl items-center justify-center font-bold text-[#E24939] tracking-[4px] flex">
+      <div class="flex-1 text-5xl items-center justify-center text-[#f2cd78] tracking-[4px] flex">
         <Roller v-if="userInfo?.reward_money" class="" :value="userInfo?.reward_money?.toLocaleString()" char-set="number" mode="short" duration="2000"></Roller>
       </div>
 
@@ -61,13 +51,10 @@
       </div>
      </div>
     </div>
-    <div  class="h-20  px-4  flex items-center justify-center">
-      <!-- <img src="@/assets/home/withdraw.png" alt="withdraw" class="w-48 h-10 object-cover   "> -->
-      <van-button round @click="goWithdraw()"  color="#E24939" style="font-weight: bold;font-size: 19px;" block>提 取</van-button>
-
+    <div @click="goWithdraw" class="h-20    flex items-center justify-center">
+      <img src="@/assets/home/withdraw.png" alt="withdraw" class="w-48 h-10 object-cover   ">
     </div>
    </section>
-  </section>
 
    <section class="w-full px-3 h-[640px]  ">
     <div class="answer_bg ">
@@ -77,7 +64,7 @@
  
           <van-col    span="3">
               <div class="flex items-center whitespace-nowrap ">
-                <div class="font-bold text-base tracking-wide text-[#E14A39]">{{ rowIndex }}期</div>
+                <div class="font-bold text-base tracking-wide text-[#FBE7C9]">{{ rowIndex }}期</div>
               </div>
             </van-col>
             <!-- here need to  click testContentList array of positon 0,3,6,9 -->
@@ -93,7 +80,7 @@
                   <!-- <van-icon name="success" size="25" /> -->
                 <img src="@/assets/arrow-both.svg" alt="arrow-both" class="w-7">
               
-                  <div class="text-xs tracking-wide text-[#333333]">2选1</div>
+                  <div class="text-xs tracking-wide text-white">2选1</div>
                 </div>
             </van-col>
                         <!-- here show testContentList array of positon 1,4,7,10 -->
@@ -143,7 +130,7 @@
       <!-- <div class="text-left text-base py-3 ">{{ tesk_dialog_content.explain }}</div> -->
 
       <section class="py-4 px-2 w-full">
-        <div  @click="select_item(1)" :class="select_item_ans == 1 ? 'bg-[#f2c65d] bg-opacity-100 animate-tracking-in-expand' : 'bg-[#E24939] bg-opacity-90 '" class="h-12 rounded-lg w-full   text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
+        <div  @click="select_item(1)" :class="select_item_ans == 1 ? 'bg-[#f2c65d] bg-opacity-100 animate-tracking-in-expand' : 'bg-[#700000] bg-opacity-90 '" class="h-12 rounded-lg w-full   text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
             <!-- <span class=" tracking-wider text-lg ">{{separateItem(tesk_dialog_content?.item1)?.name}}</span> -->
              <span class=" tracking-wider text-lg ">大麦</span>
@@ -152,13 +139,13 @@
           <!-- <span class=" tracking-wider text-lg ">{{separateItem(tesk_dialog_content?.item1)?.price}}</span> -->
           <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item1}}</span>
         </div>
-        <div v-if="tesk_dialog_content?.type == 0"  @click="select_item(2)" :class="select_item_ans == 2 ? 'bg-[#f2c65d] bg-opacity-100 animate-tracking-in-expand' : 'bg-[#E24939] bg-opacity-90 '" class="h-12 rounded-lg w-full  mt-5 text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
+        <div v-if="tesk_dialog_content?.type == 0"  @click="select_item(2)" :class="select_item_ans == 2 ? 'bg-[#f2c65d] bg-opacity-100 animate-tracking-in-expand' : 'bg-[#700000] bg-opacity-90 '" class="h-12 rounded-lg w-full  mt-5 text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
             <span class=" tracking-wider text-lg ">小麦</span>
           </div>
           <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item2}}</span>
         </div>
-        <div v-if="tesk_dialog_content?.type == 0" @click="select_item(3)" :class="select_item_ans == 3 ? 'bg-[#f2c65d] bg-opacity-100 animate-tracking-in-expand' : 'bg-[#E24939] bg-opacity-90 '"  class="h-12 rounded-lg w-full  mt-5  text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
+        <div v-if="tesk_dialog_content?.type == 0" @click="select_item(3)" :class="select_item_ans == 3 ? 'bg-[#f2c65d] bg-opacity-100 animate-tracking-in-expand' : 'bg-[#700000] bg-opacity-90 '"  class="h-12 rounded-lg w-full  mt-5  text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
             <span class=" tracking-wider text-lg ">玉米</span>
           </div>
@@ -166,7 +153,7 @@
         </div>
         <div class="pt-5 w-full">
           <div class="flex items-center  justify-center px-5 space-x-5 ">
-            <van-button @click="gopayQr(tesk_dialog_content)" round type="success" style="font-weight: bold;font-size: 16px;color:#fff" color="#E24939" block>去做任务</van-button>
+            <van-button @click="gopayQr(tesk_dialog_content)" round type="success" style="font-weight: bold;font-size: 16px;color:#000" color="#ccc" block>去做任务</van-button>
             <van-button round @click="showTaskDes()"  color="#700000" style="font-weight: bold;font-size: 18px;" block>任务说明</van-button>
 
           </div>
@@ -193,8 +180,7 @@
             <p class="text-black">{{tesk_dialog_content?.explain }}</p>
          </van-dialog>
 
-      </van-pull-refresh>
-    
+         
   </div>
 </template>
 
@@ -266,6 +252,13 @@ const currentImage = computed(() => {
 const formattedNumber = computed(() => currentNumber.value.toLocaleString());
 const numRows = computed(() => Math.ceil(testContentList.value.length / 3));
 
+//The list of pictures in the middle, click to enter and browse the article
+const goDetail = (id) => {
+  router.push({ name: "HomeDetails", query: { id: id } });
+};
+const goCarousal = () => {
+  router.push({ name: "HomeDetails" });
+};
 
 const closeEvent = () => {
   //  store.commit('app/ISSHOWNOTICE',false)
@@ -274,7 +267,7 @@ const closeEvent = () => {
 
 const gopayQr = async (task_content) => {
   console.log(task_content,"gggggggg")
-if(task_content.type == 0) {
+  if(task_content.type == 0) {
  if(select_item_ans.value === 0) return showToast('請先選擇任務') 
  router.push({ name: 'Recharge', query: { task_content: JSON.stringify(task_content) , select_item:select_item_ans.value } })
   } else {
@@ -387,14 +380,6 @@ const submitAns =  async (tesk) => {
   // }
 
   const showAnimation = (index, event) => {
-    if(userInfo.value?.isRealName == 0) {
-    showToast("请绑定 实名认证") 
-
-     setTimeout(() => {
-          router.push('/real-name')
-        }, 1000);
-     return
-  } 
   const target = event.currentTarget.getBoundingClientRect();
   // Set initial position to match the clicked element
   zoomStyle.top = `${target.top}px`;
@@ -444,8 +429,7 @@ const openTeskDialog = (index) => {
 const onRefresh = () => {
   setTimeout(() => {
    // showToast("刷新成功");
-    globaljs.getUserInfo()
-    getTaskContent()
+    //getHomePageArticleList();
     getNotice();
    // getHomePageRotograph();
     loading.value = false;
@@ -453,15 +437,12 @@ const onRefresh = () => {
 };
 
 const goWithdraw = () => {
-  if(userInfo.value?.isRealName == 0) {
-    showToast("请绑定 实名认证") 
-
-     setTimeout(() => {
-          router.push('/real-name')
-        }, 1000);
-  } else{
-    router.push('/withdraw')
-  }
+ if(userInfo.value?.isCanWithdraw == 1) {
+  router.push('/withdraw')
+ } else {
+  console.log('無法提取金額')
+  showToast('無法提取金額')
+ }
 }
 
 const goMessage = () => {
@@ -478,7 +459,28 @@ const getTaskContent = async () => {
     console.log(error);
   }
 };
+const setPersonalMessage = async () => {
+  try {
+    const res = await homeApi.setPersonalMessage();
+    if (res?.data?.success && res?.data?.code == 200) {
+      personalMessage.value = res?.data?.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
+const getPersonalMessage = async () => {
+  try {
+    const res = await homeApi.getPersonalMessage();
+    console.log(res,"getPersonalMessage")
+    if (res?.data?.success && res?.data?.code == 200) {
+     // personalMessage.value = res?.data?.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const getNotice = async () => {
   try {
@@ -507,6 +509,8 @@ onMounted(() => {
   textList.value.push(formattedMoney);
 }
   getTaskContent()
+ // setPersonalMessage()
+ // getPersonalMessage()
   getNotice();
 });
 </script>
@@ -514,7 +518,7 @@ onMounted(() => {
 
 <style scoped>
 .answer_bg{
-  /* background: #ffffff; */
+  background: #700000;
   height: 100%;
   width: 100%;
   background-image: url(@/assets/home/answer_bg.png);
@@ -528,13 +532,13 @@ onMounted(() => {
   background-size:cover;
 }
 .home_bg{
-  /* background: #700000; */
+  background: #700000;
   height: calc(100vh - 68px);
-  overflow-y: auto;
+  /* overflow-y: auto; */
   width: 100%;
-  /* background-image: url(@/assets/home/home_bg.png);
+ /* background-image: url(@/assets/home/home_bg.png);
   background-repeat: no-repeat;
-  background-size: cover;  */
+  background-size: cover; */
 }
 .notice_section{
   background-image: url(@/assets/home/notice_bg.png);

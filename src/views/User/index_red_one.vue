@@ -1,15 +1,12 @@
 <template>
-  <div class="w-full relative  h-[calc(100vh_-_68px)]  overflow-y-auto  pb-10  ">
+  <div class="w-full relative bg-[#700000]  h-[calc(100vh_-_68px)]  overflow-y-auto  pb-10  ">
     <van-pull-refresh v-model="loading" @refresh="onRefresh">
     <section class="w-full   relative">
-    <div class=" w-full   pb-2  ">
+    <div class=" w-full rounded-b-[50%] bg-[#830009] pb-2  ">
      <section  class="w-full px-4 flex items-center justify-between  pt-6 relative">
       <div @click="goProfileInfo" class="flex items-center space-x-3">
         <img :src="avatar" alt="avatar" class="w-16">
-       <div class="text-[#fff]">
-        <p class=" font-bold text-xl">{{ userInfo?.name }}</p>
-        <p class="">{{ userInfo?.phone }}</p>
-       </div>
+        <span class="text-white font-bold text-xl">{{ userInfo?.name }}</span>
       </div>
       <div>
         <img src="@/assets/user/service.png" alt="service" class="w-9">
@@ -42,10 +39,10 @@
 
    <section class="w-full relative px-4 pt-3">
     <div class="bg_ans_sec relative ">
-      <div class="h-16  "></div>
-      <div class="text-center text-[#333333]  w-full px-3 text-ellipsis overflow-hidden pb-3 ">
-       <p> {{ questionData?.question }}</p>
-      </div>
+      <div class="h-20"></div>
+      <!-- <div class="text-center text-white  w-full px-3 text-ellipsis overflow-hidden ">
+        {{ questionData?.question }}
+      </div> -->
       <div class="  h-44   relative px-3 flex flex-col items-center justify-center   ">
         <!-- <div class="h-20 flex items-center justify-between">
           <div class="relative w-full">
@@ -67,11 +64,11 @@
             </div>
         </section> -->
         <div class="h-16  w-full  ">
-          <div @click="clickAns(1,questionData?.answer1)" :class="select_ans === 1 ? 'bg-[#f3cc90]   border-[#f3cc90]' : 'bg-[#fff]   border-[#e6e4e3]'" class="h-10 relative rounded-full   border-2 ">
-            <div class="absolute -left-2 -top-1  bg-[#f3cc90] text-[#96000b] w-10 h-10 border border-[#d78364]  flex items-center justify-center rounded-full">
+          <div @click="clickAns(1,questionData?.answer1)" :class="select_ans === 1 ? 'bg-[#a9000a]   border-[#ff4855]' : 'bg-[#853333]   border-white'" class="h-10 relative rounded-full   border-2 ">
+            <div class="absolute -left-2 -top-1  bg-[#fddfb9] text-[#96000b] w-10 h-10 flex items-center justify-center rounded-full">
                     A
             </div>
-            <div class="flex items-center justify-center h-full text-[#333] w-full pl-9  text-ellipsis overflow-x-hidden">
+            <div class="flex items-center justify-center h-full text-white w-full pl-9  text-ellipsis overflow-x-hidden">
                <div class="w-full whitespace-nowrap overflow-hidden text-ellipsis ">{{questionData?.answer1}}</div>
             </div>
           </div>
@@ -79,11 +76,11 @@
           </van-col>
           <van-col span="12">
           <div class="h-16  w-full   ">
-          <div @click="clickAns(2,questionData?.answer2)" :class="select_ans === 2 ? 'bg-[#f3cc90]   border-[#f3cc90]' : 'bg-[#fff]   border-[#e6e4e3]'"  class="h-10 relative rounded-full w-full  border-2 ">
-            <div class="absolute -left-2 -top-1  bg-[#f3cc90] text-[#96000b] border border-[#d78364] w-10 h-10 flex items-center justify-center rounded-full">
+          <div @click="clickAns(2,questionData?.answer2)" :class="select_ans === 2 ? 'bg-[#a9000a]   border-[#ff4855]' : 'bg-[#853333]   border-white'"  class="h-10 relative rounded-full w-full  border-2 ">
+            <div class="absolute -left-2 -top-1  bg-[#fddfb9] text-[#96000b] w-10 h-10 flex items-center justify-center rounded-full">
                     B
             </div>
-            <div class="flex items-center justify-center h-full text-[#333]  w-full pl-9  text-ellipsis overflow-x-hidden">
+            <div class="flex items-center justify-center h-full text-white w-full pl-9  text-ellipsis overflow-x-hidden">
                <div class="w-full whitespace-nowrap overflow-hidden text-ellipsis ">{{questionData?.answer2}}</div>
             </div>
           </div>
@@ -111,11 +108,11 @@
             </div>
         </section> -->
         <div class="h-16  w-full  ">
-          <div @click="clickAns(3,questionData?.answer3)" :class="select_ans === 3 ? 'bg-[#f3cc90]   border-[#f3cc90]' : 'bg-[#fff]   border-[#e6e4e3]'" class="h-10 relative rounded-full  border-2  ">
-            <div class="absolute -left-2 -top-1  bg-[#f3cc90] text-[#96000b] border border-[#d78364]  w-10 h-10 flex items-center justify-center rounded-full">
+          <div @click="clickAns(3,questionData?.answer3)" :class="select_ans === 3 ? 'bg-[#a9000a]   border-[#ff4855]' : 'bg-[#853333]   border-white'" class="h-10 relative rounded-full  border-2  ">
+            <div class="absolute -left-2 -top-1  bg-[#fddfb9] text-[#96000b] w-10 h-10 flex items-center justify-center rounded-full">
                     C
             </div>
-            <div class="flex items-center justify-center h-full text-[#333]  w-full pl-9  text-ellipsis overflow-x-hidden">
+            <div class="flex items-center justify-center h-full text-white w-full pl-9  text-ellipsis overflow-x-hidden">
                <div class="w-full whitespace-nowrap overflow-hidden text-ellipsis ">{{questionData?.answer3}} </div>
             </div>
           </div>
@@ -132,29 +129,25 @@
             </div>
         </section> -->
         <div class="h-16  w-full  ">
-          <div @click="clickAns(4,questionData?.answer4)" :class="select_ans === 4 ? 'bg-[#f3cc90]   border-[#f3cc90]' : 'bg-[#fff]   border-[#e6e4e3]'" class="h-10 relative rounded-full  border-2 ">
-            <div class="absolute -left-2 -top-1  bg-[#f3cc90] text-[#96000b] border border-[#d78364]  w-10 h-10 flex items-center justify-center rounded-full">
+          <div @click="clickAns(4,questionData?.answer4)" :class="select_ans === 4 ? 'bg-[#a9000a]   border-[#ff4855]' : 'bg-[#853333]   border-white'" class="h-10 relative rounded-full  border-2 ">
+            <div class="absolute -left-2 -top-1  bg-[#fddfb9] text-[#96000b] w-10 h-10 flex items-center justify-center rounded-full">
                     D
             </div>
-            <div class="flex items-center justify-center h-full text-[#333]  w-full pl-9  text-ellipsis overflow-x-hidden">
+            <div class="flex items-center justify-center h-full text-white w-full pl-9  text-ellipsis overflow-x-hidden">
                <div class="w-full whitespace-nowrap overflow-hidden text-ellipsis ">{{questionData?.answer4}} </div>
             </div>
           </div>
         </div>
           </van-col>
         </van-row>
-        <div class="image_div w-full h-12 px-1">
-          <van-button round @click="submitAns()"  color="#E24939" style="font-weight: bold;font-size: 17px;" block>确定提交</van-button>
+        <div class="image_div w-full h-12 px-10">
+          <img @click="submitAns" src="@/assets/ans_button.png" alt="ans_button" class="w-full h-full object-contain ">
         </div>
       </div>
     </div>
    </section>
 
-   <section class="py-3 px-4">
-    <div class="text-[#E14A39] font-bold text-base border-b inline-block pb-1 border-[#E14A39] ">常用工具</div>
-   </section>
-
-   <!-- <section class="py-2 w-full space-y-5 px-4 pt-4">
+   <section class="py-2 w-full space-y-5 px-4 pt-4">
         <div  @click="goSection(0)" class="h-12 rounded-lg w-full bg-[#f8f8f8] text-[#000] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
             <img :src="cardpng" alt="filecheck" class="w-6">
@@ -198,76 +191,8 @@
           <img src="@/assets/user/arrow.png" alt="arrow" class="w-5 object-cover">
         </div>
        <div class="h-10"></div>
-      </section> -->
-  
-      <section class="py-2 px-4 w-full relative">
-        <div class="py-2">
-          <van-row gutter="12" class="w-full">
-          <van-col span="6">
-            <div @click="goSection(0)" class="w-full flex flex-col items-center justify-center space-y-2 text-[#333333]">
-              <img :src="cardpng" alt="" class="w-16">
-              <p>绑定银行卡</p>
-            </div>
-          </van-col>
-          <van-col span="6">
-            <div @click="goSection(1)" class="w-full flex flex-col items-center justify-center space-y-2 text-[#333333]">
-              <img :src="usersvg" alt="" class="w-16">
-              <p>实名认证</p>
-            </div>
-          </van-col>
-          <van-col span="6">
-            <div @click="goSection(2)" class="w-full flex flex-col items-center justify-center space-y-2 text-[#333333]">
-              <img :src="password" alt="" class="w-16">
-              <p>更改密码</p>
-            </div>
-          </van-col>
-          <van-col span="6">
-            <div @click="goSection(3)" class="w-full flex flex-col items-center justify-center space-y-2 text-[#333333]">
-              <img :src="announce" alt="" class="w-16">
-              <p>地址簿</p>
-            </div>
-          </van-col>
-        </van-row>
-        </div>
-       <div class="py-2">
-        <van-row gutter="12" class="w-full">
-          <van-col span="6">
-            <div @click="goSection(4)" class="w-full flex flex-col items-center justify-center space-y-2 text-[#333333]">
-              <img :src="comment" alt="" class="w-16">
-              <p>展示评论区</p>
-            </div>
-          </van-col>
-          <van-col span="6">
-            <div @click="goSection(5)" class="w-full flex flex-col items-center justify-center space-y-2 text-[#333333]">
-              <img :src="service" alt="" class="w-16">
-              <p>联系客服</p>
-            </div>
-          </van-col>
-          <van-col span="6">
-            <div @click="goSection(6)"  class="w-full flex flex-col items-center justify-center space-y-2 text-[#333333]">
-              <img :src="invite" alt="" class="w-16">
-              <p>我的邀请码</p>
-            </div>
-          </van-col>
-          <van-col span="6">
-            <div @click="goSection(7)" class="w-full flex flex-col items-center justify-center space-y-2 text-[#333333]">
-              <img :src="myteam" alt="" class="w-16">
-              <p>我的团队</p>
-            </div>
-          </van-col>
-        </van-row>
-        <div class="py-2">
-        <van-row gutter="12" class="w-full">
-          <van-col span="6">
-            <div @click="goSection(8)" class="w-full flex flex-col items-center justify-center space-y-2 text-[#333333]">
-              <img :src="record" alt="" class="w-16">
-              <p>会议录音</p>
-            </div>
-          </van-col>
-          </van-row>
-        </div>
-       </div>
       </section>
+
   </van-pull-refresh>
 
   </div>
@@ -295,15 +220,15 @@
 
 <script setup>
 import { ref, computed, onMounted } from "vue";
-import invite from '@/assets/user/invite.png'
-import announce from '@/assets/user/announce.png'
+import realname from '@/assets/user/realname.svg'
+import withdraw from '@/assets/user/withdraw.svg'
 import avatar from "@/assets/avatar.svg";
 import usersvg from "@/assets/user/person_check.png"
-import myteam from "@/assets/user/myteam.png"
+import personalpng from "@/assets/user/personal.svg"
 import cardpng from "@/assets/user/card.png"
 import password from "@/assets/user/lock.png"
-import record from "@/assets/user/record.png"
-import comment from "@/assets/user/comment.png"
+import addresspng from "@/assets/user/gg.png"
+import comment from "@/assets/user/message.png"
 import service from "@/assets/user/customer.png"
 import { showToast, showLoadingToast, closeToast } from "vant";
 import userApi from "@/network/user.js";
@@ -326,14 +251,7 @@ const questionData = ref(null)
 const select_ans = ref(0)
 const user_select_ans = ref('')
 const submitAns = async () => {
-  if(userInfo.value?.isRealName == 0) {
-    showToast("请绑定 实名认证") 
-
-     setTimeout(() => {
-          router.push('/real-name')
-        }, 1000);
-     return
-  } 
+  // console.log(questionData.value)
   if(select_ans.value === 0) return showToast('請選擇答案')  
   let data = { id: questionData?.value?.id, answer_index: select_ans?.value};
   showLoadingToast({
@@ -354,21 +272,12 @@ const submitAns = async () => {
 }
 
 const goWithdraw = () => {
-  if(userInfo.value?.isRealName == 0){ 
-        showToast("请绑定 实名认证") 
-
-        setTimeout(() => {
-          router.push('/real-name')
-        }, 1000);
-      }else{
-        router.push('/withdraw')
-    }
-//  if(userInfo.value?.isCanWithdraw_ye == 1) {
-//   router.push('/withdraw')
-//  } else {
-//   console.log('無法提取金額')
-//   showToast('無法提取金額')
-//  }
+ if(userInfo.value?.isCanWithdraw == 1) {
+  router.push('/withdraw')
+ } else {
+  console.log('無法提取金額')
+  showToast('無法提取金額')
+ }
 }
 
 
@@ -402,16 +311,16 @@ const clickAns = (number,answer) => {
 const goSection = (number) => {
  switch (number) {
     case 0:
-    if(userInfo.value?.isRealName == 0){ 
-        showToast("请绑定 实名认证") 
+    // if(userInfo.value?.isBindBank == 0){ 
+    //     showToast("请绑定 实名认证") 
 
-        setTimeout(() => {
-          router.push('/real-name')
-        }, 1000);
-      }else{
-        router.push('/bankcard')
-      }
-   // router.push('/bankcard')
+    //     setTimeout(() => {
+    //       router.push('/real-name')
+    //     }, 1000);
+    //   }else{
+    //     router.push('/bankcard')
+    //   }
+    router.push('/bankcard')
         break;
     case 1:
     router.push('/real-name')
@@ -420,44 +329,20 @@ const goSection = (number) => {
     router.push('/changepass')
         break;
     case 3:
-    if(userInfo.value?.isRealName == 0){ 
-        showToast("请绑定 实名认证") 
+    // if(userInfo.value?.isHaveAddeess == 0){ 
+    //     showToast("请绑定 实名认证") 
 
-        setTimeout(() => {
-          router.push('/real-name')
-        }, 1000);
-      }else{
-         router.push('/address')
-      }
-   // router.push('/address')
+    //     setTimeout(() => {
+    //       router.push('/real-name')
+    //     }, 1000);
+    //   }else{
+    //      router.push('/address')
+    //   }
+    router.push('/address')
         break;
 
     case 4:
-    if(userInfo.value?.isRealName == 0){ 
-        showToast("请绑定 实名认证") 
-
-        setTimeout(() => {
-          router.push('/real-name')
-        }, 1000);
-      }else{
-         router.push('/comment')
-      }
-        //router.push('/comment');
-        break;
-    case 6:
-    if(userInfo.value?.isRealName == 0){ 
-        showToast("请绑定 实名认证") 
-
-        setTimeout(() => {
-          router.push('/real-name')
-        }, 1000);
-      }else{
-         router.push('/appdownload')
-      }
-       // router.push('/appdownload');
-        break;
-    case 7:
-        router.push('/team');
+        router.push('/comment');
         break;
     // case 5:
     //     router.push('/accsetting')
@@ -558,12 +443,11 @@ onMounted(() => {
 
 <style >
 .bg_ans_sec{
-  height: 290px;
+  height: 270px;
   width: 100%;
   background-image: url(@/assets/user/ans.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  overflow-y: auto
 }
 .van-pull-refresh {
   min-height: calc(100vh - 68px) !important;

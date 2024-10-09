@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-screen w-full bg-[#aa0f04] overflow-hidden flex flex-col justify-center items-center"
+    class="h-screen w-full bg-[#E14A39] overflow-hidden flex flex-col justify-center items-center"
   >
     <!-- <div class="py-3 w-full px-14 text-center flex items-center justify-center">
       <svg

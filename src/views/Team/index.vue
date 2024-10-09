@@ -1,58 +1,73 @@
-<template>
-  <div class="w-full h-full relative pb-12">
-    <van-pull-refresh v-model="loading" @refresh="onRefresh">
-    <!-- <div
-      class="h-12 bg-[rgba(254,0,0,255)] w-full text-center px-3 text-base font-bold leading-[48px]"
+
+ <template>
+  <div class="w-full h-full relative _bg_main">
+    <div
+      class="h-12  text-black w-full flex justify-between items-center px-3 text-base font-bold"
     >
-      团队
-    </div> -->
-
-    <section class="text-black ">
-      <div class="bg_team  text-base tracking-wider white_color text-white py-10 border-b border-gray-100 relative">
-        <div class="absolute text-center top-3 w-full text-lg  font-bold">团队</div>
-        <!-- <p>轮回的缘分</p> -->
-        <div class="py-2 text-3xl text_color flex flex-col items-left pl-4 justify-left ">
-          <img src="@/assets/group.svg" alt="" class="w-20 absolute right-4 top-12 ">
-          <span class="pt-5  text-[#F2BE22] font-bold">团队总人数</span>
-          <div class="flex items-center pt-5 text-white font-bold space-x-1 ">
-            <p class="  text-4xl ">{{teamData?.all_number}}</p>
-            <p class="text-2xl ">人</p>
+      <div @click="goBack" class="">
+        <van-icon name="arrow-left" />
+      </div>
+      <div class="">我的团队</div>
+      <div class="flex-none"></div>
+    </div>
+    <section class="px-2 py-3  h-[calc(100vh_-_48px)] text-center overflow-y-auto  ">
+      <van-tabs v-model:active="active" type="card" @click-tab="onClickTab" sticky offset-top="5"  active-color="#E24939" color="#E24939"	>
+      <van-tab v-for="tab in tab_" :key="tab.id" :title="tab.name">
+        <van-pull-refresh
+      v-model="refreshing"
+      @refresh="onRefresh"
+      pulling-text="拉动刷新..."
+      loosing-text="松动刷新..."
+    >
+      <van-list
+        v-model:loading="loading"
+        :finished="finished"
+        finished-text=""
+        @load="onLoad"
+        loading-text="加载中..."
+      >
+        <div class=" relative w-full  ">
+          <div class="py-3 w-full relative px-4">
+            <section     v-for="(teamdata) in teamDetailsData" :key="teamdata?.phone" class="bg-white bg-opacity-40 my-2 backdrop-blur-sm rounded py-3 px-3 ">
+              <div class="flex items-center justify-between w-full text-xs border-b border-[#a5a5a5] pb-2 ">
+                <div class="flex items-center w-[60%] space-x-2">
+                  <img src="@/assets/avatar.svg" alt="avatar" class="w-8">
+                <div class=" ">
+                  <span>昵称：</span>
+                  <span> {{teamdata?.name}}</span>
+                </div>
+                </div>
+                <div class="w-[40%] text-right ">
+                  <span>昵称：</span>
+                  <span> {{formatDate(teamdata?.regist_time)}}</span>
+                </div>
+              </div>
+              <section class="py-2">
+                <div v-if="teamdata?.real_name" class="flex items-center py-1 justify-between text-[#333333]">
+                  <span>真实姓名</span>
+                  <span>{{teamdata?.real_name}}</span>
+                </div>
+                <div class="flex items-center py-1  justify-between text-[#333333]">
+                  <span>个人等级</span>
+                  <span>{{teamdata?.level}}</span>
+                </div>
+                <div class="flex items-center py-1  justify-between text-[#333333]">
+                  <span>电话号码</span>
+                  <span>{{teamdata?.phone}}</span>
+                </div>
+              </section>
+            </section>
           </div>
-          <!-- <p class="text-[#F2BE22] font-bold text-4xl pt-5">{{teamData?.all_number}} <p class="text-2xl -mt-2">人</p></p> -->
         </div>
-      </div>
-      <!-- <div class="py-3 px-3 border-b border-gray-100 bg-white ">
-        <span class=" tracking-wide text-base text_color">团队总人数:{{teamData?.all_number}}人</span>
-      </div> -->
-      <div class="w-full px-3 pt-3">
+      </van-list>
+        </van-pull-refresh>
+       </van-tab>
 
-     
-      <div @click="goDetail(1)" class="py-4 px-3 rounded-md shadow  bg-white flex justify-between items-center">
-        <span class=" tracking-wide text-base text-gray-600 ">一级成员:{{teamData?.level1_number}}人</span>
-        <div class="flex items-center space-x-2 text_color">
-          <span class=" tracking-wider ">查看</span>
-          <van-icon name="arrow"  />
-        </div>
-      </div>
-      <div @click="goDetail(2)"  class="py-4 px-3 mt-3 rounded-md shadow bg-white flex justify-between items-center">
-        <span class=" tracking-wide text-base  text-gray-600">二级成员:{{teamData?.level2_number}}人</span>
-        <div class="flex items-center space-x-2 text_color">
-          <span class=" tracking-wider ">查看</span>
-          <van-icon name="arrow" />
-        </div>
-      </div>
-      <div @click="goDetail(3)" class="py-4 px-3 mt-3 rounded-md shadow  bg-white flex justify-between items-center">
-        <span class=" tracking-wide text-base text-gray-600 ">三级成员:{{teamData?.level3_number}}人</span>
-        <div class="flex items-center space-x-2 text_color">
-          <span class=" tracking-wider ">查看</span>
-          <van-icon name="arrow" />
-        </div>
-      </div>
-       </div>
+
+    </van-tabs>
     </section>
-    </van-pull-refresh>
   </div>
-</template> 
+ </template>
 
 
 
@@ -61,19 +76,58 @@ import { ref, computed, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { showToast, showLoadingToast, closeToast } from "vant";
 import homeApi from "@/network/home.js";
+import dayjs from 'dayjs'
 
 const router = useRouter();
+const route = useRoute()
 const teamData = ref(null)
-const loading = ref(false)
+const active = ref(0);
+
+const teamDetailsData = ref([]);
+
+const pageSize = ref(20);
+const currentPage = ref(1);
+const totalPage = ref(1);
+
+const loading = ref(false);
+const finished = ref(false);
+const refreshing = ref(false);
+
+const tab_ = ref([
+  { id: 1, name: '一级成员' },
+  { id: 2, name: '二级成员' },
+  { id: 3, name: '三级成员' },
+])
 
 
- const onRefresh = () => {
-      setTimeout(() => {
-        showToast('刷新成功');
-       getTeamMemberNumber()
-        loading.value = false;
-      }, 1000);
-    };
+const goBack = () => {
+  router.push("/user");
+};
+
+const formatDate = (date) => {
+  return dayjs(date).format('YYYY-MM-DD')
+}
+
+function onRefresh() {
+  // 清空列表数据
+  getTeamMemberNumber()
+  teamDetailsData.value = []; //reset data
+  currentPage.value = 0; //reset data
+  //   totalPage.value = 1; //reset data
+  finished.value = false;
+  // 重新加载数据
+  // 将 loading 设置为 true，表示处于加载状态
+  loading.value = true;
+  onLoad();
+}
+
+//  const onRefresh = () => {
+//       setTimeout(() => {
+//         showToast('刷新成功');
+//        getTeamMemberNumber()
+//         loading.value = false;
+//       }, 1000);
+//     };
 
 const goDetail = (number) => {
    router.push({path:'teamdetails',query:{level:number}})
@@ -91,20 +145,75 @@ const getTeamMemberNumber = async () => {
   }
 }
 
+const onClickTab = (data) => {
+  console.log(data,"clicktab");
+  onRefresh()
+  
+}
+
+const getTeamMemberDetail = async () => {
+  let data = {
+    level: active.value + 1,
+    pageSize: pageSize.value,
+    currentPage: currentPage.value,
+  };
+  console.log(data,"send___________data *********")
+  try {
+    const res = await homeApi.getTeamMemberDetail(data);
+    console.log(res.data)
+    if (res?.data?.success == true && res?.data?.code == 200) {
+      loading.value = false;
+      totalPage.value = res?.data?.data?.count;
+      teamDetailsData.value = [
+        ...teamDetailsData.value,
+        ...res?.data?.data?.record,
+      ];
+      console.log(res?.data?.data?.count, "total");
+      if (teamDetailsData.value?.length >= parseInt(res?.data?.data?.count)) {
+        finished.value = true;
+      }
+      //teamDetailsData.value = res?.data?.data?.record;
+    }else{
+      loading.value = false
+      refreshing.value = false
+      finished.value = true
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+
+const onLoad = async () => {
+  currentPage.value++;
+  if (refreshing.value) {
+    teamDetailsData.value = [];
+    refreshing.value = false;
+  }
+  setTimeout(() => {
+    getTeamMemberDetail();
+  }, 500);
+};
+
+const onCallMethod = async () => {
+  window.scrollTo(0, 0);
+  onRefresh();
+};
+
 onMounted(()=> {
-  getTeamMemberNumber()
+  onCallMethod()
+  // getTeamMemberNumber()
 })
 
 </script>
 
-
 <style scoped>
-.bg_team{
- @apply bg-[#4286f5] rounded-b-3xl
- 
-/* background: rgb(220,53,53);
-background: linear-gradient(360deg, rgba(220,53,53,1) 0%, rgba(229,49,35,1) 35%, rgba(170,15,4,1) 100%); */
-
-
+._bg_main{
+  background-image: url(@/assets/auth/background.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100vh;
 }
 </style>

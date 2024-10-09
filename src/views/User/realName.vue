@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full  relative bg-[#B3000A]">
+  <div class="w-full  relative _bg_main">
     <div
-      class="h-12 bg-[#B3000A] text-white w-full flex justify-between items-center px-3 text-base font-bold"
+      class="h-12  text-[#000]  w-full flex justify-between items-center px-3 text-base font-bold"
     >
       <div @click="goBack" class="">
         <van-icon name="arrow-left" />
@@ -9,12 +9,12 @@
       <div class="">实名认证</div>
       <div class="flex-none"></div>
     </div>
-    <section class="text-center loginForm mt-0  bg-[#B3000A] h-[calc(100vh_-_48px)] px-5  text-white">
+    <section class="text-center loginForm mt-0  h-[calc(100vh_-_48px)] px-5  text-white">
       <div class="formSection py-5">
         <van-form>
 
           <div
-            class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5"
+            class="text-[#333] font-bold text-sm tracking-wider text-left pl-1 mt-5"
           >
            姓名
           </div>
@@ -36,7 +36,7 @@
           </div>
 
           <div
-            class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5"
+            class="text-[#333] font-bold text-sm tracking-wider text-left pl-1 mt-5"
           >
            身份证号
           </div>
@@ -58,11 +58,11 @@
             </div>
           </div>
           <div
-            class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5"
+            class="text-[#333] font-bold text-sm tracking-wider text-left pl-1 mt-5"
           >
           身份证照片
           </div>
-          <div v-if="userInfo?.isRealName == 0" class="flex items-center py-2 space-x-5 justify-between">
+          <div v-if="userInfo?.isRealName == 0" class="flex text-[#333]  items-center py-2 space-x-5 justify-between">
             <div  class="flex flex-col  items-center  ">
             <van-uploader
               accept="image/*"
@@ -113,7 +113,7 @@
 
           </div>
           </div>
-          <div v-else class="flex items-center py-2 space-x-5 justify-between">
+          <div v-else class="flex items-center py-2 space-x-5 justify-between text-[#333] ">
             <div  class="flex flex-col  items-center  ">
               <!-- {{ BaseImageUrl + frontImage }} -->
               <van-image
@@ -179,7 +179,7 @@
             :disabled="disabledBtn"
             class="back_muli"
             style="
-              background-color: #FF4855;
+              background-color: #E24939;
               border: none;
               color: #fff;
               height: 50px;
@@ -376,4 +376,11 @@ const onSubmit = async () => {
 
 
 <style scoped>
+._bg_main{
+  background-image: url(@/assets/auth/background.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100vh;
+}
 </style>

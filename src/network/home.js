@@ -145,4 +145,20 @@ export default {
             requestBase: '/api',
         })
     },
+    getArticleListApi(data) {
+        return instance({
+            url: '/opt/getArticleList',
+            method: 'post',
+            data: data,
+            requestBase: '/api',
+        })
+    },
+    getArticleDetailsApi(data) {
+        return instance({
+            url: '/opt/getArticleContent',
+            method: 'post',
+            data: data,
+            requestBase: '/api',
+        })
+    },
 }

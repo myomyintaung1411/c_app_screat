@@ -5,7 +5,7 @@
       alt=""
       class="w-full h-full object-fill absolute "
     />
-    <video
+    <!-- <video
       id="register_video"
       class="register__video__3tV1S bg-cover "
       
@@ -17,7 +17,7 @@
         src="@/assets/loginVideo.mp4"
         type="video/mp4"
       />
-    </video>
+    </video> -->
     <!-- fixed top-0 left-0 right-0 bottom-0 -->
    <section class="px-3 py-5 z-10 fixed top-0 left-0 right-0 bottom-0 ">
     <!-- <div class="flex items-center justify-center text-white tracking-wider space-x-3 text-base px-10  absolute top-20 w-full">
@@ -119,7 +119,7 @@
                </div>
               </div>
       </div>
-      <div  class="flex justify-between items-center pt-4 text-[#fff] font-semibold tracking-wider text-sm cursor-pointer"  >
+      <div  class="flex justify-between items-center pt-4 text-[#433C2B] font-semibold tracking-wider text-sm cursor-pointer"  >
           <div class="flex items-center">
             <span>没有帐户？</span>
             <span @click="goSection(1)" class="text-[#FF4855] text-base"
@@ -134,7 +134,7 @@
         </div>
       
       <div class="pt-7">
-              <van-button @click="onSubmit" :loading="loading" :disabled="loading" block color="#FF4855" style="    font-weight: bold;  font-size: 18px;  height: 48px;
+              <van-button @click="onSubmit" :loading="loading" :disabled="loading" block color="#E24939" style="    font-weight: bold;  font-size: 18px;  height: 48px;
                 ">登录</van-button>
 
       </div>

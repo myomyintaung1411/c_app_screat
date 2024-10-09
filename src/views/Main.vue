@@ -45,23 +45,31 @@
         </template>
       </van-tabbar-item> -->
     <!-- </van-tabbar> -->
-    <section class="fixed left-0 bottom-0 z-50 h-[68px]  bg_bottom_navi flex w-full sm:max-w-md sm:relative border-none    ">
+    <section class="fixed left-0 bottom-0 z-50 h-[68px]   bg_bottom_navi flex w-full sm:max-w-md sm:relative border-none    ">
       <div class="w-full  h-full flex items-center  border-none ">
         <div class=" flex items-center w-full  py-2  mx-auto     " >
-          <div @click="TabClick(1)" class=" flex flex-col items-center justify-center flex-1 py-1 rounded-full " :class="activeRoute === '/home' ? ' text-white animate-fadeleft' : 'text-[#ccc]'">
+          <div @click="TabClick(1)" class=" flex flex-col items-center justify-center flex-1 py-1 rounded-full " :class="activeRoute === '/home' ? ' text-[#FD891D] animate-fadeleft' : 'text-[#666666]'">
             <img v-if="activeRoute === '/home'" src="@/assets/home/home_a.png" alt="home" class="w-10">
             <img  v-else src="@/assets/home/home.png" alt="home" class="w-10">
             <!-- <img v-if="activeRoute === '/home'" src="@/assets/home/homea.svg" alt="home" class="w-8"> -->
             <!-- <img v-else src="@/assets/home/home.svg" alt="home" class="w-8"> -->
             <span class=" text-sm">主页</span>
           </div>
-          <div @click="TabClick(2)" class=" flex flex-col items-center justify-center flex-1 py-1 rounded-full " :class="activeRoute === '/user' ? ' text-white animate-fadeleft' : 'text-[#ccc]'">
+          <div @click="TabClick(3)" class=" flex flex-col items-center justify-center flex-1 py-1 rounded-full " :class="activeRoute === '/news' ? ' text-[#FD891D] animate-fadeleft' : 'text-[#666666]'">
+            <img v-if="activeRoute === '/news'" src="@/assets/home/news.png" alt="home" class="w-10">
+            <img v-else  src="@/assets/home/news.png" alt="home" class="w-10">
+            <!-- <img v-if="activeRoute === '/home'" src="@/assets/home/homea.svg" alt="home" class="w-8"> -->
+            <!-- <img v-else src="@/assets/home/home.svg" alt="home" class="w-8"> -->
+            <span class=" text-sm">新闻资讯</span>
+          </div>
+          <div @click="TabClick(2)" class=" flex flex-col items-center justify-center flex-1 py-1 rounded-full " :class="activeRoute === '/user' ? ' text-[#FD891D] animate-fadeleft' : 'text-[#666666]'">
             <img v-if="activeRoute === '/user'" src="@/assets/home/user_a.png" alt="home" class="w-10">
             <img v-else  src="@/assets/home/user.png" alt="home" class="w-10">
             <!-- <img v-if="activeRoute === '/home'" src="@/assets/home/homea.svg" alt="home" class="w-8"> -->
             <!-- <img v-else src="@/assets/home/home.svg" alt="home" class="w-8"> -->
             <span class=" text-sm">个人中心</span>
           </div>
+
           <!-- <div @click="TabClick(2)" class="flex items-center flex-1  space-x-2 py-1 rounded-full pl-3 " :class="activeRoute === '/user' ? ' text-white animate-fadeleft' : 'text-[#febf32]'">
             <img v-if="activeRoute === '/user'" src="@/assets/home/usera.svg" alt="home" class="w-8">
             <img v-else src="@/assets/home/user.svg" alt="home" class="w-8">
@@ -113,6 +121,9 @@ const TabClick = (n) =>{
         case 2:
             router.push('/user')
             break;
+        case 3:
+            router.push('/news')
+            break;
         default:
             break;
     }
@@ -163,7 +174,16 @@ background-color: transparent;
 }
 
 .main {
-  @apply overflow-y-scroll sm:overflow-y-visible
+  @apply overflow-y-scroll sm:overflow-y-visible;
+
+  /* background: #700000; */
+  /* overflow-y: auto; */
+  width: 100%;
+  background-image: url(@/assets/home/home_bg.png);
+  background-repeat: no-repeat;
+  background-size: cover; 
+  /* background-color: none; */
+
 }
 
 </style>

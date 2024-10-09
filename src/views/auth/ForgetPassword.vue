@@ -159,7 +159,7 @@
         </div>
       
       <div class="pt-7">
-              <van-button @click="onSubmit" :loading="loading" :disabled="loading" block color="#FF4855" style="    font-weight: bold;  font-size: 18px;  height: 48px;
+              <van-button @click="onSubmit" :loading="loading" :disabled="loading" block color="#E24939" style="    font-weight: bold;  font-size: 18px;  height: 48px;
                 ">登录</van-button>
 
       </div>

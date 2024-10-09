@@ -1,5 +1,5 @@
 <template>
-     <div id="comment" class="w-full h-screen relative bg-[#B3000A] overflow-y-auto ">
+     <div id="comment" class="w-full h-screen relative  _bg_main overflow-y-auto ">
         <!-- <div
       class="h-12 bg-[#B3000A] text-white w-full flex justify-between items-center px-3 text-base font-bold "
     >
@@ -14,8 +14,8 @@
         title="展示评论区"
         left-arrow
         @click-left="goBack"
-        color="#fff" 
-       style="background: #B3000A;font-weight:500 !important;color:#ffffff !important;"
+        color="#000" 
+       style="background:transparent;font-weight:500 !important;color:#000 !important;"
       />
     
     <section v-if="commentData?.length > 0" class="    mt-0  flex flex-col  ">
@@ -32,20 +32,20 @@
             @load="onLoad"
             loading-text="加载中..."
         >
-         <div class="py-3 px-3 flex items-center justify-between text-white">
+         <div class="py-3 px-3 flex items-center justify-between text-[#333333]">
             <span class="text-base">{{totalPage}} 条评论 </span>
             <!-- <div class="flex items-center">
                 <div class="bg-[#df0213] text-white px-2 rounded py-1">最热</div>
             </div> -->
          </div>
-         <section class="py-2 px-3 text-white ">
-                <div v-for="com in commentData" :key="com?.Id" class="flex items-center w-full py-2  justify-between border-b border-[#97000ad2]">
+         <section class="py-2 px-3 text-[#333333] ">
+                <div v-for="com in commentData" :key="com?.Id" class="flex items-center w-full py-2  justify-between border-b border-[#999]">
                  <div class="flex  space-x-2 items-start">
                     <img :src="com?.img" alt="userimage" class="w-10" />
                     <div class="flex flex-col space-y-1">
                         <p class="text-base">{{com?.title}}</p>
-                        <p class="text-sm text-[#e7e5e5]">{{com?.text}}</p>
-                        <p class="text-xs text-[#ff7279]"> {{ formatDate(com?.stime) }}</p>
+                        <p class="text-sm text-[#333333]">{{com?.text}}</p>
+                        <p class="text-xs text-[#999999]"> {{ formatDate(com?.stime) }}</p>
                     </div>
                  </div>
                  <!-- <div class="flex items-center space-x-2">
@@ -56,7 +56,7 @@
                  </div> -->
                  </div>
             </section>
-            <section class="py-3 px-4 text-white">
+            <section class="py-3 px-4 text-[#333333]">
              <div class="flex flex-col justify-center   ">
                     <span class=" pt-2 pb-2">上传图片
                     </span>
@@ -70,11 +70,11 @@
                 />
              </div>
             </section>
-            <section class="pb-3 px-4 text-white">
+            <section class="pb-3 px-4 text-[#333333]">
                     <span class="pb-2">选择评论  </span>
                <div v-for="nnn in 4" :key="nnn" class="py-2" @click="SelectComment(nnn)">
-                <div class="w-full  rounded-md p-2 relative" :class="comment_select === nnn ? 'border-2 border-[#fddfb9]' : 'border border-white'">
-                    <div class="absolute -left-3 bg-[#fddfb9] text-[#96000b] w-8 h-8 flex items-center justify-center rounded-full">
+                <div class="w-full bg-white rounded-md p-2 relative" :class="comment_select === nnn ? 'border-2 border-[#999]' : 'border border-white'">
+                    <div class="absolute -left-3 bg-[#f3cc90] text-[#96000b] w-8 h-8 flex items-center justify-center rounded-full">
                      {{nnn}}
                     </div>
                     <p v-if="nnn === 1" class="pl-8">
@@ -96,7 +96,7 @@
                 <van-button   @click="onSubmit"   block   :loading="loading"  :disabled="loading"
                class="back_muli"
              style="
-              background-color: #FF4855;
+              background-color: #E24939;
               border: none;
               color: #fff;
               height: 50px;
@@ -322,10 +322,18 @@ onMounted(() => {
 
 <style scoped >
  #comment :deep() .van-nav-bar__title {
-    color:#fff !important
+    color:#000 !important
 }
 #comment :deep() .van-nav-bar .van-icon {
-    color:#fff !important
+    color:#000 !important
 
+}
+
+._bg_main{
+  background-image: url(@/assets/auth/background.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100vh;
 }
 </style>

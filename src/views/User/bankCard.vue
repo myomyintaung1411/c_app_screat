@@ -1,7 +1,7 @@
 <template>
-  <div id="newmessage" class="w-full h-full relative">
+  <div id="newmessage" class="w-full h-full relative _bg_main">
     <div
-      class="h-12 bg-[#B3000A] text-white w-full flex justify-between items-center px-3 text-base font-bold"
+      class="h-12  text-[#000]  w-full flex justify-between items-center px-3 text-base font-bold"
     >
       <div @click="goBack" class="">
         <van-icon name="arrow-left" />
@@ -10,10 +10,10 @@
       <div class="flex-none"></div>
     </div>
     <!-- v-if="userInfo?.bank != null || userInfo?.bank || userInfo?.bank_card != null || userInfo?.bank_card" -->
-    <section v-if="userInfo?.isBindBank == 1" class=" px-4 text-black bg-[#B3000A] h-[calc(100vh_-_48px)]">
+    <section v-if="userInfo?.isBindBank == 1" class=" px-4 text-black  h-[calc(100vh_-_48px)] overflow-y-auto ">
      
         <div class="py-2 px-1 w-full">
-          <div class="font-bold text-sm text_color py-3">
+          <div class="font-bold text-sm text-black py-3">
             姓名
           </div>
         <div class="flex justify-between items-center px-3  rounded-lg bg-white border border-gray-300 py-4 text-sm">
@@ -25,7 +25,7 @@
       </div>
      
       <div class="py-2 px-1 w-full">
-        <div class="font-bold text-sm text_color py-3">
+        <div class="font-bold text-sm text-black py-3">
            银行账户名称
           </div>
         <div class="flex justify-between items-center px-3  rounded-lg bg-white border border-gray-300 py-4 text-sm">
@@ -37,7 +37,7 @@
       </div>
 
       <div class="py-2 px-1 w-full">
-        <div class="font-bold text-sm text_color py-3">
+        <div class="font-bold text-sm text-black py-3">
             银行卡号
           </div>
         <div class="flex justify-between items-center px-3 bg- rounded-lg bg-white border border-gray-300 py-4 text-sm">
@@ -53,7 +53,7 @@
             block
             class="back_muli font-bold"
             style="
-              background-color: #FF4855;
+              background-color: #E24939;
               border: none;
               color: #fff;
               height: 50px;
@@ -98,7 +98,7 @@
         </div>
       </div> -->
     </section>
-    <section v-else class="bg-[#B3000A] h-[calc(100vh_-_48px)]">
+    <section v-else class=" h-[calc(100vh_-_48px)]">
       <div class="py-20 text-center">
         <van-empty description="还没卡包" color="#fff" style="color: white" />
         <div class="pt-3 px-5">
@@ -107,7 +107,7 @@
             block
             class="back_muli font-bold"
             style="
-              background-color: #FF4855;
+              background-color: #E24939;
               border: none;
               color: #fff;
               height: 56px;">
@@ -178,6 +178,13 @@ onMounted(() => {
 
 <style scoped>
 #newmessage :deep() .van-empty__description {
-  color: white !important;
+  color: #333 !important;
+}
+._bg_main{
+  background-image: url(@/assets/auth/background.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100vh;
 }
 </style>

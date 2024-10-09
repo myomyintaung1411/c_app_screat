@@ -32,6 +32,12 @@ export const routes = [
       //   component: () => import('./views/Team/index.vue')
       // },
       {
+        path: '/news',
+        name: 'News',
+        meta: { title: 'News',requireAuth: true  },
+        component: () => import('./views/News/index.vue')
+      },
+      {
         path: '/user',
         name: 'User',
         meta: { title: 'User',requireAuth: true  },
@@ -46,6 +52,17 @@ export const routes = [
   //   meta: { title: 'Article Detail Page',requireAuth: true },
   //   component: () => import('./views/home/CarousalDetails.vue')
   // },
+    {
+    path: '/newsDetails',
+    name: 'NewsDetails',
+    meta: { title: 'NewsDetails Page',requireAuth: true },
+    component: () => import('./views/News/NewsDetails.vue')
+  },
+   {    path: '/team',
+        name: 'Team',
+        meta: { title: 'Team',requireAuth: true  },
+        component: () => import('./views/Team/index.vue')
+  },
   {
     path: '/address',
     name: 'Shipment Address',
@@ -130,12 +147,12 @@ export const routes = [
   //   meta: { title: 'TeamDetails',requireAuth: true },
   //   component: () => import('./views/Team/TeamDetail.vue')
   // },
-  // {
-  //   path: '/appdownload',
-  //   name: 'AppDownload',
-  //   meta: { title: 'AppDownload',requireAuth: true },
-  //   component: () => import('./views/user/downApp.vue')
-  // },
+  {
+    path: '/appdownload',
+    name: 'AppDownload',
+    meta: { title: 'AppDownload',requireAuth: true },
+    component: () => import('./views/user/downApp.vue')
+  },
   // {
   //   path: '/promotion',
   //   name: 'Promotion',

@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full h-full relative">
+  <div class="w-full h-full relative _bg_main">
     <div
-      class="h-12 bg-[#B3000A] text-white w-full flex justify-between items-center px-3 text-base font-bold "
+      class="h-12  text-[#000]  w-full flex justify-between items-center px-3 text-base font-bold "
     >
       <div @click="goBack" class="">
         <van-icon name="arrow-left" />
@@ -9,13 +9,13 @@
       <div class="">{{ userInfo?.isBindBank == 0 ? '綁定个人银行卡信息' : '修改个人银行信息' }}</div>
       <div class="flex-none"></div>
     </div>
-    <section class="   loginForm mt-0 bg-[#B3000A] h-[calc(100vh_-_48px)] flex flex-col">
+    <section class="   loginForm mt-0  h-[calc(100vh_-_48px)] flex flex-col">
       <!-- <section class="bg-[#fafafa] w-full relative flex items-center py-3 justify-center">
         <img src="@/assets/loginbg.jpg" alt="loginbg" class="h-20 w-20">
       </section> -->
       <div class="formSection px-5">
         <van-form>
-         <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5">银行账户名称</div>
+         <div class="text-[#333] font-bold text-sm tracking-wider text-left pl-1 mt-5">银行账户名称</div>
           <div
             class="w-full flex items-center relative rounded-lg white_color h-14    mt-1"
           >
@@ -33,7 +33,7 @@
             </div>
           </div>
 
-          <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5"> 银行卡号</div>
+          <div class="text-[#333] font-bold text-sm tracking-wider text-left pl-1 mt-5"> 银行卡号</div>
           <div
             class="w-full flex items-center relative rounded-lg h-14 white_color  mt-1"
           >
@@ -52,7 +52,7 @@
             </div>
           </div>
 
-          <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5">电话号码</div>
+          <div class="text-[#333] font-bold text-sm tracking-wider text-left pl-1 mt-5">电话号码</div>
           <div
             class="w-full flex items-center relative rounded-lg h-14 white_color  mt-1"
           >
@@ -69,7 +69,7 @@
               />
             </div>
           </div>
-          <div class="text_color font-bold text-sm tracking-wider text-left pl-1 mt-5">银行卡图片</div>
+          <div class="text-[#333] font-bold text-sm tracking-wider text-left pl-1 mt-5">银行卡图片</div>
          
           <div class="flex flex-col  py-2  w-full  ">
             <van-uploader
@@ -89,7 +89,7 @@
             block
             class="back_muli"
             style="
-              background-color: #FF4855;
+              background-color: #E24939;
               border: none;
               color: #fff;
               height: 50px;
@@ -214,4 +214,11 @@ const onSubmit = async () => {
 
 
 <style scoped>
+._bg_main{
+  background-image: url(@/assets/auth/background.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100vh;
+}
 </style>
