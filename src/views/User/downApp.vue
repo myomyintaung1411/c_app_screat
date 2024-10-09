@@ -59,6 +59,7 @@ const goBack = () => {
 };
 
 onMounted(()=>{
+  host.value = window.location.origin // window?.location?.origin
   globaljs.getUserInfo()
 })
 
@@ -76,9 +77,7 @@ const copyAddress = async () => {
 
 //const Global = xxy; // call unknow.js object as global
 
-onMounted(()=>{
-    host.value = window?.location?.origin // window?.location?.origin
-})
+
 </script>
 
 
