@@ -326,7 +326,7 @@ const questionData = ref(null)
 const select_ans = ref(0)
 const user_select_ans = ref('')
 const submitAns = async () => {
-  if(userInfo.value?.isRealName == null) {
+  if(userInfo.value?.isRealName == 0) {
     showToast("请绑定 实名认证") 
 
      setTimeout(() => {
@@ -354,7 +354,7 @@ const submitAns = async () => {
 }
 
 const goWithdraw = () => {
-  if(userInfo.value?.isRealName == null){ 
+  if(userInfo.value?.isRealName == 0){ 
         showToast("请绑定 实名认证") 
 
         setTimeout(() => {
@@ -402,7 +402,7 @@ const clickAns = (number,answer) => {
 const goSection = (number) => {
  switch (number) {
     case 0:
-    if(userInfo.value?.isRealName == null){ 
+    if(userInfo.value?.isRealName == 0){ 
         showToast("请绑定 实名认证") 
 
         setTimeout(() => {
@@ -420,7 +420,7 @@ const goSection = (number) => {
     router.push('/changepass')
         break;
     case 3:
-    if(userInfo.value?.isRealName == null){ 
+    if(userInfo.value?.isRealName == 0){ 
         showToast("请绑定 实名认证") 
 
         setTimeout(() => {
@@ -433,7 +433,7 @@ const goSection = (number) => {
         break;
 
     case 4:
-    if(userInfo.value?.isRealName == null){ 
+    if(userInfo.value?.isRealName == 0){ 
         showToast("请绑定 实名认证") 
 
         setTimeout(() => {
@@ -445,7 +445,7 @@ const goSection = (number) => {
         //router.push('/comment');
         break;
     case 6:
-    if(userInfo.value?.isRealName == null){ 
+    if(userInfo.value?.isRealName == 0){ 
         showToast("请绑定 实名认证") 
 
         setTimeout(() => {
@@ -525,7 +525,7 @@ const getQuestion = async () => {
     try {
     const res = await homeApi.getQuestion(data);
     console.log(res,"getQuestion ************")
-     showToast(res?.data?.msg);
+     //showToast(res?.data?.msg);
     if (res?.data?.success == true && res?.data?.code == 200) {
       questionData.value = res?.data?.data
     // store.commit("app/PROFILE_USER_INFO", res.data?.data);

@@ -387,7 +387,7 @@ const submitAns =  async (tesk) => {
   // }
 
   const showAnimation = (index, event) => {
-    if(userInfo.value?.isRealName == null) {
+    if(userInfo.value?.isRealName == 0) {
     showToast("请绑定 实名认证") 
 
      setTimeout(() => {
@@ -453,7 +453,7 @@ const onRefresh = () => {
 };
 
 const goWithdraw = () => {
-  if(userInfo.value?.isRealName == null) {
+  if(userInfo.value?.isRealName == 0) {
     showToast("请绑定 实名认证") 
 
      setTimeout(() => {

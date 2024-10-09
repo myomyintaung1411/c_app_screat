@@ -22,7 +22,7 @@
           <div
             class="w-full flex items-center relative rounded-lg h-14 white_color   mt-1"
           >
-            <div v-if="realInfoData?.real_name"
+            <div v-if="realInfoData?.state == 0 || realInfoData?.state == 1"
               class=" w-full h-full text-sm flex px-3 text-black  items-center relative"
             >
               {{realInfoData?.real_name}}
@@ -50,7 +50,7 @@
           <div
             class="w-full flex items-center relative rounded-lg h-14 white_color   mt-1"
           >
-          <div v-if="realInfoData?.id_code"
+          <div v-if="realInfoData?.state == 0 || realInfoData?.state == 1"
               class=" w-full h-full text-sm flex px-3 text-black  items-center relative"
             >
               {{realInfoData?.id_code}}
@@ -73,7 +73,41 @@
           >
           身份证照片
           </div>
-          <div v-if="!realInfoData" class="flex text-[#333]  items-center py-2 space-x-5 justify-between">
+          <div v-if="realInfoData?.state == 0 || realInfoData?.state == 1" class="flex items-center py-2 space-x-5 justify-between text-[#333] ">
+            <div  class="flex flex-col  items-center  ">
+              <!-- {{ BaseImageUrl + frontImage }} -->
+              <van-image
+              width="100"
+              height="100"
+             
+              :src="realInfoData?.id_front_url"
+            />
+            <span class=" pt-2">身份证正面</span>
+          </div>
+            <div class="flex flex-col  items-center   ">
+              <van-image
+              width="100"
+              height="100"
+              
+              :src="realInfoData?.id_back_url"
+            />
+            <!-- <img src="https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg" alt=""> -->
+            <span class=" pt-2">身份证反面</span>
+
+          </div>
+            <div class="flex flex-col  items-center   ">
+              <van-image
+              width="100"
+              height="100"
+             
+              :src="realInfoData?.id_hand_url"
+            />
+            <!-- <img src="https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg" alt=""> -->
+            <span class=" pt-2">手持身份证</span>
+
+          </div>
+          </div>
+          <div v-else class="flex text-[#333]  items-center py-2 space-x-5 justify-between">
             <div  class="flex flex-col  items-center  ">
             <van-uploader
               accept="image/*"
@@ -124,40 +158,7 @@
 
           </div>
           </div>
-          <div v-else class="flex items-center py-2 space-x-5 justify-between text-[#333] ">
-            <div  class="flex flex-col  items-center  ">
-              <!-- {{ BaseImageUrl + frontImage }} -->
-              <van-image
-              width="100"
-              height="100"
-             
-              :src="realInfoData?.id_front_url"
-            />
-            <span class=" pt-2">身份证正面</span>
-          </div>
-            <div class="flex flex-col  items-center   ">
-              <van-image
-              width="100"
-              height="100"
-              
-              :src="realInfoData?.id_back_url"
-            />
-            <!-- <img src="https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg" alt=""> -->
-            <span class=" pt-2">身份证反面</span>
 
-          </div>
-            <div class="flex flex-col  items-center   ">
-              <van-image
-              width="100"
-              height="100"
-             
-              :src="realInfoData?.id_hand_url"
-            />
-            <!-- <img src="https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg" alt=""> -->
-            <span class=" pt-2">手持身份证</span>
-
-          </div>
-          </div>
 
         </van-form>
         <div class="mt-8">
