@@ -220,8 +220,8 @@ onMounted(() => {
   // if (userInfo?.value?.isRealName == 1) {
   //   btnText.value = " 已实名认证";
   //   disabledBtn.value = true
-    realname.value = realInfoData?.value?.real_name;
-    id_code.value = realInfoData?.value?.id_code;
+    // realname.value = realInfoData?.value?.real_name;
+    // id_code.value = realInfoData?.value?.id_code;
   //   frontImage.value[0] = userInfo?.value?.id_front_url;
   //   backImage.value[0] = userInfo?.value?.id_back_url;
   //   personalImage.value[0] = userInfo?.value?.id_hand_url;
@@ -375,7 +375,7 @@ const getRealInfo = async () => {
     });
     const res = await userApi.GetRealNameInfo();
     loading.value = false;
-    showToast({ message: res?.data?.msg, duration: 2000 });
+    //showToast({ message: res?.data?.msg, duration: 2000 });
     if (res?.data?.success == true && res?.data?.code == 200) {
       realInfoData.value = res?.data?.data
     }
