@@ -55,14 +55,21 @@
             <!-- <img v-else src="@/assets/home/home.svg" alt="home" class="w-8"> -->
             <span class=" text-sm">主页</span>
           </div>
-          <div @click="TabClick(3)" class=" flex flex-col items-center justify-center flex-1 py-1 rounded-full " :class="activeRoute === '/news' ? ' text-[#FD891D] animate-fadeleft' : 'text-[#666666]'">
+          <div @click="TabClick(2)" class=" flex flex-col items-center justify-center flex-1 py-1 rounded-full " :class="activeRoute === '/news' ? ' text-[#FD891D] animate-fadeleft' : 'text-[#666666]'">
             <img v-if="activeRoute === '/news'" src="@/assets/home/news.png" alt="home" class="w-10">
             <img v-else  src="@/assets/home/news.png" alt="home" class="w-10">
             <!-- <img v-if="activeRoute === '/home'" src="@/assets/home/homea.svg" alt="home" class="w-8"> -->
             <!-- <img v-else src="@/assets/home/home.svg" alt="home" class="w-8"> -->
             <span class=" text-sm">新闻资讯</span>
           </div>
-          <div @click="TabClick(2)" class=" flex flex-col items-center justify-center flex-1 py-1 rounded-full " :class="activeRoute === '/user' ? ' text-[#FD891D] animate-fadeleft' : 'text-[#666666]'">
+          <div @click="TabClick(3)" class=" flex flex-col items-center justify-center flex-1 py-1 rounded-full " :class="activeRoute === '/metting' ? ' text-[#FD891D] animate-fadeleft' : 'text-[#666666]'">
+            <img v-if="activeRoute === '/metting'" src="@/assets/home/metting.png" alt="home" class="w-10">
+            <img v-else  src="@/assets/home/metting.png" alt="home" class="w-10">
+            <!-- <img v-if="activeRoute === '/home'" src="@/assets/home/homea.svg" alt="home" class="w-8"> -->
+            <!-- <img v-else src="@/assets/home/home.svg" alt="home" class="w-8"> -->
+            <span class=" text-sm">会议系统</span>
+          </div>
+          <div @click="TabClick(4)" class=" flex flex-col items-center justify-center flex-1 py-1 rounded-full " :class="activeRoute === '/user' ? ' text-[#FD891D] animate-fadeleft' : 'text-[#666666]'">
             <img v-if="activeRoute === '/user'" src="@/assets/home/user_a.png" alt="home" class="w-10">
             <img v-else  src="@/assets/home/user.png" alt="home" class="w-10">
             <!-- <img v-if="activeRoute === '/home'" src="@/assets/home/homea.svg" alt="home" class="w-8"> -->
@@ -119,11 +126,15 @@ const TabClick = (n) =>{
             router.push('/home')
             break;
         case 2:
-            router.push('/user')
-            break;
-        case 3:
             router.push('/news')
             break;
+        case 3:
+            router.push('/metting')
+            break;
+        case 4:
+            router.push('/user')
+            break;
+    
         default:
             break;
     }

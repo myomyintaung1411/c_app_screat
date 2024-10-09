@@ -21,11 +21,11 @@
         <p class="text-black">姓名</p>
         <p>{{userInfo?.name}}</p>
       </div>
-      <div @click="goEditPhone" class="flex justify-between items-center my-3 py-3 bg-[#f8f8f8]  rounded-lg shadow  text-black pl-5 pr-2">
+      <div  class="flex justify-between items-center my-3 py-3 bg-[#f8f8f8]  rounded-lg shadow  text-black pl-5 pr-5">
         <p class="text-black">手机号</p>
        <div class="flex items-center space-x-3 ">
         <p>{{userInfo?.phone}}</p>
-        <van-icon name="arrow" color="#B3000A" size="15"  />
+        <!-- <van-icon name="arrow" color="#B3000A" size="15"  /> -->
        </div>
       </div>
       <div v-if="userInfo.isRealName === 1" class="flex justify-between items-center my-3 rounded-lg  shadow py-3 bg-white  text-black px-5">

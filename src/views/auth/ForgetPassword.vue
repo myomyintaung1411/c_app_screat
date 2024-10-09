@@ -215,9 +215,9 @@ const onSubmit = () => {
   if (password.value.length < 6) return showToast("密码必须至少有6个字符长");
   if (password.value !== confirmpass.value)
     return showToast("两次输入密码不一致");
-  if (!/(?=.*\d)(?=.*[A-Z])/.test(password.value)) {
-    return showToast("密码应至少包含一个大写字母和数字");
-  }
+  // if (!/(?=.*\d)(?=.*[A-Z])/.test(password.value)) {
+  //   return showToast("密码应至少包含一个大写字母和数字");
+  // }
 
   const ispass = globaljs.identityIDCard(id_code.value);
   // console.log(ispass.isPass,ispass.errorMessage);

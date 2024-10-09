@@ -46,7 +46,7 @@
                 <input
                   v-model.trim="account" 
                   autocomplete="off"
-                  placeholder="请输入手机号码"
+                  placeholder="请输入用户名"
                   class="input-name  bg-transparent px-3 border-none outline-none focus:outline-none focus:border-none w-full h-full placeholder:text-[#999999] placeholder:font-medium placeholder:tracking-wide"
                    type="email"
                 />

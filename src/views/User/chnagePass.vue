@@ -196,9 +196,9 @@ const onSubmit = async () => {
   if (newpassword.value !== confirmpass.value)
     return showToast("两次输入密码不一致");
 
-  if (!/(?=.*\d)(?=.*[A-Z])/.test(newpassword.value)) {
-    return showToast("密码应至少包含一个大写字母和数字");
-  }
+  // if (!/(?=.*\d)(?=.*[A-Z])/.test(newpassword.value)) {
+  //   return showToast("密码应至少包含一个大写字母和数字");
+  // }
 
   let data = {
     old_pw: md5(oldpassword.value),
