@@ -13,7 +13,7 @@
       <div class="flex items-center py-3">
         <div class="h-12  w-full bg-white rounded flex items-center justify-between ">
           <div class="flex-1  rounded h-full flex items-center pl-5">
-            推荐码：60TN30
+            推荐码：{{userInfo?.referralCode}}
           </div>
           <van-button @click="copyAddress"   class="text-white"  style="height:48px;color:#fff; background-color:#E24939;border:none">复制</van-button>
 
