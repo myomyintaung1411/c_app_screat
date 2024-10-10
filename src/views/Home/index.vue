@@ -34,15 +34,15 @@
     </div>
    </section>
 
-   <section class=" h-48   px-3">
-    <div class="bg-white border-2 border-solid border-[#C2AF78] rounded h-full">
-
+   <section class=" h-48   px-3 py-2">
+    <div class="bg-white border-2 border-solid border-[#C2AF78] rounded h-full overflow-y-auto px-3 text-left py-2 text-sm tracking-wide">
+      {{ noticeList?.home_notice_content }}
     </div>
    </section>
 
 
    
-   <section class="w-full px-3 py-5   ">
+   <section class="w-full px-3 pb-4 pt-2   ">
     <section class="bg-white rounded  border-2 border-solid border-[#C2AF78] ">
     <div class="h-20 px-4   ">
      <div class="flex items-center justify-between h-full ">

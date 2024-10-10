@@ -4,8 +4,8 @@
     <section class="w-full   relative">
     <div class=" w-full   pb-2  ">
      <section  class="w-full px-4 flex items-center justify-between  pt-6 relative">
-      <div @click="goProfileInfo" class="flex items-center space-x-3">
-        <img :src="avatar" alt="avatar" class="w-16">
+      <div @click="goProfileInfo()" class="flex items-center space-x-3  z-40">
+        <img :src=" userInfo?.avatar ? userInfo?.avatar : avatar" alt="avatar" class="w-16 h-16 object-cover rounded-full">
        <div class="text-[#fff]">
         <p class=" font-bold text-xl">{{ userInfo?.name }}</p>
         <p class="">{{ userInfo?.phone }}</p>
@@ -347,8 +347,10 @@ const submitAns = async () => {
     console.log('getAnswer ', res)
     if (res?.data?.success && res?.data?.code == 200) {
      // carousalImage.value = res?.data?.data;
+     select_ans.value = 0
     }
   } catch (error) {
+    select_ans.value = 0
     console.log(error);
   }
 }

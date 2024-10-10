@@ -166,6 +166,12 @@ export const routes = [
   //   component: () => import('./views/user/accountSetting.vue')
   // },
   {
+    path: '/editnickname',
+    name: 'EditNickName',
+    meta: { title: 'NickName',requireAuth: true },
+    component: () => import('./views/user/editNick.vue')
+  },
+  {
     path: '/changepass',
     name: 'PasswordChange',
     meta: { title: 'Password Change',requireAuth: true },

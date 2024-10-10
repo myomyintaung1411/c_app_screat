@@ -11,7 +11,7 @@
     </div> -->
     <van-nav-bar
         :border="false"
-        title="展示评论区"
+        :title="commentSingle ? commentSingle?.title : '展示评论区'"
         left-arrow
         @click-left="goBack"
         color="#000" 

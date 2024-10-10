@@ -78,29 +78,29 @@
               <!-- {{ BaseImageUrl + frontImage }} -->
               <van-image
               width="100"
-              height="100"
+              height="100" fit="cover" 
              
-              :src="realInfoData?.id_front_url"
+              :src="realInfoData?.id_front_url" @click="showImage(realInfoData?.id_front_url)"
             />
             <span class=" pt-2">身份证正面</span>
           </div>
             <div class="flex flex-col  items-center   ">
               <van-image
               width="100"
-              height="100"
+              height="100" fit="cover" 
               
-              :src="realInfoData?.id_back_url"
+              :src="realInfoData?.id_back_url" @click="showImage(realInfoData?.id_back_url)"
             />
             <!-- <img src="https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg" alt=""> -->
             <span class=" pt-2">身份证反面</span>
 
           </div>
             <div class="flex flex-col  items-center   ">
-              <van-image
+              <van-image 
               width="100"
-              height="100"
+              height="100" fit="cover" 
              
-              :src="realInfoData?.id_hand_url"
+              :src="realInfoData?.id_hand_url" @click="showImage(realInfoData?.id_hand_url)"
             />
             <!-- <img src="https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg" alt=""> -->
             <span class=" pt-2">手持身份证</span>
@@ -190,7 +190,7 @@ import passpng from "@/assets/user/password.svg";
 import phonepng from "@/assets/user/phone.svg";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
-import { showToast, showLoadingToast, closeToast } from "vant";
+import { showToast, showLoadingToast, closeToast,showImagePreview } from "vant";
 import userApi from "@/network/user.js";
 import md5 from "js-md5";
 import globaljs from "@/utils/global";
@@ -228,6 +228,18 @@ onMounted(() => {
   // }
 });
 
+
+const showImage = (image) => {
+  // image = `${image}`
+  if (image == null) return showToast("没有可用的图像");
+  showImagePreview({
+    closeable: true, 
+    images: [image],
+    className:'showImageClass',
+    onClose() {
+    },
+  });
+};
 
 
 const goBack = () => {

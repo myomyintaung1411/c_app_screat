@@ -49,10 +49,17 @@ export default {
             requestBase: '/api',
         })
     },
-    bindBank(data) { // editBankInfo and Edit AddBankInfo is same method
+    bindBank(data) { 
         return instance({
              url: '/opt/bindBank',
-           // url:'/opt/editBankInfo',
+            method: 'post',
+            data: data,
+            requestBase: '/api',
+        })
+    },
+    getBankInfo(data) {
+        return instance({
+             url: '/opt/get_bank_info',
             method: 'post',
             data: data,
             requestBase: '/api',
@@ -60,15 +67,23 @@ export default {
     },
 
     RealName(data) {
-        return instance({ //use instance instead of photo method
+        return instance({
             url: `/opt/real_name`,
             method: 'post',
             data: data,
             requestBase: '/api',
         })
     },
+    EditNickName(data) {
+        return instance({
+            url: `/opt/edit_nickname`,
+            method: 'post',
+            data: data,
+            requestBase: '/api',
+        })
+    },
     WithdrawAmount(data) {
-        return instance({ //use instance instead of photo method
+        return instance({ 
             url: `/opt/withdraw`,
             method: 'post',
             data: data,

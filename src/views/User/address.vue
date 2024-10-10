@@ -10,8 +10,41 @@
       <div class="flex-none"></div>
     </div>
 
-    <section
-      v-if=" userInfo?.isHaveAddeess == 0" class=" h-[calc(100vh_-_48px)]"
+
+
+    <section v-if="userInfo?.address"  class=" h-[calc(100vh_-_48px)] px-4">
+
+        <div class="py-2 px-1 w-full text-[#333]">
+          <div class="font-bold text-sm  whitespace-nowrap py-3">
+            收货地址
+          </div>
+        <div class="flex justify-between w-full  items-center px-3 bg-white border border-gray-300 rounded-lg  py-4 text-sm">
+
+          <div class=" tracking-widest van-ellipsis max-w-[80%]">
+             {{userInfo?.address}}
+          </div>
+        </div>
+      </div>
+     
+<!-- 
+      <div class="pt-8 px-1">
+           <van-button
+            @click="onEditAddress"
+            block
+            class="back_muli font-bold"
+            style="
+              background-color: #E24939;
+              border: none;
+              color: #fff;
+              height: 50px;
+            "
+          >
+            修改 收货地址
+          </van-button>
+        </div> -->
+    </section>
+    <section v-else
+       class=" h-[calc(100vh_-_48px)]"
     >
       <div class="py-20 text-center text-white">
         <van-empty 
@@ -35,49 +68,6 @@
         </div>
       </div>
     </section>
-
-    <section v-else  class=" h-[calc(100vh_-_48px)] px-4">
-      <!-- <div  class="py-2 px-1 w-full ">
-        <div class="font-bold text-sm  text_color py-3">
-           姓名
-          </div>
-        <div class="flex justify-between items-center px-3 bg-white border border-gray-300 rounded-lg  py-4 text-sm">
-
-          <div class=" tracking-widest">
-              {{addressData?.name}}
-          </div>
-        </div>
-      </div> -->
-
-        <div class="py-2 px-1 w-full text-[#333]">
-          <div class="font-bold text-sm  whitespace-nowrap py-3">
-            收货地址
-          </div>
-        <div class="flex justify-between w-full  items-center px-3 bg-white border border-gray-300 rounded-lg  py-4 text-sm">
-
-          <div class=" tracking-widest van-ellipsis max-w-[80%]">
-             {{addressData?.address}}
-          </div>
-        </div>
-      </div>
-     
-<!-- 
-      <div class="pt-8 px-1">
-           <van-button
-            @click="onEditAddress"
-            block
-            class="back_muli font-bold"
-            style="
-              background-color: #E24939;
-              border: none;
-              color: #fff;
-              height: 50px;
-            "
-          >
-            修改 收货地址
-          </van-button>
-        </div> -->
-    </section>
   </div>
 </template>
 
@@ -92,9 +82,7 @@ import globaljs from "@/utils/global";
 const router = useRouter();
 const store = useStore();
 const userInfo = computed(() => store.getters["app/ProfileInfoData"]);
-const addAddressDialog = ref(false);
 const addressData = ref(null);
-const loading = ref(false)
 
 const isEdit = ref(false)
 
@@ -110,29 +98,23 @@ const onEditAddress = () => {
    address:addressData.value?.address,
    phone:addressData.value?.phone,isEdit:true}});
 };
-const GetUserAddress = async () => {
-  try {
-    // showLoadingToast({
-    //   message: "加载中...",
-    //   forbidClick: true,
-    //   loadingType: "spinner",
-    //   duration:1000
-    // });
-    const res = await userApi.getAddress();
-    console.log(res)
-    //showToast({ message: res?.data?.msg, duration: 2000 });
-    if (res?.data?.success == true && res?.data?.code == 200) {
-     addressData.value = res?.data?.data
-     // await globaljs.getUserInfo();
-    }
-  } catch (error) {
-    closeToast();
-    console.log(error);
-  }
-};
+// const GetUserAddress = async () => {
+//   try {
+//     const res = await userApi.getAddress();
+//     console.log(res)
+//     //showToast({ message: res?.data?.msg, duration: 2000 });
+//     if (res?.data?.success == true && res?.data?.code == 200) {
+//      addressData.value = res?.data?.data
+//      // await globaljs.getUserInfo();
+//     }
+//   } catch (error) {
+//     closeToast();
+//     console.log(error);
+//   }
+// };
 onMounted(()=> {
    globaljs.getUserInfo();
-   GetUserAddress()
+  // GetUserAddress()
 })
 </script>
   

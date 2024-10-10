@@ -112,14 +112,16 @@
 
 
 <script setup>
-import { ref } from "vue";
-import passpng from "@/assets/user/password.svg";
-import phonepng from "@/assets/user/phone.svg";
-import { useRouter, useRoute } from "vue-router";
+import { ref,computed, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 import { showToast, showLoadingToast, closeToast } from "vant";
 import userApi from "@/network/user.js";
 import md5 from "js-md5";
+import globaljs from "@/utils/global";
+
 const router = useRouter();
+const store = useStore();
 
 const loginpassword = ref('')
 const oldphone = ref('')
@@ -127,12 +129,18 @@ const newphone = ref('')
 const passwordField = ref('password')
 const loading = ref(false)
 
+const userInfo = computed(() => store.getters["app/ProfileInfoData"]);
+
+onMounted(() => {
+  oldphone.value = userInfo?.value?.phone
+})
+
 const showVisibile = () => {
     passwordField.value = passwordField.value === "password" ? "text" : "password";
 };
 
 const goBack = () => {
-    router.push('/user')
+    router.push('/profileinfo')
 }
 
 const onSubmit = async () => {
@@ -170,9 +178,10 @@ const onSubmit = async () => {
      loading.value = false
     showToast({message:res?.data?.msg,duration:2000});
     if (res?.data?.success == true && res?.data?.code == 200) {
-      //store.commit("app/PROFILE_USER_INFO", res.data?.data);
-      //userData.value = res?.data?.data;
-      router.push('/user')
+      await globaljs.getUserInfo();
+      setTimeout(() => {
+         router.push("/profileinfo");
+     }, 500);
     }
   } catch (error) {
      loading.value = false

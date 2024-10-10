@@ -8,20 +8,20 @@
       <div class="">新闻资讯详情</div>
       <div class="flex-none"></div>
     </div>
-    <section class="px-5  overflow-y-auto loginForm  h-[calc(100vh_-_48px)] ">
+    <section class="px-5  overflow-y-auto overflow-x-hidden loginForm  h-[calc(100vh_-_48px)] w-full ">
         
-        <div class="py-2 ">
+        <div class="py-2 w-full ">
             <img :src="article?.img_title_url" alt="image" class="h-48 w-full object-cover">
         </div>
-        <div class="py-2 text-base ">
-            {{ article?.title }}
+        <div class="py-2 text-base w-full   break-words ">
+           <p> {{ article?.title }}</p>
         </div>
-        <div class="text-xs text-[#666666]">
+        <div class="text-xs text-[#666666] w-full ">
             {{ article?.create_at}}
         </div>
 
-        <div class="py-2">
-            <section  class="py-2 text-black text-sm">
+        <div class="py-2 w-full">
+            <section  class="py-2 text-black text-sm break-words">
                 <div v-html="article?.content"></div>
            </section>
         </div>
@@ -30,9 +30,9 @@
             <video
             id="register_video " 
             class="register__video__3tV1S bg-cover absolute top-0 cover h-full w-full"
-            autoplay loop muted
+              
             preload="auto" width="100%" height="100%"
-            playsInline
+            playsInline controls autoplay loop
             >
             <source
                 :src="article?.video_url"

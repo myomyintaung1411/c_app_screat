@@ -10,28 +10,36 @@
     <div class="w-full  py-2 px-3">
       <div class="flex justify-between items-center my-3 py-3 bg-[#f8f8f8]  rounded-lg shadow  px-5">
         <p class="text-black">头像</p>
-        <van-image round width="2.5rem" height="2.5rem" :src="avatar" />
-        <!-- <van-uploader   accept="image/*"  v-model="frontImage"   :max-count="1"
+        <!-- <van-image round width="2.5rem" height="2.5rem" :src="avatar" /> -->
+        <van-uploader   accept="image/*"  v-model="frontImage"   :max-count="1"
               :max-size="5000 * 1024"    @oversize="onOversize"
               :after-read="frontafterRead">
-           <van-image round width="2.5rem" height="2.5rem" :src="avatar" />
-        </van-uploader> -->
+           <van-image round width="2.5rem" height="2.5rem" fit="cover"  :src=" userInfo?.avatar ? userInfo?.avatar : avatar" />
+        </van-uploader>
       </div>
       <div class="flex justify-between items-center my-3 py-3 bg-[#f8f8f8]  rounded-lg shadow  text-black px-5">
-        <p class="text-black">姓名</p>
+        <p class="text-black">账号</p>
         <p>{{userInfo?.name}}</p>
-      </div>
-      <div  class="flex justify-between items-center my-3 py-3 bg-[#f8f8f8]  rounded-lg shadow  text-black pl-5 pr-5">
-        <p class="text-black">手机号</p>
-       <div class="flex items-center space-x-3 ">
-        <p>{{userInfo?.phone}}</p>
-        <!-- <van-icon name="arrow" color="#B3000A" size="15"  /> -->
-       </div>
       </div>
       <div v-if="userInfo.isRealName === 1" class="flex justify-between items-center my-3 rounded-lg  shadow py-3 bg-white  text-black px-5">
         <p class="text-black">实名</p>
         <p>{{userInfo?.true_name}}</p>
       </div>
+      <div @click="editNickname" class="flex justify-between items-center my-3 py-3 bg-[#f8f8f8]  rounded-lg shadow  text-black pl-5 pr-4">
+        <p class="text-black">昵称</p>
+        <div class="flex items-center space-x-2 ">
+        <p>{{userInfo?.nickname ? userInfo?.nickname : '添加昵称'}}</p>
+        <van-icon name="arrow" color="#333" size="15"  />
+       </div>
+      </div>
+      <div @click="goEditPhone"  class="flex justify-between items-center my-3 py-3 bg-[#f8f8f8]  rounded-lg shadow  text-black pl-5 pr-4">
+        <p class="text-black">手机号</p>
+       <div class="flex items-center space-x-3 ">
+        <p>{{userInfo?.phone}}</p>
+        <van-icon name="arrow" color="#000" size="15"  />
+       </div>
+      </div>
+
       <div class="py-5  relative w-full ">
             <van-button @click="logout"    block class="back_muli "  style=" background:#E24939; border: none;color:#fff;height:48px;">
                退出
@@ -61,7 +69,7 @@
 
 
 <script setup>
-import { ref,computed } from "vue";
+import { ref,computed,onMounted } from "vue";
 import avatar from "@/assets/avatar.svg";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
@@ -77,11 +85,19 @@ const loading = ref(false)
 const frontImage = ref([]);
 const frontImageUrl = ref("");
 
+onMounted(() => {
+  globaljs.getUserInfo()
+})
+
 const goBack = () => {
     router.push('/user')
 }
 const goEditPhone = () => {
     router.push('/changephone')
+}
+
+const editNickname = () => {
+  router.push('/editnickname')
 }
 
 const logout = ()=> {
@@ -120,6 +136,10 @@ const editAvatar = async () => {
     if (res?.data?.success == true && res?.data?.code == 200) {
       //addAddressDialog.value = false;
       await globaljs.getUserInfo();
+      setTimeout(() => {
+        frontImageUrl.value = ''
+        frontImage.value = []
+      }, 500);
     //  router.push("/user");
     }
   } catch (error) {

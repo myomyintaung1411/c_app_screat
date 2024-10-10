@@ -33,8 +33,8 @@
                 <div class="border-b border-b-[#333333] pb-2 ">
                     <div class="py-1 text-[#333333] text-sm px-1">
                        <div class="py-1 w-full text-base">
-                           <p>{{ comm?.title }}</p>
-                           <p>{{ comm?.comment1 }} {{ comm?.comment2 }}  {{ comm?.comment3 }} {{ comm?.comment4 }}</p>
+                           <p class="font-bold text-base">{{ comm?.title }}</p>
+                           <p class="text-sm">{{ comm?.comment1 }} {{ comm?.comment2 }}  {{ comm?.comment3 }} {{ comm?.comment4 }}</p>
                        </div>
                    </div>
                    <div class="flex items-center justify-between text-[#666666] text-sm">

@@ -25,9 +25,9 @@
             <div class="absolute lef"></div>
           </div> -->
           <div class="h-28 "></div>
-          <div class="h-56  mt-10 mx-10">
-            <div class="h-full w-full">
-             <vue-qr class="h-full w-full rounded bg-cover object-cover " v-bind:text="host + '/register' + '?shareCode=' + userInfo?.referralCode"  :margin="20" />
+          <div class="h-56 px-10 py-10  mx-10  ">
+            <div class="h-full w-full  ">
+             <vue-qr class="h-56 w-full rounded  object-cover " v-bind:text="host + '/register' + '?shareCode=' + userInfo?.referralCode"  :margin="20" />
           </div>
           </div>
         </div>
@@ -52,6 +52,7 @@ const store = useStore();
 const { toClipboard } = useClipboard()
 
 const host = ref('')
+const noticeList = ref(null)
 const userInfo = computed(()=> store.getters["app/ProfileInfoData"])
 
 const goBack = () => {
@@ -60,8 +61,26 @@ const goBack = () => {
 
 onMounted(()=>{
   host.value = window.location.origin // window?.location?.origin
+  getNotice()
   globaljs.getUserInfo()
 })
+
+const getNotice = async () => {
+  try {
+    const res = await homeApi.getNotice();
+    if (res?.data?.success && res?.data?.code == 200) {
+      noticeList.value = res?.data?.data;
+      // Show popup only if it hasn't been shown yet
+      if (!showPopup.value) {
+       showNotice.value = true
+      }
+      store.commit("app/ISSHOWNOTICE", true);
+
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const copyAddress = async () => {
     //let copydata = host.value + '/register' + '?shareCode=' + userInfo?.value?.invitation_code

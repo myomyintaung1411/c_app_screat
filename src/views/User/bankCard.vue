@@ -10,47 +10,62 @@
       <div class="flex-none"></div>
     </div>
     <!-- v-if="userInfo?.bank != null || userInfo?.bank || userInfo?.bank_card != null || userInfo?.bank_card" -->
-    <section v-if="userInfo?.isBindBank == 1" class=" px-4 text-black  h-[calc(100vh_-_48px)] overflow-y-auto ">
+    <section v-if="bankInfo" class=" px-4 text-black  h-[calc(100vh_-_48px)] overflow-y-auto ">
      
-        <div class="py-2 px-1 w-full">
-          <div class="font-bold text-sm text-black py-3">
-            姓名
+        <div class="py-1 px-1 w-full">
+          <div class="font-bold text-sm text-black py-2">
+            银行账户名称
           </div>
-        <div class="flex justify-between items-center px-3  rounded-lg bg-white border border-gray-300 py-4 text-sm">
+        <div class="flex justify-between items-center px-3  rounded-lg bg-white border border-gray-300 py-3 text-sm">
 
           <div class=" tracking-widest">
-             {{ userInfo?.bank_account }}
+             {{ bankInfo?.card_account }}
           </div>
         </div>
       </div>
      
-      <div class="py-2 px-1 w-full">
-        <div class="font-bold text-sm text-black py-3">
-           银行账户名称
+      <div class="py-1 px-1 w-full">
+        <div class="font-bold text-sm text-black py-2">
+          银行卡号
           </div>
-        <div class="flex justify-between items-center px-3  rounded-lg bg-white border border-gray-300 py-4 text-sm">
+        <div class="flex justify-between items-center px-3  rounded-lg bg-white border border-gray-300 py-3 text-sm">
 
           <div class=" tracking-widest">
-             {{ userInfo?.bank }}
+             {{ bankInfo?.card_code }}
           </div>
         </div>
       </div>
 
-      <div class="py-2 px-1 w-full">
-        <div class="font-bold text-sm text-black py-3">
-            银行卡号
+      <div class="py-1 px-1 w-full">
+        <div class="font-bold text-sm text-black py-2">
+          电话号码
           </div>
-        <div class="flex justify-between items-center px-3 bg- rounded-lg bg-white border border-gray-300 py-4 text-sm">
+        <div class="flex justify-between items-center px-3 bg- rounded-lg bg-white border border-gray-300 py-3 text-sm">
 
           <div class=" tracking-widest">
-             {{ userInfo?.bank_card }}
+             {{ bankInfo?.phone }}
           </div>
+        </div>
+      </div>
+      <div class="py-1 px-1 w-full">
+        <div class="font-bold text-sm text-black py-2">
+          银行卡图片
+          </div>
+        <div class="flex justify-between items-center bg- rounded-lg  py-1 text-sm">
+
+          <van-image
+              width="100"
+              height="100" fit="cover" 
+             
+              :src="bankInfo?.image"  @click="showImage(bankInfo?.image)"
+            />
         </div>
       </div>
       <div class="pt-8 px-1">
           <van-button
             @click="onSubmit"
             block
+            :disabled="bankInfo?.state == 0 ||  bankInfo?.state == 1"
             class="back_muli font-bold"
             style="
               background-color: #E24939;
@@ -59,7 +74,7 @@
               height: 50px;
             "
           >
-            {{ userInfo?.bank == null || !userInfo?.bank || userInfo?.bank_card == null || !userInfo?.bank_card ? '綁定银行卡' : '修改银行卡'}}
+          {{ bankInfo?.state == 0 ? '未审核' : bankInfo?.state == 1 ? '已通过' : bankInfo?.state == 2 ? '已拒绝' : '綁定银行卡'  }}
           </van-button>
         </div>
       <!-- <div
@@ -121,11 +136,13 @@
 
   <script setup>
 import { ref, computed, onMounted } from "vue";
-import { showToast, showLoadingToast, closeToast } from "vant";
+import { showToast, showLoadingToast, closeToast ,showImagePreview} from "vant";
 import userApi from "@/network/user.js";
 import { useStore } from "vuex";
 import { useRouter, useRoute } from "vue-router";
 import globaljs from "@/utils/global";
+
+const bankInfo = ref(null)
 
 const router = useRouter();
 const store = useStore();
@@ -139,37 +156,43 @@ const onSubmit = () => {
   router.push("/addBankCard");
 };
 
-// let formData = new FormData();
-// formData.append("id_front_url", frontImageUrl.value); // 因为要上传多个文件，所以需要遍历一下才行
-// formData.append("id_back_url", frontImageUrl.value); // 因为要上传多个文件，所以需要遍历一下才行
+const showImage = (image) => {
+  // image = `${image}`
+  if (image == null) return showToast("没有可用的图像");
+  showImagePreview({
+    closeable: true, 
+    images: [image],
+    className:'showImageClass',
+    onClose() {
+    },
+  });
+};
 
-// const add_Address = async () => {
-//   if (address.value == "") {
-//     return showToast("请输入收货地址");
-//   }
-//   let data = {
-//     address: address.value,
-//   };
-//   try {
-//     showLoadingToast({
-//       message: "加载中...",
-//       forbidClick: true,
-//       loadingType: "spinner",
-//     });
-//     const res = await userApi.editAddress(data);
-//     showToast({ message: res?.data?.msg, duration: 2000 });
-//     if (res?.data?.success == true && res?.data?.code == 200) {
-//       addAddressDialog.value = false;
-//       await globaljs.getUserInfo();
-//       //router.push('/user')
-//     }
-//   } catch (error) {
-//     closeToast();
-//     console.log(error);
-//   }
-// };
+
+const getBankInfo = async () => {
+
+  try {
+    showLoadingToast({
+      message: "加载中...",
+      forbidClick: true,
+      loadingType: "spinner",
+    });
+    const res = await userApi.getBankInfo();
+    console.log(res,"bank_info**********");
+    
+    if (res?.data?.success == true && res?.data?.code == 200) {
+      bankInfo.value = res?.data?.data
+      // await globaljs.getUserInfo();
+      //router.push('/user')
+    }
+  } catch (error) {
+    closeToast();
+    console.log(error);
+  }
+};
 
 onMounted(() => {
+  getBankInfo()
   globaljs.getUserInfo();
 });
 </script>
