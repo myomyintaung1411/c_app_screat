@@ -527,7 +527,7 @@ onMounted(() => {
   /* background-size: 100% 100%; */
 }
 .bg_flag{
-    background-image: url(@/assets/home/flag.png);
+    /* background-image: url(@/assets/home/flag.png); */
   background-repeat: no-repeat;
   background-size:cover;
 }
