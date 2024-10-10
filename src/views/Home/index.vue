@@ -207,7 +207,6 @@ import { showToast, showLoadingToast, closeToast,showImagePreview } from "vant";
 import { useStore } from "vuex";
 import homeactive from "@/assets/home/homea.svg";
 import homepng from "@/assets/home/home.svg";
-import boxImage from "@/assets/box.png";
 import globaljs from "@/utils/global";
 import ans1_img from '@/assets/home/ans_1.png'
 import ans3_img from '@/assets/home/ans3.png'
