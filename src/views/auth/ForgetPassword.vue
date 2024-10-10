@@ -1,7 +1,7 @@
 <template>
   <div class="relative min-h-screen min-w-full w-full   h-screen  items-center max-w-md sm:mx-auto   login__   ">
     <img
-      src="@/assets/auth/background.png"
+      src="@/assets/auth/loginbg.jpg"
       alt=""
       class="w-full h-full object-fill absolute"
     />

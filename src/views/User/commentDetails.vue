@@ -18,7 +18,7 @@
        style="background:transparent;font-weight:500 !important;color:#000 !important;"
       />
     
-    <section v-if="commentData?.length > 0" class="    mt-0  flex flex-col  ">
+    <section  class="    mt-0  flex flex-col  ">
         <van-pull-refresh
         v-model="refreshing"
         @refresh="onRefresh"
@@ -109,13 +109,13 @@
         </van-list>
         </van-pull-refresh>
     </section>
-    <section v-else class="   loginForm mt-0 h-full w-full flex flex-col items-center justify-center overflow-y-auto ">
+    <!-- <section v-else class="   loginForm mt-0 h-full w-full flex flex-col items-center justify-center overflow-y-auto ">
             <div class="text-white">
                 <van-empty
                 description="暂无数据"
               />
             </div>
-    </section>
+    </section> -->
     </div>
      <!-- back to top -->
     <van-back-top  bottom="10vh" style="background:#E24939" />
