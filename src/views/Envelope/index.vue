@@ -19,7 +19,7 @@
         <div class="bg-white h-[500px] rounded-xl w-full relative ">
           <div class="relative flex flex-col justify-center items-center rounded-t-xl h-40 bg-gray-100 rounded-b-[50%]">
            <div class="flex items-center justify-center absolute -top-10 left-0 w-full">
-            <img src="@/assets/box.png" alt="box" class="w-28">
+            <!-- <img src="@/assets/box.png" alt="box" class="w-28"> -->
           </div>
           <div class="text-black font-bold pt-10 tracking-widest text-sm">打卡签到每日领福利</div>
           </div>

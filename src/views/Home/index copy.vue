@@ -58,7 +58,7 @@
             <van-col    span="5">
               <!-- @click="openTeskDialog((rowIndex - 1) * 3)" -->
                 <div @click="showAnimation((rowIndex - 1) * 3)"  class=" h-16 flex items-center justify-center w-full bg-[#f2c65d]">
-                 <img src="@/assets/box.png" alt="box" class="w-full h-full">
+                 <img src="@/assets/auth/background.png" alt="box" class="w-full h-full">
                 </div>
             </van-col>
             <van-col   span="3">
@@ -74,7 +74,7 @@
             <van-col   span="5">
               <!-- @click="openTeskDialog((rowIndex - 1) *  3 + 1)" -->
                 <div @click="showAnimation((rowIndex - 1) *  3 + 1)" class=" h-16 flex items-center justify-center w-full bg-[#f2c65d]">
-                  <img src="@/assets/box.png" alt="box" class="w-full h-full">
+                  <img src="@/assets/auth/background.png" alt="box" class="w-full h-full">
 
                 </div>
             </van-col>
@@ -89,7 +89,7 @@
               <!-- @click="openTeskDialog((rowIndex - 1) * 3 + 2)" -->
                 <div  @click="showAnimation((rowIndex - 1) * 3 + 2)"  class=" h-16 flex items-center justify-center w-full bg-[#FF4855] text-base font-bold text-white">
                   <!-- 免费包 -->
-                  <img src="@/assets/box.png" alt="box" class="w-full h-full">
+                  <img src="@/assets/auth/background.png" alt="box" class="w-full h-full">
                 </div>
             </van-col>
        </van-row>
@@ -158,13 +158,13 @@
    <!-- <div v-if="zoomedImageIndex !== null" class="zoom-overlay " @click="closeZoom"> -->
     <!-- <van-popup v-model:show="imagePopup"  position="center"  >
       <div class=" ">
-        <img src="`@/assets/box.png`" alt="zoomed image" class="zoomed-image animate-flip">  
+        <img src="`@/assets/auth/background.png`" alt="zoomed image" class="zoomed-image animate-flip">  
       </div>
     </van-popup> -->
 
     <van-popup v-model:show="imagePopup" style="background: none;"  position="center" class=" bg-none bg-transparent">
      <div class=" w-full h-64    ">
-      <img src="`@/assets/box.png`" alt="zoomed image" class=" w-full h-full animate-zoomInRotateX   ">  
+      <img src="`@/assets/auth/background.png`" alt="zoomed image" class=" w-full h-full animate-zoomInRotateX   ">  
      </div>
     </van-popup>
 
@@ -172,16 +172,16 @@
       <div class="absolute  top-2 right-3 text-white">
         <van-icon name="cross" size="25" @click="closeZoom" />
       </div>
-      <img src="`@/assets/box.png`" alt="zoomed image" class="zoomed-image animate-fadefromTop">  
+      <img src="`@/assets/auth/background.png`" alt="zoomed image" class="zoomed-image animate-fadefromTop">  
     </div> -->
 
     <van-popup v-model:show="showNotice" @click-overlay="closeEvent" @close="closeEvent" @click-close-icon="closeEvent" closeable  round  position="center" class=" bg-none bg-transparent">
      <div class=" w-full    px-5 py-2  ">
       <div class="py-2 flex flex-col justify-center items-center ">
-        <img src="@/assets/box.png" alt="" class="w-20">
+        <img src="@/assets/auth/background.png" alt="" class="w-20">
       </div>
       <div v-html="noticeList?.content" class="text-base text-center " > </div>
-      <!-- <img src="`@/assets/box.png`" alt="zoomed image" class=" w-full h-full animate-zoomInRotateX   ">   -->
+      <!-- <img src="`@/assets/auth/background.png`" alt="zoomed image" class=" w-full h-full animate-zoomInRotateX   ">   -->
      </div>
     </van-popup>
 
@@ -200,7 +200,7 @@ import { showToast, showLoadingToast, closeToast,showImagePreview } from "vant";
 import { useStore } from "vuex";
 import homeactive from "@/assets/home/homea.svg";
 import homepng from "@/assets/home/home.svg";
-import boxImage from "@/assets/box.png";
+import boxImage from "@/assets/auth/background.png";
 
 const router = useRouter();
 const store = useStore();
