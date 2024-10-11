@@ -1,5 +1,5 @@
 <template>
-  <div class="relative min-h-screen min-w-full w-full   h-screen  items-center max-w-md sm:mx-auto   login__   ">
+  <div class="relative min-h-screen min-w-full w-full    h-screen  items-center max-w-md sm:mx-auto   login__   ">
     <img
       src="@/assets/auth/loginbg.jpg"
       alt=""
@@ -17,7 +17,7 @@
         type="video/mp4"
       />
     </video>
-   <section class="px-3 py-5 z-10 fixed top-0 left-0 right-0 bottom-0">
+   <section class="px-3 py-5 z-10  overflow-y-auto fixed top-0 left-0 right-0 bottom-0">
     <!-- <div class="flex items-center justify-center text-white tracking-wider space-x-3 text-base px-10  absolute top-20 w-full">
        <img src="@/assets/auth/logo.png" alt="logo" class="w-24">
     </div> -->
@@ -31,7 +31,7 @@
       <img src="@/assets/auth/logo.png" alt="service" class="w-24 ">
     </div>
 
-   <section class="  z-20  w-full  rounded-xl px-8 pt-16 max-w-md mx-auto">
+   <section class="   z-20  w-full  rounded-xl px-8 pt-16 max-w-md mx-auto">
     <!-- <div class="text-2xl font-bold tracking-wider text-white pb-3">登录帐户</div> -->
  
     <form @click.prevent class="   relative text-[#999999]  w-full ">
@@ -145,11 +145,6 @@
                 ">注册</van-button>
 
       </div>
-
-
-
-
-
      </form>
    </section>
   </section> 
@@ -167,7 +162,7 @@ import md5 from "js-md5";
 
 const router = useRouter();
 const route = useRoute();
-const invite_code = ref("");//  0QGM
+const invite_code = ref("");//  35854
 const username = ref("");//mma123
 const phone = ref("");//13222222222
 const password = ref("");//123AAA

@@ -17,7 +17,7 @@
         type="video/mp4"
       />
     </video>
-   <section class="px-3 py-5 z-10 fixed top-0 left-0 right-0 bottom-0">
+   <section class="px-3 py-5 z-10 overflow-y-auto fixed top-0 left-0 right-0 bottom-0">
     <!-- <div class="flex items-center justify-center text-white tracking-wider space-x-3 text-base px-10  absolute top-20 w-full">
        <img src="@/assets/auth/logo.png" alt="logo" class="w-24">
     </div> -->
@@ -67,7 +67,7 @@
                   autocomplete="off"
                   placeholder="请输入电话号码"
                   class="input-name  bg-transparent text-[#333]  px-3 border-none outline-none focus:outline-none focus:border-none w-full h-full placeholder:text-[#999999] placeholder:font-medium placeholder:tracking-wide"
-                   type="text"
+                  type="email"
                 />
               </div>
       </div>

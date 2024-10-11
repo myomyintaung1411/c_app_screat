@@ -16,7 +16,7 @@
       />
     </video> -->
     <div class=" px-3 w-full h-10 ">
-      <div @click="goMessage" class=" relative w-full h-10    ">
+      <div  class=" relative w-full h-10    ">
         <img src="@/assets/home/notice_bg.png" alt="" class="h-full w-full object-fill">
         <div class="absolute h-full top-0 right-0 w-full ">
           <div class="w-full h-full pl-8 pr-8 ">
@@ -24,11 +24,10 @@
                   <div  class="">{{ noticeList?.content }}</div>
                 </van-notice-bar>
           </div>
-          <div class="absolute left-4 top-0  flex items-center justify-center">
+          <!-- <div class="absolute left-4 top-0  flex items-center justify-center">
                 <van-badge :content="0">
-                  <!-- <img src="@/assets/user/notice_fill.svg" alt="button_more" class=" w-6"> -->
                </van-badge>
-            </div>
+            </div> -->
         </div>
       </div>
     </div>
@@ -146,23 +145,23 @@
         <div  @click="select_item(1)" :class="select_item_ans == 1 ? 'bg-[#f2c65d] bg-opacity-100 animate-tracking-in-expand' : 'bg-[#E24939] bg-opacity-90 '" class="h-12 rounded-lg w-full   text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
             <!-- <span class=" tracking-wider text-lg ">{{separateItem(tesk_dialog_content?.item1)?.name}}</span> -->
-             <span class=" tracking-wider text-lg ">大麦</span>
+             <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item1}}</span>
 
           </div>
           <!-- <span class=" tracking-wider text-lg ">{{separateItem(tesk_dialog_content?.item1)?.price}}</span> -->
-          <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item1}}</span>
+          <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.money1}}</span>
         </div>
         <div v-if="tesk_dialog_content?.type == 0"  @click="select_item(2)" :class="select_item_ans == 2 ? 'bg-[#f2c65d] bg-opacity-100 animate-tracking-in-expand' : 'bg-[#E24939] bg-opacity-90 '" class="h-12 rounded-lg w-full  mt-5 text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
-            <span class=" tracking-wider text-lg ">小麦</span>
+            <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item2}}</span>
           </div>
-          <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item2}}</span>
+          <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.money2}}</span>
         </div>
         <div v-if="tesk_dialog_content?.type == 0" @click="select_item(3)" :class="select_item_ans == 3 ? 'bg-[#f2c65d] bg-opacity-100 animate-tracking-in-expand' : 'bg-[#E24939] bg-opacity-90 '"  class="h-12 rounded-lg w-full  mt-5  text-[#f8f8f8] font-bold flex items-center justify-between px-4 text-base">
           <div class="flex items-center space-x-3">
-            <span class=" tracking-wider text-lg ">玉米</span>
+            <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item3}}</span>
           </div>
-          <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.item3}}</span>
+          <span class=" tracking-wider text-lg ">{{tesk_dialog_content?.money3}}</span>
         </div>
         <div class="pt-5 w-full">
           <div class="flex items-center  justify-center px-5 space-x-5 ">
@@ -224,7 +223,6 @@ const tesk_dialog = ref(false)
 const imagePopup = ref(false)
 const noticeDialog = ref(true)
 const tesk_dialog_content = ref({})
-const personalMessage = ref(null);
 const carousalImage = ref(null);
 const noticeList = ref(null);
 const loading = ref(false);
@@ -257,12 +255,7 @@ const showPopup = computed(() => store.getters["app/IsShowNotice"]);
 const showCrownDiv = computed(() => {
   return [2, 5, 8, 11].includes(zoomedImageIndex.value);
 });
-// Show ans3_img for indexes 2, 5, 8, 11, and ans1_img for all other indexes
-const currentImage = computed(() => {
-  return [2, 5, 8, 11].includes(zoomedImageIndex.value) ? ans3_img : ans1_img;
-});
 
-const formattedNumber = computed(() => currentNumber.value.toLocaleString());
 const numRows = computed(() => Math.ceil(testContentList.value.length / 3));
 
 
@@ -341,49 +334,6 @@ const closeZoom = () => {
   }
 };
 
-const submitAns =  async (tesk) => {
-  // console.log(tesk,"gg")
-  let itemId = select_item_ans.value == 1 ? tesk.item1 :  select_item_ans.value == 2 ? tesk.item2 : tesk.item3
-  // console.log(itemId,"jafa")
-  tesk_loading.value = true
-  showLoadingToast({
-    message: "加载中...",
-    forbidClick: true,
-    loadingType: "spinner",
-  });
-  let data = { task_id: tesk.task_id, item_id: itemId ,image:''};
-  try {
-    const res = await homeApi.getuploadTaskCertificate(data);
-    showToast({ message: res?.data?.msg, duration: 2000 });
-    console.log('getuploadTaskCertificate ', res)
-    tesk_loading.value = false
-    if (res?.data?.success && res?.data?.code == 200) {
-      carousalImage.value = res?.data?.data;
-    }
-  } catch (error) {
-    tesk_loading.value = false
-    console.log(error);
-  }
-}
-
-  // Function to separate item into name and price
-  function separateItem(item) {
-    if (!item) return { name: '', price: '' };
-
-    // Regular expression to match the name and price
-    const match = item.match(/(\D+)(\d+元)/);
-    if (match) {
-      return { name: match[1], price: match[2] };
-    }
-    return { name: '', price: '' };
-  }
-
-  // const showAnimation = (index) => {
-  //   imagePopup.value = true
-  //   zoomedImageIndex.value = index;
-  //   console.log(index,"dd")
-  //   console.log(testContentList.value[index]);
-  // }
 
   const showAnimation = (index, event) => {
     if(userInfo.value?.isRealName == 0) {
@@ -394,6 +344,7 @@ const submitAns =  async (tesk) => {
         }, 1000);
      return
   } 
+    if(noticeList.value?.isCanDoTask == 0) return showToast("你没有权限执行任务") 
   const target = event.currentTarget.getBoundingClientRect();
   // Set initial position to match the clicked element
   zoomStyle.top = `${target.top}px`;

@@ -12,7 +12,7 @@
         <p class="text-black">头像</p>
         <!-- <van-image round width="2.5rem" height="2.5rem" :src="avatar" /> -->
         <van-uploader   accept="image/*"  v-model="frontImage"   :max-count="1"
-              :max-size="5000 * 1024"    @oversize="onOversize"
+              :max-size="10000 * 1024"    @oversize="onOversize"
               :after-read="frontafterRead">
            <van-image round width="2.5rem" height="2.5rem" fit="cover"  :src=" userInfo?.avatar ? userInfo?.avatar : avatar" />
         </van-uploader>
@@ -151,7 +151,7 @@ const editAvatar = async () => {
 
 const onOversize = (file) => {
   console.log(file);
-  showToast("文件大小不能超过 5MB");
+  showToast("文件大小不能超过 10MB");
 };
 
 async function frontafterRead(file, detail) {

@@ -1,5 +1,5 @@
 <template>
-     <div id="comment" class="w-full h-screen relative  _bg_main overflow-y-auto ">
+     <div id="comment" class="w-full h-screen relative  _bg_main pb-20 overflow-y-auto ">
         <!-- <div
       class="h-12 bg-[#B3000A] text-white w-full flex justify-between items-center px-3 text-base font-bold "
     >
@@ -64,7 +64,7 @@
                 accept="image/*"
                 v-model="frontImage"
                 :max-count="1"
-                :max-size="5000 * 1024"
+                :max-size="10000 * 1024"
                 @oversize="onOversize"
                 :after-read="frontafterRead"
                 />
@@ -93,7 +93,7 @@
                </div>
             </section>
             <section class="px-4 py-3">
-                <van-button   @click="onSubmit"   block   :loading="loading"  :disabled="loading"
+                <van-button   @click="onSubmit"   block   :loading="subLoading"  :disabled="subLoading"
                class="back_muli"
              style="
               background-color: #E24939;
@@ -108,6 +108,8 @@
 
         </van-list>
         </van-pull-refresh>
+             <!-- back to top -->
+    <van-back-top  bottom="30vh" style="background:#E24939" />
     </section>
     <!-- <section v-else class="   loginForm mt-0 h-full w-full flex flex-col items-center justify-center overflow-y-auto ">
             <div class="text-white">
@@ -117,8 +119,7 @@
             </div>
     </section> -->
     </div>
-     <!-- back to top -->
-    <van-back-top  bottom="10vh" style="background:#E24939" />
+
 
 </template>
 
@@ -145,6 +146,7 @@ const pageSize = ref(20);
 const currentPage = ref(1);
 const totalPage = ref(1);
 const loading = ref(false);
+const subLoading = ref(false);
 const finished = ref(false);
 const refreshing = ref(false);
 const commentData = ref([])
@@ -207,7 +209,7 @@ async function frontafterRead(file, detail) {
 
 const onOversize = (file) => {
   console.log(file);
-  showToast("文件大小不能超过 5MB");
+  showToast("文件大小不能超过 10MB");
 };
 
 const onSubmit  = async () => {
@@ -224,22 +226,22 @@ const onSubmit  = async () => {
     forbidClick: true,
     loadingType: "spinner",
   }); 
-  loading.value = true;
+  subLoading.value = true;
   try {
    
     const res = await homeApi.postComment(data);
 
-    loading.value = false;
+    subLoading.value = false;
     console.log('getComment ', res)
     showToast({ message: res?.data?.msg, duration: 2000 });
     if (res?.data?.success && res?.data?.code == 200) {
       comment_select.value = 0
       frontImageUrl.value = ''
       frontImage.value = []
-     getPeopleComment()
+      onRefresh()
     }
   } catch (error) {
-    loading.value = false;
+    subLoading.value = false;
     console.log(error);
   }
 }

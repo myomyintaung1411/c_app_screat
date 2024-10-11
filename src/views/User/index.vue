@@ -11,8 +11,12 @@
         <p class="">{{ userInfo?.phone }}</p>
        </div>
       </div>
-      <div>
+      <div @click="goMessage" class="relative">
         <img src="@/assets/user/service.png" alt="service" class="w-9">
+        <div  class="absolute right-1 top-0  flex items-center justify-center">
+                <van-badge v-if="messageCount > 0" :content="messageCount" max="9">
+               </van-badge>
+           </div> 
       </div>
      </section>
      <section class="flex items-center w-full justify-center px-4 pt-6">
@@ -287,14 +291,14 @@
         提示
       </div>
     </template>
-    <p class="text-center py-2 text-black">是否确认退出？</p>
+    <p class="text-center py-2 text-black">是否确认退出？ </p>
   </van-dialog>
   
 </template>
 
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted,onBeforeUnmount } from "vue";
 import invite from '@/assets/user/invite.png'
 import announce from '@/assets/user/announce.png'
 import avatar from "@/assets/avatar.svg";
@@ -322,9 +326,29 @@ const frontImage = ref([]);//
 const frontImageUrl = ref("");//
 const loading = ref(false)
 const questionData = ref(null)
-
+const alertInterval = ref(null)
 const select_ans = ref(0)
 const user_select_ans = ref('')
+const messageCount = ref(null)
+
+const getMessage = async () => {
+  try {
+    const res = await userApi.getNoReadMsgApi();
+    console.log('getMessagegetMessage ', res)
+    if (res?.data?.success && res?.data?.code == 200) {
+     // carousalImage.value = res?.data?.data;
+     messageCount.value = res?.data?.data?.count
+    }
+  } catch (error) {
+    select_ans.value = 0
+    console.log(error);
+  }
+}
+
+const goMessage = () => {
+  router.push('/messageList')
+}
+
 const submitAns = async () => {
   if(userInfo.value?.isRealName == 0) {
     showToast("请绑定 实名认证") 
@@ -550,10 +574,24 @@ const getAnswer = async () => {
   // }
 };
 
+function callMsgEverySec() {
+  alertInterval.value = setInterval(() => {
+    getMessage()
+    console.log("3 log second");
+  }, 10000);
+  }
+
+onBeforeUnmount(() => {
+  clearInterval(alertInterval.value);
+  alertInterval.value = null
+})
+
 onMounted(() => {
+  getMessage()
   getQuestion()
   getAnswer()
   globaljs.getUserInfo();
+  callMsgEverySec()
 })
 </script>
 

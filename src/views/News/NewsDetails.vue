@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h-full _bg_main relative">
+    <div class="w-full h-full _bg_main relative overflow-y-auto ">
      
      <div class="h-12 text-black w-full flex justify-between items-center px-3 text-base font-bold ">
       <div @click="goBack" class="">
@@ -8,7 +8,7 @@
       <div class="">新闻资讯详情</div>
       <div class="flex-none"></div>
     </div>
-    <section class="px-5  overflow-y-auto overflow-x-hidden loginForm  h-[calc(100vh_-_48px)] w-full ">
+    <section class="px-5  overflow-y-auto overflow-x-hidden loginForm  h-[calc(100vh_-_48px)] w-full pb-20">
         
         <div class="py-2 w-full ">
             <img :src="article?.img_title_url" alt="image" class="h-48 w-full object-cover">
@@ -40,16 +40,20 @@
             />
             </video>
         </div>
-     
+             <!-- back to top -->
+             <van-back-top  bottom="10vh" style="background:#E24939" />
+
     </section>
+
     </div>
+
 </template>
 
 <script setup>
  import { ref, computed, onMounted } from "vue";
 import homeApi from "@/network/home.js";
 import { useRouter, useRoute } from "vue-router";
-import { showToast, showLoadingToast, closeToast } from "vant";
+import { showToast, showLoadingToast, closeToast,BackTop  } from "vant";
 import { useStore } from "vuex";
 
 const router = useRouter();

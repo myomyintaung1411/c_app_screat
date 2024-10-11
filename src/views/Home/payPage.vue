@@ -1,7 +1,7 @@
 <template>
-    <div class="w-full h-screen relative bg-[#B3000A]">
+    <div class="w-full h-screen relative _bg_main overflow-y-auto">
       <div
-        class="h-12 bg-[#B3000A] text-white w-full flex justify-between items-center px-3 text-base font-bold"
+        class="h-12  text-black w-full flex justify-between items-center px-3 text-base font-bold"
       >
         <div @click="goBack" class="">
           <van-icon name="arrow-left" />
@@ -78,4 +78,11 @@
   color:#fff !important
   
   }
+  ._bg_main{
+  background-image: url(@/assets/auth/background.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100vh;
+}
   </style>

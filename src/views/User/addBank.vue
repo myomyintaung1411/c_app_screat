@@ -76,7 +76,7 @@
               accept="image/*" class="w-full"
               v-model="frontImage"
               :max-count="1"
-              :max-size="5000 * 1024"
+              :max-size="10000 * 1024"
               @oversize="onOversize"
               :after-read="frontafterRead"
             />
@@ -173,7 +173,7 @@ async function frontafterRead(file, detail) {
 
 const onOversize = (file) => {
   console.log(file);
-  showToast("文件大小不能超过 5MB");
+  showToast("文件大小不能超过 10MB");
 };
 
 const onSubmit = async () => {

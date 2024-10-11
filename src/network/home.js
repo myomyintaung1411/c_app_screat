@@ -161,4 +161,12 @@ export default {
             requestBase: '/api',
         })
     },
+    uploadCommentTitle(data) {
+        return instance({
+            url: '/opt/upload_comment_title',
+            method: 'post',
+            data: data,
+            requestBase: '/api',
+        })
+    },
 }

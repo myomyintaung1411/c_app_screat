@@ -11,14 +11,18 @@
      <section class="">
         <div class="px-3 py-2 w-full relative">
             <div>
-                <div v-for="mess in personalMessage" :key="mess?.id"  class="border-b border-[#666] py-2 text-[#333]">
+                <div v-for="mess in personalMessage" :key="mess?.id"  class="border-b border-[#666] py-2 text-[#000]">
                  <div @click="setMsg(mess)">
-                        <p>{{mess?.msg}} </p>
+                        <p class="text-sm">{{mess?.msg}} </p>
+                    
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs text-[#666]">{{ mess?.create_at }}</span>
                     <div v-if="mess?.isRead == 0" class="py-1 text-right text-white">
                          <van-tag type="danger">未读</van-tag>
                     </div>
                     <div v-else class="py-1 text-right ">  <van-tag type="success">已读
                     </van-tag></div>
+                  </div>
                     </div>
                 </div>
             </div>
@@ -39,7 +43,7 @@ const router = useRouter();
 const store = useStore();
 const personalMessage = ref(null)
 const goBack = () => {
- router.push("/home");
+ router.push("/user");
 };
 
 const getPersonalMessage = async () => {
