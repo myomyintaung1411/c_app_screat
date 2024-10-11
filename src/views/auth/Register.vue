@@ -1,5 +1,5 @@
 <template>
-  <div class="relative min-h-screen min-w-full w-full    h-screen  items-center max-w-md sm:mx-auto   login__   ">
+  <div class="relative min-h-screen min-w-full w-full overflow-y-auto    h-screen  items-center max-w-md sm:mx-auto   login__   ">
     <img
       src="@/assets/auth/loginbg.jpg"
       alt=""
@@ -255,7 +255,18 @@ const onSubmit = () => {
   // router.push("/login");
 };
 
+const scrollToInput = (event) => {
+  const element = event?.target;
+  setTimeout(() => {
+    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 300); // Adjust the delay to ensure keyboard animation finishes
+};
+
 onMounted(()=>{
+  const inputs = document?.querySelectorAll('input');
+  inputs?.forEach((input) => {
+    input.addEventListener('focus', scrollToInput);
+  });
   if (route?.query !== undefined && route.query?.shareCode !== undefined) {
    invite_code.value = route?.query?.shareCode;
  } 

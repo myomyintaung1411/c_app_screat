@@ -235,12 +235,12 @@
         </div>
        <div class="py-2">
         <van-row gutter="12" class="w-full">
-          <van-col span="6">
+          <!-- <van-col span="6">
             <div @click="goSection(4)" class="w-full flex flex-col items-center justify-center space-y-2 text-[#333333]">
               <img :src="comment" alt="" class="w-16">
               <p>展示评论区</p>
             </div>
-          </van-col>
+          </van-col> -->
           <van-col span="6">
             <div @click="goSection(5)" class="w-full flex flex-col items-center justify-center space-y-2 text-[#333333]">
               <img :src="service" alt="" class="w-16">
@@ -259,16 +259,22 @@
               <p>我的团队</p>
             </div>
           </van-col>
-        </van-row>
-        <div class="py-2">
-        <van-row gutter="12" class="w-full">
           <van-col span="6">
             <div @click="goSection(8)" class="w-full flex flex-col items-center justify-center space-y-2 text-[#333333]">
               <img :src="record" alt="" class="w-16">
               <p>会议录音</p>
             </div>
           </van-col>
-          </van-row>
+        </van-row>
+        <div class="py-2">
+        <!-- <van-row gutter="12" class="w-full">
+          <van-col span="6">
+            <div @click="goSection(8)" class="w-full flex flex-col items-center justify-center space-y-2 text-[#333333]">
+              <img :src="record" alt="" class="w-16">
+              <p>会议录音</p>
+            </div>
+          </van-col>
+          </van-row> -->
         </div>
        </div>
       </section>

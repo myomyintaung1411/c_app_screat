@@ -41,7 +41,8 @@
          <section class="py-2 px-3 text-[#333333] ">
                 <div v-for="com in commentData" :key="com?.Id" class="flex items-center w-full py-2  justify-between border-b border-[#999]">
                  <div class="flex  space-x-2 items-start">
-                    <img :src="com?.img" alt="userimage" class="w-10" />
+                    <img v-if="com?.img" :src="com?.img" alt="userimage" class="w-10" />
+                    <div v-else class="w-8 h-8 rounded-full bg-[#FF5C24]"></div>
                     <div class="flex flex-col space-y-1">
                         <p class="text-base">{{com?.title}}</p>
                         <p class="text-sm text-[#333333]">{{com?.text}}</p>
@@ -56,7 +57,7 @@
                  </div> -->
                  </div>
             </section>
-            <section class="py-3 px-4 text-[#333333]">
+            <!-- <section class="py-3 px-4 text-[#333333]">
              <div class="flex flex-col justify-center   ">
                     <span class=" pt-2 pb-2">上传图片
                     </span>
@@ -69,10 +70,10 @@
                 :after-read="frontafterRead"
                 />
              </div>
-            </section>
-            <section class="pb-3 px-4 text-[#333333]">
-                    <span class="pb-2">选择评论  </span>
-               <div v-for="nnn in 4" :key="nnn" class="py-2" @click="SelectComment(nnn)">
+            </section> -->
+            <section class="pb-3 pt-3 px-4 text-[#333333]">
+                    <span class="pb-2 pl-4 font-bold">发表评论  </span>
+               <!-- <div v-for="nnn in 4" :key="nnn" class="py-2" @click="SelectComment(nnn)">
                 <div class="w-full bg-white rounded-md p-2 relative" :class="comment_select === nnn ? 'border-2 border-[#999]' : 'border border-white'">
                     <div class="absolute -left-3 bg-[#f3cc90] text-[#96000b] w-8 h-8 flex items-center justify-center rounded-full">
                      {{nnn}}
@@ -90,8 +91,23 @@
                       {{ commentSingle?.comment4 }}
                     </p>
                 </div>
-               </div>
-            </section>
+               </div> -->
+               <div
+              class="w-full flex items-center relative px-4 rounded-lg h-14 white_color border-gray-300 border mt-1"
+            >
+              <div
+                class=" w-full h-full text-sm flex justify-center items-center relative"
+              >
+                <input
+                  v-model="comment"
+                  autocomplete="off"
+                  placeholder="请输入您的主题"
+                  class="input-name text-[#000] bg-transparent  border-none outline-none focus:outline-none focus:border-none w-full h-full placeholder:text-gray-600 placeholder:tracking-widest"
+                  type="text"
+                />
+              </div>
+            </div>
+              </section>
             <section class="px-4 py-3">
                 <van-button   @click="onSubmit"   block   :loading="subLoading"  :disabled="subLoading"
                class="back_muli"
@@ -133,6 +149,7 @@ import homeApi from "@/network/home.js";
 import globaljs from "@/utils/global";
 import userApi from "@/network/user.js";
 import dayjs from 'dayjs'
+import avatar from "@/assets/avatar.svg";
 
 const router = useRouter();
 const route = useRoute()
@@ -141,7 +158,7 @@ const store = useStore();
 const userInfo = computed(()=> store.getters["app/ProfileInfoData"])
 const passInfo = computed(()=> store.getters["app/PasswordInfo"])
 const BaseImageUrl = computed(() => store.getters["app/BaseImageUrl"]);
-
+const comment = ref('')
 const pageSize = ref(20);
 const currentPage = ref(1);
 const totalPage = ref(1);
@@ -213,14 +230,14 @@ const onOversize = (file) => {
 };
 
 const onSubmit  = async () => {
-  if(frontImageUrl.value == '') return showToast('請先上傳圖片')
-  if(comment_select.value == 0) return showToast('請選擇评论')
-  let comment_index = ''
-  if(comment_select.value == 1) comment_index = commentSingle?.value?.comment1
-  if(comment_select.value == 2) comment_index = commentSingle?.value?.comment2
-  if(comment_select.value == 3) comment_index = commentSingle?.value?.comment3
-  if(comment_select.value == 4) comment_index = commentSingle?.value?.comment4
-  let data = { id: commentSingle?.value?.id, comment_index:comment_index,img:frontImageUrl.value};
+   if(comment.value == '') return showToast('请输入您的主题')
+  // if(comment_select.value == 0) return showToast('請選擇评论')
+  // let comment_index = ''
+  // if(comment_select.value == 1) comment_index = commentSingle?.value?.comment1
+  // if(comment_select.value == 2) comment_index = commentSingle?.value?.comment2
+  // if(comment_select.value == 3) comment_index = commentSingle?.value?.comment3
+  // if(comment_select.value == 4) comment_index = commentSingle?.value?.comment4
+  let data = { id: commentSingle?.value?.id, content:comment.value};
   showLoadingToast({
     message: "加载中...",
     forbidClick: true,

@@ -206,9 +206,9 @@ const onSubmit  = async () => {
   }
 }
 
-const goDetails = (comm) => {
-    router.push({ name: 'commentDetails', query: { comm: JSON.stringify(comm) } })
-}
+// const goDetails = (comm) => {
+//     router.push({ name: 'commentDetails', query: { comm: JSON.stringify(comm) } })
+// }
 
 const getComment = async () => {
  let data = {

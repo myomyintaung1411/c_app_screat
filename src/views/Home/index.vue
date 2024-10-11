@@ -188,7 +188,7 @@
             </div>
           </div>
 
-          <van-dialog v-model:show="task_explain_dialog" title="和任务说明" >
+          <van-dialog v-model:show="task_explain_dialog" title="任务说明" >
             <p class="text-black">{{tesk_dialog_content?.explain }}</p>
          </van-dialog>
 

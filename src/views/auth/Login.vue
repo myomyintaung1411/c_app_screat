@@ -1,5 +1,5 @@
 <template>
-  <div class="relative min-h-screen min-w-full w-full   h-screen  items-center max-w-md sm:mx-auto   login__   ">
+  <div class="relative min-h-screen min-w-full w-full overflow-y-auto   h-screen  items-center max-w-md sm:mx-auto   login__   ">
     <img
       src="@/assets/auth/loginbg.jpg"
       alt=""
