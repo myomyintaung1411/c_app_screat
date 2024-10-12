@@ -476,6 +476,12 @@ const goSection = (number) => {
       }
         //router.push('/comment');
         break;
+
+    case 5:
+        let link = `http://kefu.aiminzhonghua.net/?groupid=f44bdf77723478499f84597d38f3e488&metadata={"name":${userInfo?.value?.name}}`
+        router.push({ name: 'Chat', query: { url: link  } })
+
+        break;
     case 6:
     if(userInfo.value?.isRealName == 0){ 
         showToast("请绑定 实名认证") 
@@ -595,7 +601,6 @@ onBeforeUnmount(() => {
 onMounted(() => {
   getMessage()
   getQuestion()
-  getAnswer()
   globaljs.getUserInfo();
   callMsgEverySec()
 })

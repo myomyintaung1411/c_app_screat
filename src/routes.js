@@ -208,6 +208,12 @@ export const routes = [
     component: () => import('./views/auth/Register.vue')
   },
   {
+    path: '/chat',
+    name: 'Chat',
+    meta: { title: 'Chat' },
+    component: () => import('./views/user/Chat.vue')
+  },
+  {
     path: '/forgetpass',
     name: 'ForgetPassword',
     meta: { title: 'Forget Password',requiresVisitor: true },

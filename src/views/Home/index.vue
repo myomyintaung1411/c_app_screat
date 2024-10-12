@@ -268,7 +268,13 @@ const gopayQr = async (task_content) => {
   console.log(task_content,"gggggggg")
 if(task_content.type == 0) {
  if(select_item_ans.value === 0) return showToast('請先選擇任務') 
- router.push({ name: 'Recharge', query: { task_content: JSON.stringify(task_content) , select_item:select_item_ans.value } })
+  let passData = {
+    task_id: task_content?.task_id,
+    item_id: select_item_ans.value == 1 ? task_content.item1 :  select_item_ans.value == 2 ? task_content.item2 : task_content.item3,
+    money: select_item_ans.value == 1 ? task_content.money1 :  select_item_ans.value == 2 ? task_content.money2 : task_content.money3,
+    type:task_content?.type
+  }
+ router.push({ name: 'Recharge', query: { task_content: JSON.stringify(passData) , select_item:select_item_ans.value } })
   } else {
   tesk_loading.value = true
   showLoadingToast({

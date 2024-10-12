@@ -118,7 +118,7 @@ const reCharge = async () => {
     loading.value = false
     if (res?.data?.success && res?.data?.code == 200) {
      // upload_dialog.value = false
-     router.push({ name: 'Pay', query: { info: JSON.stringify(res?.data?.data)  } })
+     router.push({ name: 'Pay', query: { info: JSON.stringify(res?.data?.data) , task_content:JSON.stringify(task_content_data.value) }  })
 
      // carousalImage.value = res?.data?.data;
     }
