@@ -19,12 +19,11 @@
           <van-radio-group v-model="recharge_type" direction="horizontal">
             <van-radio :name="1" checked-color="#E24939">扫码</van-radio>
             <van-radio :name="2" checked-color="#E24939">银行卡</van-radio>
-            <!-- <van-radio :name="3" checked-color="#E24939">余额支付</van-radio> -->
           </van-radio-group>
 
           </div>
     
-          <section >
+          <section v-if="task_content_data?.type == 0">
           <div class="text-[#333] font-bold text-sm tracking-wider text-left pl-1 mt-5">充值金额</div>
           <div
             class="w-full flex items-center relative rounded-lg h-14 bg-white   mt-1"
@@ -92,23 +91,17 @@ const upload_dialog = ref(false)
 const BaseImageUrl = computed(() => store.getters["app/BaseImageUrl"]);
 const recharge_type = ref(1)
 const amount = ref('')
-const url = ref('')
-
 const goBack = () => {
-  router.push('/home')
-//  if(url.value == 'home' || url.value == ''){
-//   router.push('/home')
-//  } else{
-//   router.push('/user')
-//  }
+router.push("/home");
 };
 
 
 const reCharge = async () => {
-
+  // console.log(itemId,"jafa")
+ if(task_content_data.value?.type == 0) {
   if(amount.value == '') return showToast('请输入充值金额')
   if(amount.value < 300) return showToast('充值金额至少300')
- 
+ }
   loading.value = true
   showLoadingToast({
     message: "加载中...",
@@ -117,11 +110,7 @@ const reCharge = async () => {
   });
    // Extract the number using regex
   //  let numberOnly = itemId?.match(/(\d+)/)?.[0] || null;
-  let data = { pay_type:recharge_type.value,
-              amount:amount.value,
-              task_id:task_content_data.value?.task_id, 
-              item_id: task_content_data.value?.item_id ,
-            }
+  let data = { pay_type:recharge_type.value,amount:amount.value};
   try {
     const res = await userApi.Recharge(data);
     showToast({ message: res?.data?.msg, duration: 2000 });
@@ -144,13 +133,10 @@ const reCharge = async () => {
 
 onMounted(() => {
 
-    if(route.query.task_content || route.query.select_item){
+    if(route.query.task_content && route.query.select_item){
        select_item.value = route.query.select_item
         task_content_data.value = JSON.parse(route.query.task_content)
   }
-  //   if(route.query.url){
-  //      url.value = route.query.url
-  // }
 });
 
 

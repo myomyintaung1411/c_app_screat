@@ -24,7 +24,7 @@
        <img src="@/assets/auth/logo.png" alt="logo" class="w-24">
     </div> -->
     <div class="flex flex-col   items-end py-2">
-     <div class="flex flex-col items-center justify-center">
+     <div @click="goChat" class="flex flex-col items-center justify-center">
       <img src="@/assets/auth/service.png" alt="service" class="w-10">
       <span class="text-white text-sm tracking-wider">联系客服</span>
      </div>
@@ -158,6 +158,7 @@ import { showToast, showLoadingToast, closeToast } from "vant";
 import authApi from "@/network/auth.js";
 import { useStore } from "vuex";
 import md5 from "js-md5";
+import globaljs from "@/utils/global";
 
 const router = useRouter();
 const route = useRoute();
@@ -169,6 +170,9 @@ const inputValidation = ref('')
 const loading = ref(false);
 const checked = ref(false);
 const randomNumber = ref('')
+
+const noticeData = computed(()=> store.getters["app/NoticeData"])
+
 const showVisibile = () => {
   passwordField.value =
     passwordField.value === "password" ? "text" : "password";
@@ -191,6 +195,11 @@ const goSection = (number) => {
       break;
   }
 };
+
+const goChat = () => {
+  router.push({ name: 'Chat', query: { url: noticeData.value?.customer_url  } })
+
+}
 
 const onSubmit = () => {
   //const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -231,6 +240,7 @@ const onSubmit = () => {
 };
 
 onMounted(() => {
+  globaljs.getNotice()
   createFourRandom()
   if (route?.query !== undefined && route.query?.acc !== undefined) {
     account.value = route.query?.acc;

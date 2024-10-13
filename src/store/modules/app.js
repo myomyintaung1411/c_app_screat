@@ -5,7 +5,8 @@ export default {
       profileInfodata:JSON.parse(localStorage.getItem('abcd')) || null,
       passwordInfo:JSON.parse(localStorage.getItem('ear')) || null,
       isShowNotice:false,
-      baseImageUrl:'http://45.116.165.93:6195/statics/'
+      baseImageUrl:'http://45.116.165.93:6195/statics/',
+      noticeData:null,
     },
 
     getters: {
@@ -14,9 +15,13 @@ export default {
         IsShowNotice:state =>  state.isShowNotice,
         PasswordInfo:state =>  state.passwordInfo,
         BaseImageUrl:state =>  state.baseImageUrl,
+        NoticeData:state => state.noticeData,
     },
 
     mutations: {
+        NOTICE_DATA(state,payload) {
+            state.noticeData = payload
+        },
         LOGIN_DATA(state,payload) {
             state.loginData = payload
             localStorage.setItem('xztt',JSON.stringify(payload))

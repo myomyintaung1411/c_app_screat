@@ -22,7 +22,7 @@
        <img src="@/assets/auth/logo.png" alt="logo" class="w-24">
     </div> -->
     <div class="flex flex-col   items-end py-2">
-     <div class="flex flex-col items-center justify-center">
+     <div @click="goChat" class="flex flex-col items-center justify-center">
       <img src="@/assets/auth/service.png" alt="service" class="w-10">
       <span class="text-white text-sm tracking-wider">联系客服</span>
      </div>
@@ -176,14 +176,16 @@
 
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed,onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { showToast, showLoadingToast, closeToast } from "vant";
 import authApi from "@/network/auth.js";
 import md5 from "js-md5";
 import globaljs from "@/utils/global";
+import { useStore } from "vuex";
 
 const router = useRouter();
+const store = useStore();
 
 const id_code = ref("");
 const account = ref("");
@@ -192,6 +194,7 @@ const confirmpass = ref("");
 const passwordField = ref("password");
 const conpasswordField = ref("password");
 const loading = ref(false);
+const noticeData = computed(()=> store.getters["app/NoticeData"])
 
 const showVisibile = () => {
   passwordField.value =
@@ -201,6 +204,11 @@ const conshowVisibile = () => {
   conpasswordField.value =
     conpasswordField.value === "password" ? "text" : "password";
 };
+
+const goChat = () => {
+  router.push({ name: 'Chat', query: { url: noticeData.value?.customer_url  } })
+}
+
 
 const goLoign = () => {
   router.push("/login");
@@ -261,6 +269,10 @@ const onSubmit = () => {
 
   // router.push("/login");
 };
+
+onMounted(()=>{
+  globaljs.getNotice()
+})
 </script>
 
 

@@ -1,5 +1,6 @@
 
 import userApi from "@/network/user.js";
+import homeApi from "@/network/home.js";
 import { showToast, showLoadingToast, closeToast } from "vant";
 import store from '@/store/index'
 import { computed } from 'vue'
@@ -12,6 +13,18 @@ export default {
          //showToast(res?.data?.msg);
         if (res?.data?.success == true && res?.data?.code == 200) {
          store.commit("app/PROFILE_USER_INFO", res.data?.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getNotice  ()  {
+        try {
+        const res = await homeApi.getNotice();
+		console.log(res.data,"getNotice")
+         //showToast(res?.data?.msg);
+        if (res?.data?.success == true && res?.data?.code == 200) {
+         store.commit("app/NOTICE_DATA", res.data?.data);
         }
       } catch (error) {
         console.log(error);

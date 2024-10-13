@@ -83,7 +83,7 @@
             <van-col    span="5">
 
               <!-- @click="openTeskDialog((rowIndex - 1) * 3)" @click="showAnimation((rowIndex - 1) * 3)" -->
-                <div @click="(event) => showAnimation((rowIndex - 1) * 3, event)"   class=" animation_d h-18 flex items-center justify-center w-full bg-[#F965B]">
+                <div @click="(event) => showAnimation((rowIndex - 1) * 3, event,rowIndex)"   class=" animation_d h-18 flex items-center justify-center w-full bg-[#F965B]">
                  <img src="@/assets/home/ans_1.png" alt="box" class="w-full h-full">
                 </div>
             </van-col>
@@ -100,7 +100,7 @@
             <van-col   span="5">
 
               <!-- @click="openTeskDialog((rowIndex - 1) *  3 + 1)" @click="showAnimation((rowIndex - 1) *  3 + 1)"-->
-                <div  @click="(event) => showAnimation((rowIndex - 1) * 3 + 1, event)" class=" animation_d h-18 flex items-center justify-center w-full bg-[#F965B]">
+                <div  @click="(event) => showAnimation((rowIndex - 1) * 3 + 1, event,rowIndex)" class=" animation_d h-18 flex items-center justify-center w-full bg-[#F965B]">
                   <img src="@/assets/home/ans_1.png" alt="box" class="w-full h-full">
 
                 </div>
@@ -114,7 +114,7 @@
                <!-- here show testContentList array of positon 3,5,8,11  -->
             <van-col   span="5">
               <!-- @click="openTeskDialog((rowIndex - 1) * 3 + 2)"  @click="showAnimation((rowIndex - 1) * 3 + 2)" -->
-                <div @click="(event) => showAnimation((rowIndex - 1) * 3 + 2, event)"   class=" animation_d z-10 relative flex  h-18   items-center justify-center w-full flex-col text-base font-bold text-white">
+                <div @click="(event) => showAnimation((rowIndex - 1) * 3 + 2, event,rowIndex)"   class=" animation_d z-10 relative flex  h-18   items-center justify-center w-full flex-col text-base font-bold text-white">
                   <!-- 免费包 -->
                    <img src="@/assets/home/crown.png" alt="crown" class="w-8 absolute -top-6">
                   <img src="@/assets/home/ans3.png" alt="box" class="w-full h-full">
@@ -165,7 +165,7 @@
         </div>
         <div class="pt-5 w-full">
           <div class="flex items-center  justify-center px-5 space-x-5 ">
-            <van-button @click="gopayQr(tesk_dialog_content)" round type="success" style="font-weight: bold;font-size: 16px;color:#fff" color="#E24939" block>去做任务</van-button>
+            <van-button :loading="tesk_loading" :disabled="tesk_loading" @click="gopayQr(tesk_dialog_content)" round type="success" style="font-weight: bold;font-size: 16px;color:#fff" color="#E24939" block>去做任务</van-button>
             <van-button round @click="showTaskDes()"  color="#700000" style="font-weight: bold;font-size: 18px;" block>任务说明</van-button>
 
           </div>
@@ -189,7 +189,7 @@
           </div>
 
           <van-dialog v-model:show="task_explain_dialog" title="任务说明" >
-            <p class="text-black">{{tesk_dialog_content?.explain }}</p>
+            <p class="text-black px-2 py-2">{{tesk_dialog_content?.explain }}</p>
          </van-dialog>
 
       </van-pull-refresh>
@@ -270,10 +270,43 @@ if(task_content.type == 0) {
  if(select_item_ans.value === 0) return showToast('請先選擇任務') 
   let passData = {
     task_id: task_content?.task_id,
-    item_id: select_item_ans.value == 1 ? task_content.item1 :  select_item_ans.value == 2 ? task_content.item2 : task_content.item3,
+    item_id:select_item_ans.value,
+  // item_id: select_item_ans.value == 1 ? task_content.item1 :  select_item_ans.value == 2 ? task_content.item2 : task_content.item3,
     money: select_item_ans.value == 1 ? task_content.money1 :  select_item_ans.value == 2 ? task_content.money2 : task_content.money3,
     type:task_content?.type
   }
+    // console.log(passData.money,"passData.money")
+    //   if(userInfo?.value?.balance <= passData.money) {
+    //    showToast('余额不足,请至充值页面充值！')
+    //   setTimeout(() => {
+    //     router.push({ name: 'Recharge', query:{url:'home'} })
+    //     }, 1000);
+    //  return
+    // } 
+  // let data = { task_id: task_content?.task_id, item_id: select_item_ans.value };
+  // tesk_loading.value = true
+  // showLoadingToast({
+  //   message: "加载中...",
+  //   forbidClick: true,
+  //   loadingType: "spinner",
+  // });
+  // try {
+  //   const res = await homeApi.getuploadTaskCertificate(data);
+  //   showToast({ message: res?.data?.msg, duration: 2000 });
+  //   console.log('paid getuploadTaskCertificate ', res)
+  //   tesk_loading.value = false
+  //   if (res?.data?.success && res?.data?.code == 200) {
+  //    // carousalImage.value = res?.data?.data;
+  //    tesk_dialog.value = false
+  //   } else {
+  //        setTimeout(() => {
+  //       router.push({ name: 'Recharge', query:{url:'home'} })
+  //       }, 500);
+  //   }
+  // } catch (error) {
+  //   tesk_loading.value = false
+  //   console.log(error);
+  // }
  router.push({ name: 'Recharge', query: { task_content: JSON.stringify(passData) , select_item:select_item_ans.value } })
   } else {
   tesk_loading.value = true
@@ -282,11 +315,11 @@ if(task_content.type == 0) {
     forbidClick: true,
     loadingType: "spinner",
   });
-  let data = { task_id: task_content.task_id, item_id: 1 ,image:''};
+  let data = { task_id: task_content.task_id, item_id: 1 };
   try {
     const res = await homeApi.getuploadTaskCertificate(data);
     showToast({ message: res?.data?.msg, duration: 2000 });
-    console.log('getuploadTaskCertificate ', res)
+    console.log('free getuploadTaskCertificate ', res)
     tesk_loading.value = false
     if (res?.data?.success && res?.data?.code == 200) {
      // carousalImage.value = res?.data?.data;
@@ -341,7 +374,7 @@ const closeZoom = () => {
 };
 
 
-  const showAnimation = (index, event) => {
+  const showAnimation = (index, event,rowIndexForDoTask) => {
     if(userInfo.value?.isRealName == 0) {
     showToast("请绑定 实名认证") 
 
@@ -350,7 +383,30 @@ const closeZoom = () => {
         }, 1000);
      return
   } 
-    if(noticeList.value?.isCanDoTask == 0) return showToast("你没有权限执行任务") 
+    console.log(rowIndexForDoTask,"rowIndexForDoTask") 
+    switch (rowIndexForDoTask) {
+      case 1:
+      if(noticeList.value?.isCanDoTask1 == 0) return showToast("你没有权限执行任务") 
+        break;
+      case 2:
+      if(noticeList.value?.isCanDoTask2 == 0) return showToast("你没有权限执行任务") 
+        break;
+      case 3:
+      if(noticeList.value?.isCanDoTask3 == 0) return showToast("你没有权限执行任务") 
+        break;
+      case 4:
+      if(noticeList.value?.isCanDoTask4 == 0) return showToast("你没有权限执行任务") 
+        break;
+      default:
+        break;
+    }
+    // if(userInfo?.value?.balance <=0) {
+    //    showToast('余额不足,请至充值页面充值！')
+    //   setTimeout(() => {
+    //     router.push({ name: 'Recharge', query:{url:'home'} })
+    //     }, 1000);
+    //  return
+    // } 
   const target = event.currentTarget.getBoundingClientRect();
   // Set initial position to match the clicked element
   zoomStyle.top = `${target.top}px`;

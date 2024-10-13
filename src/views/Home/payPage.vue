@@ -10,11 +10,11 @@
         <div class="flex-none"></div>
       </div>
 
-      <div v-if="info_data"  style="overflow: hidden !important" class="__iframe">
+      <div v-if="info_data"  style="overflow-x: hidden !important;overflow-y: auto;" class="__iframe">
         <iframe  :src="info_data?.url"  scrolling="no" seamless="seamless"  frameborder="0" 
-        style="overflow:hidden;height:100%;width:100%" height="100%" width="100%"></iframe>
+        style="overflow-x:hidden;overflow-y: auto;height:100%;width:100%" height="100%" width="100%"></iframe>
     </div>
-    <div class="absolute bottom-10 px-5 w-full">
+    <!-- <div class="absolute bottom-10 px-5 w-full">
       <van-button
             @click="openDialog"
             block
@@ -28,7 +28,7 @@
           >
           上传凭证
           </van-button>
-    </div>
+    </div> -->
     </div>
 
     <van-popup v-model:show="upload_dialog" @click-overlay="closeEvent" @close="closeEvent" @click-close-icon="closeEvent" closeable  round  position="bottom" :style="{ height: '80%' }" class=" bg-none bg-transparent">
@@ -97,7 +97,8 @@ const closeEvent = () => {
 
 
   const goBack = () => {
-  router.push("/home");
+    //router.push({ name: 'Recharge',query:{task_content:JSON.stringify(task_content.value)} })
+   router.push('/home')
   };
   
   const onOversize = (file) => {
@@ -166,6 +167,7 @@ async function frontafterRead(file, detail) {
   }
 
   onMounted(() => {
+    console.log(route.query?.task_content,"route.query?.task_content")
     showLoadingToast({
     message: "加载中...",
     forbidClick: true,
@@ -190,6 +192,7 @@ async function frontafterRead(file, detail) {
           width: 100%;
           position: relative;
           background: inherit;
+          overflow-y: auto;
         }
 
   #payqrPage :deep() .van-nav-bar__title {

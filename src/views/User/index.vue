@@ -269,9 +269,9 @@
         <div class="py-2">
         <!-- <van-row gutter="12" class="w-full">
           <van-col span="6">
-            <div @click="goSection(8)" class="w-full flex flex-col items-center justify-center space-y-2 text-[#333333]">
-              <img :src="record" alt="" class="w-16">
-              <p>会议录音</p>
+            <div @click="goSection(9)" class="w-full flex flex-col items-center justify-center space-y-2 text-[#333333]">
+              <img :src="comment" alt="" class="w-16">
+              <p>充值</p>
             </div>
           </van-col>
           </van-row> -->
@@ -328,6 +328,8 @@ const store = useStore();
 // const userData = ref(null)
 const userInfo = computed(()=> store.getters["app/ProfileInfoData"])
 const passInfo = computed(()=> store.getters["app/PasswordInfo"])
+const noticeData = computed(()=> store.getters["app/NoticeData"])
+
 const frontImage = ref([]);//
 const frontImageUrl = ref("");//
 const loading = ref(false)
@@ -478,7 +480,7 @@ const goSection = (number) => {
         break;
 
     case 5:
-        let link = `http://kefu.aiminzhonghua.net/?groupid=f44bdf77723478499f84597d38f3e488&metadata={"name":${userInfo?.value?.name}}`
+        let link = `${noticeData.value?.customer_url}&metadata={"name":${userInfo?.value?.name}}`
         router.push({ name: 'Chat', query: { url: link  } })
 
         break;
@@ -497,6 +499,9 @@ const goSection = (number) => {
     case 7:
         router.push('/team');
         break;
+    case 9:
+    router.push({ name: 'Recharge', query:{url:'user'} })
+    break;
     // case 5:
     //     router.push('/accsetting')
     //     break;
@@ -602,6 +607,7 @@ onMounted(() => {
   getMessage()
   getQuestion()
   globaljs.getUserInfo();
+  globaljs.getNotice()
   callMsgEverySec()
 })
 </script>

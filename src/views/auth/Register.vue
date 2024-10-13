@@ -22,7 +22,7 @@
        <img src="@/assets/auth/logo.png" alt="logo" class="w-24">
     </div> -->
     <div class="flex flex-col   items-end py-2">
-     <div class="flex flex-col items-center justify-center">
+     <div @click="goChat" class="flex flex-col items-center justify-center">
       <img src="@/assets/auth/service.png" alt="service" class="w-10">
       <span class="text-white text-sm tracking-wider">联系客服</span>
      </div>
@@ -159,9 +159,12 @@ import { useRouter, useRoute } from "vue-router";
 import { showToast, showLoadingToast, closeToast } from "vant";
 import authApi from "@/network/auth.js";
 import md5 from "js-md5";
+import { useStore } from "vuex";
+import globaljs from "@/utils/global";
 
 const router = useRouter();
 const route = useRoute();
+const store = useStore();
 const invite_code = ref("");//  35854
 const username = ref("");//mma123
 const phone = ref("");//13222222222
@@ -170,6 +173,13 @@ const confirmpass = ref("");
 const passwordField = ref("password");
 const conpasswordField = ref("password");
 const loading = ref(false)
+
+const noticeData = computed(()=> store.getters["app/NoticeData"])
+
+const goChat = () => {
+  router.push({ name: 'Chat', query: { url: noticeData.value?.customer_url  } })
+
+}
 
 const showVisibile = () => {
   passwordField.value =
@@ -263,6 +273,7 @@ const scrollToInput = (event) => {
 };
 
 onMounted(()=>{
+  globaljs.getNotice()
   const inputs = document?.querySelectorAll('input');
   inputs?.forEach((input) => {
     input.addEventListener('focus', scrollToInput);
