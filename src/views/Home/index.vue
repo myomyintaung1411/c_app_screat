@@ -51,8 +51,8 @@
       <!-- <van-rolling-text  class="my-rolling-text  font-bold"  :start-num="0" :text-list="textList"
       :duration="1" /> -->
       <!-- <vue3-autocounter ref='counter' :startAmount='0' :endAmount='userInfo.reward_amount' :duration='3'  separator=',' decimalSeparator='.' :decimals='2' :autoinit='true' /> -->
-      <div class="flex-1 text-5xl items-center justify-center font-bold text-[#E24939] tracking-[4px] flex">
-        <Roller v-if="userInfo?.reward_money" class="" :value="userInfo?.reward_money?.toLocaleString()" char-set="number" mode="short" duration="2000"></Roller>
+      <div class="flex-1 text-5xl  items-center justify-center font-bold text-[#E24939] tracking-[4px] flex">
+        <Roller v-if="userInfo?.reward_money" class="" :value="formattedRewardMoney" char-set="number" mode="short" duration="2000"></Roller>
       </div>
 
       <div class="">
@@ -257,6 +257,13 @@ const showCrownDiv = computed(() => {
 });
 
 const numRows = computed(() => Math.ceil(testContentList.value.length / 3));
+const formattedRewardMoney = computed(() => {
+  const rewardMoney = userInfo?.value?.reward_money;
+  if (rewardMoney !== undefined && rewardMoney !== null) {
+    return Number(rewardMoney?.toFixed(0))?.toLocaleString();
+  }
+  return null;
+});
 
 
 const closeEvent = () => {
@@ -350,6 +357,7 @@ const select_item = (index) => {
 const getItem = (index) => {
   return testContentList.value[index] || {};
 };
+
 
 const closeZoom = () => {
   // Select all elements with the `animation_d` class
