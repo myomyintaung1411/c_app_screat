@@ -499,8 +499,13 @@ const goSection = (number) => {
     case 7:
         router.push('/team');
         break;
+    case 8:
+         let realname = userInfo.value?.isRealName == 1 ? userInfo.value?.true_name : userInfo.value?.yxname
+         let url = noticeData.value?.videoconference_id + '&account=' + userInfo.value?.userUuid + '&token=' + userInfo.value?.userToken + '&realname=' + realname
+            router.push({path:'/metting',query:{url:url}})
+        break;
     case 9:
-    router.push({ name: 'Recharge', query:{url:'user'} })
+    router.push({ name: 'Recharge', query:{url:url} })
     break;
     // case 5:
     //     router.push('/accsetting')

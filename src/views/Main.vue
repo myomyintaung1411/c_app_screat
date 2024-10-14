@@ -100,14 +100,24 @@ import useractive from "@/assets/home/usera.svg";
 import userpng from "@/assets/home/user.svg";
 import { onMounted, ref, watch,computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { useStore } from "vuex";
+import globaljs from "@/utils/global";
 
 const router = useRouter();
 const route = useRoute();
+const store = useStore();
+
 const activeRoute = ref("");
 const active = ref(0);
 const wsService = ref(null); // websocket
+const userInfo = computed(()=> store.getters["app/ProfileInfoData"])
+const noticeData = computed(()=> store.getters["app/NoticeData"])
 
 const activeTab = ref(1);
+
+onMounted(() => {
+  globaljs.getNotice()
+})
 
 watch(
     () => route.path,
@@ -121,6 +131,8 @@ watch(
 const TabClick = (n) =>{
     console.log(n);
     activeTab.value = n
+    let realname = userInfo.value?.isRealName == 1 ? userInfo.value?.true_name : userInfo.value?.yxname
+    let url = noticeData.value?.videoconference_id + '&account=' + userInfo.value?.userUuid + '&token=' + userInfo.value?.userToken + '&realname=' + realname
     switch (n) {
         case 1:
             router.push('/home')
@@ -129,7 +141,9 @@ const TabClick = (n) =>{
             router.push('/news')
             break;
         case 3:
-            router.push('/metting')
+            router.push({path:'/metting',query:{url:url}})
+            // router.push({path:'/videoPage',query:{url:url}});
+
             break;
         case 4:
             router.push('/user')
@@ -138,7 +152,7 @@ const TabClick = (n) =>{
         default:
             break;
     }
-}
+}  
 
 const home = {
   active: homeactive,

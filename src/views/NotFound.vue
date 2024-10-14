@@ -6,14 +6,14 @@
             <img src="@/assets/404.webp" alt="" class="w-[213px] h-[82px]" draggable="false" loading="lazy">
           </div>
         </div>
-        <p class="pt-5 text_color text-xl tracking-wider text-center">出错啦，您访问的页面无法连接！</p>
-        <router-link to="/" class="py-3 flex items-center space-x-2 text-white text-[18px]">
+        <p class="pt-5  text-xl tracking-wider text-center text-black">出错啦，您访问的页面无法连接！</p>
+        <router-link to="/" class="py-3 flex items-center space-x-2 text-black text-[18px]">
           <p>联系客服</p>
           <van-icon name="arrow" />
         </router-link>
         <div class="py-3 w-[200px] ">
-          <div  class="btn_login text-center py-3 cursor-pointer text-lg text-white">
-            <van-button @click="goService" block  hairline color="#d63436">联系客服</van-button>
+          <div  class="btn_login text-center py-3 cursor-pointer text-lg text-black">
+            <van-button @click="goService" block  hairline color="#E14A39">联系客服</van-button>
           </div>
         </div>
       </div>

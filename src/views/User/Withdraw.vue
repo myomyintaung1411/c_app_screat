@@ -123,14 +123,14 @@ const onSubmit = async () => {
     const res = await userApi.WithdrawAmount(data);
     loading.value = false
     if (res?.data?.success == true && res?.data?.code == 200) {
-      showToast({ message: '申请成功', duration: 1500 });
+      showToast({ message: res?.data?.msg, duration: 1500 });
       //addAddressDialog.value = false;
       //await globaljs.getUserInfo();
       setTimeout(() => {
         router.push("/user");
       }, 1000);
     } else {
-      showToast({ message: '暂未开放', duration: 1500 });
+      showToast({ message: res?.data?.msg, duration: 1500 });
     }
   } catch (error) {
     loading.value = false
