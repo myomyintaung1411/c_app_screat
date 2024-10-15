@@ -25,12 +25,7 @@ export const routes = [
       //   meta: { title: '爱满中华',requireAuth: true  },
       //   component: () => import('./views/Envelope/index.vue')
       // },
-      {
-        path: '/metting',
-        name: 'Metting',
-        meta: { title: 'Metting',requireAuth: true  },
-        component: () => import('./views/Metting/index.vue')
-      },
+
       {
         path: '/news',
         name: 'News',
@@ -45,6 +40,12 @@ export const routes = [
       },
     ],
 
+  },
+  {
+    path: '/metting',
+    name: 'Metting',
+    meta: { title: 'Metting',requireAuth: true  },
+    component: () => import('./views/Metting/index.vue')
   },
   // {
   //   path: '/homeArticle',
