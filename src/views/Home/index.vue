@@ -69,7 +69,8 @@
   </section>
 
    <section class="w-full px-3 h-[640px]  ">
-    <div class="answer_bg ">
+    <div class="answer_bg " :style="{'background-image': `url(${Global?.ossLink}answer_bg.png)`}"
+    >
       <div class="h-[80px] "></div>
       <div class="px-3">
         <van-row  v-for="(rowIndex) in numRows" :key="rowIndex"  gutter="1" class=" h-[130px]  "  align="center" >
@@ -516,6 +517,7 @@ const getNotice = async () => {
     console.log(error);
   }
 };
+const Global = xxy; // call unknow.js object as global
 
 onMounted(() => {
   globaljs.getUserInfo()
@@ -537,7 +539,7 @@ onMounted(() => {
   /* background: #ffffff; */
   height: 100%;
   width: 100%;
-  background-image: url(@/assets/home/answer_bg.png);
+  /* background-image: url(@/assets/home/answer_bg.png); */
   background-repeat: no-repeat;
  background-size: 100% 100%;
   /* background-size: 100% 100%; */

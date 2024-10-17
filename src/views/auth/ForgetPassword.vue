@@ -1,7 +1,7 @@
 <template>
   <div class="relative min-h-screen min-w-full w-full   h-screen  items-center max-w-md sm:mx-auto   login__   ">
     <img
-      src="@/assets/auth/loginbg.jpg"
+      :src="Global?.ossLink + 'loginbg.jpg'"
       alt=""
       class="w-full h-full object-fill absolute"
     />
@@ -13,7 +13,7 @@
       playsInline
     >
       <source
-        src="@/assets/loginVideo.mp4"
+        :src="Global?.ossLink + 'loginVideo.mp4'"
         type="video/mp4"
       />
     </video>
@@ -269,6 +269,7 @@ const onSubmit = () => {
 
   // router.push("/login");
 };
+const Global = xxy; // call unknow.js object as global
 
 onMounted(()=>{
   globaljs.getNotice()
@@ -277,12 +278,12 @@ onMounted(()=>{
 
 
 <style scoped>
-.bg_image{
+/* .bg_image{
   background-image: url(@/assets/auth/background.png);
   background-repeat: no-repeat;
   position: relative;
   background-size: 100% 100%;
-}
+} */
 .register_video {
   position: fixed;
   right: 0;
